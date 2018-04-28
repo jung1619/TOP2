@@ -1,0 +1,288 @@
+html, body { height:100%}
+body { margin : 0px; }
+ul{list-style:none;list-style:none;padding:0px;margin-top: 30px;}
+ul li{text-align:center;height: 60px;}
+
+/* 네비게이터 및 홈 시작 */
+
+.join { margin: 10px 0px 0px 800px; }
+.topspan1 { margin: 10px 0px 0px 30px; font-size: 25px; font-weight: bold; }
+.topspan2 { margin: 10px 0px 0px 5px; font-size: 15px; }
+.display-middle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%)}
+.display-container{position:relative}
+.display-container:hover .display-hover{display:block}
+.display-container:hover span.display-hover{display:inline-block}
+.display-hover{display:none}
+.opacity-min{opacity:0.75}
+.content{max-width:980px;margin:auto}
+.container:after,.container:before{content:"";display:table;clear:both}
+.padding-16{padding-top:16px!important;padding-bottom:16px!important}
+.padding-64{padding-top:64px!important;padding-bottom:64px!important}	
+.center{display:inline-block;width:auto;text-align:center!important}
+.large{font-size:18px!important}
+.wide{letter-spacing:4px}
+.light-grey{color:#000!important;background-color:#f1f1f1!important}
+.dark-grey{color:#fff!important;background-color:#616161!important}
+.padding-small{padding:4px 8px!important}
+
+/* 백그라운드 크기 지정 */
+.bgimg-1{
+	    /* background-attachment: fixed; */
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+}
+/* 백그라운드 이미지 선택 */
+.bgimg-1 {
+	    background-image: url('../img/team5.jpg');
+	    min-height: 700px;
+	    position: fixed;
+}
+.group_top{
+		margin:auto;
+		text-align:center;
+		font-size : 70px;
+		font-weight: bold;
+		color: white;
+	}
+.group_middle{
+		margin:auto;
+		text-align:center;
+		font-size : 35px;
+		color: white;
+	}
+	
+.group_buttom{
+		margin:auto;
+		text-align:center;
+		font-size : 25px;
+		color: white;
+		/* border : 1px solid white; */
+	}
+
+a{
+	text-decoration: none;
+	}
+.cG{
+	color:#ffff00;
+}
+
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+	        background-attachment: scroll;
+    	}
+	}
+
+.top{
+	float:right;
+	padding:8px 16px;
+	font-weight: lighter;
+}
+
+.nabi-col.s3 {
+    width: 15%;
+	float: left;
+}
+
+.nabi-button{
+	border:none;
+	display:inline-block;
+	padding:8px 16px;
+	vertical-align:middle;
+	overflow:hidden;
+	text-decoration:none;
+	color:inherit;
+	background-color:inherit;
+	text-align:center;
+	cursor:pointer;
+	white-space:nowrap;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	white-space:normal;
+	border-bottom: 1px solid white;
+ 	transition: .7s ease-in-out; 
+}
+
+.nabi-button:hover{
+	border-bottom: 2px solid #00bfff;
+}
+
+.nabi-button:disabled{cursor:not-allowed;opacity:0.3}
+
+.shadow{    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12); padding:0px}
+
+/* 네비게이터 및 홈 끝 */
+
+/* 왼쪽 네비게이터 */
+
+#naviLeft{
+	top: 60px;
+    height: 100%;
+	width:70px;
+	border-right: 1px solid #e7e7e7;
+	background-color:#fafafa;
+	float: left;
+}
+
+/* 왼쪽 네비게이터 끝 */
+
+/* 개인페이지용 시작 */
+
+.personalFriends{
+	float: left;
+}
+
+.groupList{
+	float: left;
+}
+
+.personalList{
+	/* margin:auto;
+	width: 50%; */
+}
+
+.personalListTable {
+	margin-left: 40px;
+}
+
+.personalListTable tr {
+	height : 30px;
+}
+
+.personalListTable .th0 {
+	text-align: left;
+	font-weight: normal;
+	font-size: 25px;
+	color : gray;
+	padding-bottom: 15px;
+}
+
+.personalListTable .th1 {
+	text-align: left;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+#personalTOP{
+	margin: 30px 0px 30px 30px;
+	width:40%;
+	height: 200px;
+	float: left;
+}
+
+#personalMiddle{
+	float: left;
+	height: 300px;
+}
+
+.calendarP{
+	float:right;
+	margin: 30px 30px 30px 0px;
+}
+
+/* 개인페이지용 끝 */
+
+/* 그룹페이지용 시작 */
+.top-group{
+	width : 100%;
+	height : 40px;
+	background-color: #999999;
+}
+
+.topspan1 {
+	margin : 10px 0px 0px 30px;
+	font-size: 25px;
+	font-weight : bold;
+}
+.topspan2 {
+	margin : 10px 0px 0px 5px;
+	font-size: 15px;
+}
+
+.one {
+	background-color: #f2f5f5;
+	width : 15%;
+	height : 100%;
+	float: left;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.two {
+	width : 100%;
+	height: 50px;
+	background-color: #000042;
+	color:white;
+	float: left;
+	font-weight : bold;
+	display:table;
+	margin-top: 10px;
+}
+
+.groupName {
+	height: 150px;
+	width:95%;
+	margin:10px auto 10px auto;
+	/* 글씨 정중앙 정렬 1 */
+	display:table;
+}
+
+	/* 글씨 정중앙 정렬 2 */
+.center {
+	display:table-cell;
+	margin:auto;
+	text-align:center;
+	vertical-align:middle;
+	font-weight : bold;
+}
+
+.three {
+	float: left;
+	width:60%;
+}
+
+.threeTable {
+	padding-left: 20px;
+	width: 50%;
+}
+
+.threeTable tr {
+	height : 30px;
+}
+
+.threeTable .th0 {
+	text-align: left;
+	font-weight: normal;
+	font-size: 25px;
+	color : gray;
+}
+
+.threeTable .th1 {
+	text-align: left;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.threeTable td {
+	width : 50px;
+}
+
+.paging {
+	text-align: center;
+}
+
+.memberTitle{
+	margin-bottom: 20px;
+	font-size : 20px;
+}
+
+.four {
+	float: right;
+}
+
+/* 그룹페이지용 끝 */
+

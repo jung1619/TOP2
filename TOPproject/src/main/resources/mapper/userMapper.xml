@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+  <mapper namespace="global.sesoc.TOPproject.DAO.UserMapperInterface">
+  
+  
+  <!-- U P D A T E -->
+  
+  <update id="updateUser_p_num_list" parameterType="User">
+  		UPDATE
+  			TOP_USER
+  		SET
+  			P_NUM_LIST = #{p_num_list}
+  		WHERE
+  		    ID = #{id}
+  
+  </update>
+  
+  
+  
+  <update id="updateUser" parameterType="User">
+  	UPDATE top_user
+  	SET pw = #{pw}, email = #{email}, name = #{name}
+  		<if test="nickname != null"> ,nickname = #{nickname} </if>
+	  	<if test="company != null"> ,company = #{company} </if>
+  	WHERE id = #{id}
+  </update>
+  
+    
+  <update id="updateFriendList" parameterType="map">
+  	UPDATE friend_list
+  	SET fl = #{fl}
+  	WHERE id = #{id}
+  </update>
+  
+  
+  <update id="updateUserSchedule" parameterType="Schedule">
+  	UPDATE schedule_user
+  	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		content = #{content}
+  	WHERE schedule_num = #{schedule_num}
+  </update>
+  
+  
+  <update id="updateUserMemo" parameterType="Memo">
+  	UPDATE memo
+  	SET n_content = #{n_content}
+  	WHERE id = #{id}
+  </update>
+  
+  
+  <!-- S E L E C T -->
+  
+  <select id="searchUser" parameterType="String" resultType="User">
+  	SELECT id, pw, email, name, nickname, company, p_num_list
+  	FROM top_user
+  	WHERE id = #{id}
+  </select>
+  
+  
+  <select id="selectSchedule" parameterType="String" resultType="Schedule">
+  	SELECT id, startdate, enddate, content, color, deldate, schedule_num
+  	FROM schedule_user
+  	WHERE id = #{id} and deldate is NULL
+  </select>
+  
+  
+  <select parameterType="String" id="searchUserFL" resultType="String"> 
+  	SELECT fl 
+  	FROM friend_list 
+  	WHERE id = #{id} 
+  </select>
+  
+  
+  <!-- I N S E R T -->
+
+
+  <insert id="insertUser" parameterType="User">
+	  INSERT INTO top_user(
+	  	id, pw, email, name, nickname
+	  		<if test="company != null"> ,company </if> 
+	  )VALUES(
+	  	#{id}, #{pw}, #{email}, #{name}
+	  		<if test="nickname != null"> ,#{nickname} </if>
+	  		<if test="company != null"> ,#{company} </if>
+	  )
+  </insert>
+  
+  
+  <insert id="insertFriendList" parameterType="map">
+  	INSERT INTO friend_list(
+  		id, fl
+  	)VALUES(
+  		#{id}, #{fl}
+  	)
+  </insert>
+  
+  
+  <insert id="insertUserSchedule" parameterType="Schedule">
+  	INSERT INTO schedule_user(
+  		id, startdate, enddate, content, schedule_num
+  	)VALUES(
+  		#{id}, 
+  		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		#{content},
+  		s_u_seq.nextval
+  	)
+  </insert>
+  
+  
+  <insert id="insertUserMemo" parameterType="Memo">
+  	INSERT INTO memo(
+  		id, n_content
+  	)VALUES(
+  		#{id}, #{n_content}
+  	)
+  </insert>
+  
+  
+  <!-- D E L E T E -->
+  
+  <update id="deleteUserMemo" parameterType="Memo">
+  	UPDATE memo
+  	SET n_deldate = SYSDATE
+  	WHERE id = #{id}
+  </update>
+  
+  
+  <update id="deleteUserSchedule" parameterType="Schedule">
+  	UPDATE schedule_user
+  	SET deldate = SYSDATE
+  	WHERE schedule_num = #{schedule_num} 
+  		and id = #{id} 
+  		and deldate is NULL
+  </update>
+  
+  
+  </mapper>

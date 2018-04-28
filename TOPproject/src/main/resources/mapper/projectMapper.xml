@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+  <mapper namespace="global.sesoc.TOPproject.DAO.ProjectMapperInterface">
+  
+  
+  <!-- U P D A T E -->
+  
+  <update id="updateProject" parameterType="Project">
+  	UPDATE top_project
+  	SET p_name = #{p_name}, p_memberlist = #{p_memberlist}
+  	WHERE p_num = #{p_num} AND p_m_id = #{p_m_id}
+  </update>
+  
+  
+  <update id="updateProjectSchedule" parameterType="Schedule">
+  UPDATE schedule_project
+  	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		content = #{content}
+  	WHERE schedule_num = #{schedule_num}
+  			and
+  			p_num = #{p_num}
+  </update>
+  
+  
+  <update id="updateProjectNotice" parameterType="Memo">
+  	UPDATE notice
+  	SET n_content = #{n_content}
+  	WHERE p_num = #{p_num}
+  </update>
+  
+  <!-- 정광철 context적용   update-->
+  <update id="upDateContext" parameterType="Context">
+  	UPDATE 
+  		context
+  	SET
+  		context = #{context}, writer = #{writer}
+  	WHERE 
+  		p_num = #{p_num}
+  </update>
+  
+  
+  <!-- S E L E C T -->
+  
+  <select id="noticeList"  parameterType="String" resultType="Notice">
+  SELECT
+  	 p_num
+  	,n_content
+  	,n_indate
+  	,n_deldate
+  FROM
+   	notice
+  WHERE
+    p_num = #{p_num} 	
+  
+  </select>
+  
+  <select id="memberList" parameterType="String" resultType="String">
+  SELECT
+  	p_memberlist
+  FROM
+   	top_project
+  WHERE
+  	p_num=#{p_num} 	
+  </select>
+  
+    <select id="selectPm" parameterType="String" resultType="String">
+  SELECT
+  	p_m_id
+  FROM
+   	top_project
+  WHERE
+  	p_num=#{p_num}
+  </select>
+  
+  <select id="selectProjectSchedule" parameterType="String" resultType="Schedule">
+	 SELECT p_num, startdate, enddate, content, color, schedule_num
+	 FROM schedule_project
+	 WHERE p_num = #{p_num} and deldate is NULL
+  </select>
+  
+  <select id="selectProject" parameterType="Project" resultType="Project">
+	SELECT
+		P_NUM
+		,P_M_ID
+		,P_NAME
+		,P_MEMBERLIST
+		,TO_CHAR(P_INDATE,'YYMMDD')
+		,TO_CHAR(P_DELDATE,'YYMMDD')
+		,TO_CHAR(P_STARTDATE,'YYMMDD')
+		,TO_CHAR(P_ENDDATE,'YYMMDD')
+	FROM 
+		TOP_PROJECT
+	WHERE
+		p_m_id = #{p_m_id}
+	AND 
+		p_name = #{p_name}
+	AND 
+		p_memberlist = #{p_memberlist}
+	
+  </select>
+  
+  <!--selectContext 정광철  -->
+  <select id="selectContext" parameterType="String" resultType="Context">
+  	SELECT
+  		p_num
+  		,context
+  		,title
+  	FROM  
+  		context
+  	WHERE
+  		p_num = #{p_num}	
+  </select>
+  
+  
+  <select id="selectNotice" parameterType="String" resultType="Notice">
+  	SELECT
+  		p_num
+  		,n_content
+  		,n_indate
+  		,n_deldate
+  	FROM  
+  		notice
+  	WHERE
+  		p_num = #{p_num}	
+  </select>
+  
+  
+  <select id="searchProject" parameterType="int" resultType="Project">
+  	SELECT p_num, p_m_id, p_name, p_memberlist, p_startdate, p_enddate
+  	FROM top_project
+  	WHERE p_num = #{p_num}
+  </select>
+  
+  <select id="searchContext" parameterType="int" resultType="Context">
+  	SELECT p_num, title, context, writer
+  	FROM context
+  	WHERE p_num = #{p_num}
+  </select>
+  
+  	
+  <!-- I N S E R T -->
+ 
+  <insert id="insertProject" parameterType="Project">
+	INSERT INTO top_project(
+	  p_num, p_m_id, p_name, p_memberlist, p_startdate, p_enddate
+	)values(
+	  p_num_seq.NEXTVAL, #{p_m_id}, #{p_name}, #{p_memberlist}, 
+	  TO_DATE(#{p_startdate}, 'yyyyMMddhh24miss')
+	  ,TO_DATE(#{p_enddate}, 'yyyyMMddhh24miss')
+	)
+  </insert>
+  
+  
+  <insert id="insertProjectSchedule" parameterType="Schedule">
+  	INSERT INTO schedule_project(
+  		p_num, startdate, enddate, content, schedule_num
+  	)VALUES(
+  		#{p_num}, 
+  		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		#{content},
+  		s_p_seq.nextval
+  	)
+  </insert>
+  
+  
+  <insert id="insertProjectNotice" parameterType="Memo">
+  	INSERT INTO notice(
+  		p_num, n_content
+  	)VALUES(
+  		#{p_num}, #{n_content}
+  	)
+  </insert>
+  
+  <!-- 
+  <insert id="insertContext" parameterType="Context">
+  	INSERT INTO context(
+  		p_num
+  		,context
+  		,title 
+  	)VALUES(
+  		#{p_num}
+  		,#{context}
+  		,#{title}
+  	)
+  </insert> -->
+  
+  <insert id="insertNotice" parameterType="Notice">
+  INSERT INTO
+  	notice(
+  	 p_num
+  	 ,n_content
+  	 ,n_indate
+  	)VALUES(
+  		#{p_num}
+  		,#{n_content}
+  		,sysdate
+  	)
+  </insert>
+  
+  <insert id="insertContext" parameterType="Context">
+  INSERT INTO context(
+  	p_num, title, context
+  )VALUES(
+  	#{p_num}, #{title}, #{context}
+  )
+  </insert>
+  
+  
+  
+  <!-- D E L E T E -->
+  
+  <update id="deleteProjectNotice" parameterType="Memo">
+  	UPDATE notice
+  	SET n_deldate = SYSDATE
+  	WHERE p_num = #{p_num}
+  </update>
+  
+  <update id="deleteProjectSchedule" parameterType="Schedule">
+  	UPDATE schedule_project
+  	SET deldate = SYSDATE
+  	WHERE schedule_num = #{schedule_num} 
+  		and p_num = #{p_num} 
+  		and deldate is NULL
+  </update>  
+  
+  
+  </mapper>
