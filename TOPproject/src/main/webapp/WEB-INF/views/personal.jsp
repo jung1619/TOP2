@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>GROUP PAGE</title>
+	<title>PERSONAL PAGE</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -34,6 +34,19 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="./resources/js/script.js"></script>
+
+<!-- css 추가부분 -->
+<script src="https://medialoot.com/preview/lumino/js/chart.min.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/chart-data.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/easypiechart.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/easypiechart-data.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/bootstrap-datepicker.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/custom.js"></script>
+<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
 
 
 <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script>
@@ -112,7 +125,8 @@ var dataset = [
     	      eventClick:  function(event, jsEvent, view) {
     	    	    $('#startTime').val(moment(event.start).format('YYYY-MM-DD')+'T'+moment(event.start).format('HH:mm'));
     	    	    $('#endTime').val(moment(event.end).format('YYYY-MM-DD')+'T'+moment(event.end).format('HH:mm'));
-    	            
+     	    	    $('#startTimes').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
+    	    	    $('#endTimes').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
     	    	    $("#eventInfo").html(event.description);
     	            $("#eventLink").attr('href', event.url);
     	            $("#eventContent").dialog({ modal: true, title: event.title, width:350});
@@ -131,6 +145,10 @@ var dataset = [
 	 $('#fullCalModal').modal('hide'); 
 	 var schedule_num = document.getElementById('modalId').value;
 	 $('.schedule_num').attr('value', schedule_num);
+	 var startTimes = document.getElementById('startTimes').value;
+	    $('.startTimes').html(startTimes);
+	 var endTimes = document.getElementById('endTimes').value;
+	    $('.endTimes').html(endTimes);
 	 $('#delcalendar').modal();
  }
  
@@ -144,27 +162,117 @@ var dataset = [
 <body>
 <%@ include file="nabi-top.jsp" %>
 <%@ include file="nabi-left.jsp" %>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">PERSONAL PAGE</h1>
+			</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+				<div class="panel panel-default articles">
+					<div class="panel-heading">
+						PROJECT NOTICE
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+					<div class="panel-body articles-container">
+					
+						<c:forEach var="notice" items="${noticeArr}"> 
+						<div class="article border-bottom">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-xs-10 col-md-10">
+										<h4><a href="#">${notice.n_indate }</a></h4>
+										<p>${notice.n_content}</p>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div><!--End .article-->
+						</c:forEach>
+						
+						<div class="article border-bottom">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-xs-10 col-md-10">
+										<h4><a href="#">여기엔 그룹공지 날짜</a></h4>
+										<p>여기엔 그룹공지 내용</p>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div><!--End .article-->
+						<div class="paging"> 1 2 3 4 5 </div>
+						
+					</div>
+				</div><!--End .articles-->
+				
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						Progress bars
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+					<div class="panel-body">
+						<div class="col-md-12 no-padding">
+							<div class="row progress-labels">
+								<div class="col-sm-6">New Orders</div>
+								<div class="col-sm-6" style="text-align: right;">80%</div>
+							</div>
+							<div class="progress">
+								<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="row progress-labels">
+								<div class="col-sm-6">Comments</div>
+								<div class="col-sm-6" style="text-align: right;">60%</div>
+							</div>
+							<div class="progress">
+								<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="row progress-labels">
+								<div class="col-sm-6">New Users</div>
+								<div class="col-sm-6" style="text-align: right;">40%</div>
+							</div>
+							<div class="progress">
+								<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="row progress-labels">
+								<div class="col-sm-6">Page Views</div>
+								<div class="col-sm-6" style="text-align: right;">20%</div>
+							</div>
+							<div class="progress">
+								<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Friend List
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+					<div class="panel-body">
+						<ul class="todo-list">
+							<c:forEach var="friend" items="${fList}">
+								<li class="todo-list-item">
+									${friend} 오른쪽에 친구 삭제기능 넣어야 함
+									<div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
+					<!-- <div class="panel-heading">친구검색</div> -->
+					<div class="panel-footer">
+							<div class="input-group">
+							<input id="searchId" type="text" class="form-control input-md" placeholder="추가할 친구 ID를 입력하세요">
+							<span class="input-group-btn">
+							<button class="btn btn-primary btn-md" id="searchBtn">검색</button></span></div>
+					</div>
+					<div class="panel-footer">
+						<div class="searchedId">
+							<a id="idSearchDiv"></a>
+							<input type="button" id="addBtn" value="ADD">
+						</div>
+					</div>
+				</div>
+			</div>
 
-<div id="personalTOP">
-	<div class="personalList">
-		<table class="personalListTable">
-			<tr>
-				<th class="th0">PROJECT NOTICE</th>
-				<td></td>
-			</tr>
-			<!-- 본인이 가입한 프로젝트별 새로운 공지리스트를 띄어줌 / 내용 들어갈 쿼리 다시 넣어야 함 -->
-			<c:forEach var="notice" items="${noticeArr}"> 
-				<tr>
-					<td>${notice.n_content}</td>
-					<td>${notice.n_indate }</td>
-				</tr>
-			</c:forEach>
-			
-				<td colspan="2"><div class="paging"> 1 2 3 4 5 </div></td>
-			</tr>
-		</table>
-	</div>
-	
 	<div class="groupList">
 		<c:forEach var="group" items="${groupList}">
 				<a href="group?groupNum=${group}">${group}그룹</a><br>
@@ -185,6 +293,21 @@ var dataset = [
             <form action="deleteUserSchedule" method="post">
             <div id="modalBody" class="modal-body">
 	            <table>
+	            	<tr>
+		            	<td>
+		            		<h4 class="modalTitle"></h4>
+		            	</td>
+		            </tr>	            
+	            	<tr>
+		            	<td>
+		            		시작일 : <span class="startTimes"></span>
+		            	</td>
+		            </tr>
+		            <tr>
+		            	<td>
+		            		종료일 : <span class="endTimes"></span>
+		            	</td>
+		            </tr>
 	           		 <tr>
 						<td>
 							<input type="hidden" name="id" value="${sessionScope.loginedId}">
@@ -211,7 +334,7 @@ var dataset = [
                 <h4 class="modal-title">새로운 일정 등록</h4>
             </div>
             <div id="modalBody" class="modal-body">
-            <form action="insertSchedule" method="post">
+            <form action="insertUserSchedule" method="post">
 	            <table>
 	           		 <tr>
 						<td>
@@ -221,12 +344,12 @@ var dataset = [
 					</tr>
 					<tr>
 						<td>
-							<input type="datetime-local" name="startdate" required="required">
+							<input type="datetime-local" name="startdate" required="required" value="2018-05-01T08:30">
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="datetime-local" name="enddate" required="required">
+							<input type="datetime-local" name="enddate" required="required" value="2018-05-03T08:30">
 						</td>
 					</tr>
 				</table>
@@ -259,11 +382,13 @@ var dataset = [
 					<tr>
 						<td>
 							<input type="datetime-local" id="startTime" name="startdate">
+							<input type="hidden" id="startTimes">
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<input type="datetime-local" id="endTime" name="enddate">
+							<input type="hidden" id="endTimes">
 						</td>
 					</tr>
 				</table>
@@ -278,25 +403,6 @@ var dataset = [
     </div>
 </div>
 
-<div class="searchId">
-	<h3>친구검색</h3>
-		<input type="text" name="searchId" id="searchId" placeholder="ID Here...">
-		<input type="button" id="searchBtn" value="Search"> <br />
-	<br />
-	<div class="searchedId">
-		<a id="idSearchDiv"></a>
-		<input type="button" id="addBtn" value="ADD">
-	</div>
-
 </div>
-<div class="friendList">
-	<h3>친구목록</h3>
-	<div id="addedFriendDiv">
-	<c:forEach var="friend" items="${fList}">
-			<a>${friend}</a> <br />
-		</c:forEach>
-	</div>
-</div>
-
 </body>
 </html>

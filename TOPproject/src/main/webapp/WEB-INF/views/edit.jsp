@@ -59,6 +59,28 @@
 					})  
 				}); 
 			
+			$('.makePDF').on('click',function() {
+				var data = CKEDITOR.instances.editor1.getData();
+				alert(data);
+				$.ajax({
+					url : 'makePDF'
+					, type : 'post'
+					, data : {
+						textt : data
+					}
+					, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+					, dataType : 'json'
+					,success : function(e) {
+						console.log(e);
+						console.log(e.file);
+						location.href=e.file;
+					}
+					, error : function(e) {
+						console.log(e);
+					}
+				})  
+			}); 
+			
 			
 		});
 		
@@ -100,7 +122,8 @@
 			
 		</textarea>
 		<input type="submit" value="저장">
-		<input class="makedocs" type="button" value="docs 파일로 저장">
+		<input class="makedocs" type="button" value="DOCX 파일로 저장">
+		<input class="makePDF" type="button" value="PDF 파일로 저장">
 		</form>
 	</div>
 	
