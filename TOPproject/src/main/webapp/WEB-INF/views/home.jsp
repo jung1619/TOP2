@@ -12,13 +12,14 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 	<!-- 상단 네비게이터. 메인과 로그인 후 개인화면에서 사용할 예정 -->
 	<%@ include file="nabi-top.jsp" %>
 	
 	<!-- 슬라이드 쇼 -->
-<header class="w3-display-container w3-center">
+<header class="w3-display-containerH w3-center">
   <button class="w3-button w3-block w3-green w3-hide-large w3-hide-medium" onclick="document.getElementById('download').style.display='block'">Download <i class="fa fa-android"></i> <i class="fa fa-apple"></i> <i class="fa fa-windows"></i></button>
  <div class="mySlides w3-animate-opacity">
     <img src="./resources/img/team5.jpg" alt="Image 1" style="min-width:500px" width="100%" height="90%">
@@ -59,7 +60,7 @@
   <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">TOP의 다른 기능을 더 알아볼까요? <i class="fa fa-angle-right"></i></a>
   <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">TOP의 다른 기능을 더 알아볼까요? <i class="fa fa-angle-right"></i></a>
 </header>
-<div class="content container padding-64" id="about">
+<div class="content containerH padding-64" id="about">
   <h3 class="center">ABOUT ME</h3>
   <p class="center"><em>I love </em></p>
   <p>We have created a fictional "personal" website/blog, and our fictional character is a hobby photographer. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -70,15 +71,15 @@
   <p class="large center padding-16">TOP 이 점이 좋다</p>
   <p class="wide"><i class="fa fa-camera"></i>Excel, Power Point, PDF 저장 포맷</p>
   <div class="w3-light-grey">
-    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:90%">90%</div>
+    <div class="w3-containerH w3-padding-small w3-dark-grey w3-center" style="width:90%">90%</div>
   </div>
   <p class="wide"><i class="fa fa-laptop"></i>언제 어디서든 팀 프로젝트 참여</p>
   <div class="w3-light-grey">
-    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:85%">85%</div>
+    <div class="w3-containerH w3-padding-small w3-dark-grey w3-center" style="width:85%">85%</div>
   </div>
   <p class="wide button"><i class="fa fa-photo"></i>개인 프로젝트 문서도 작성 가능</p>
   <div class="w3-light-grey">
-    <div class="w3-container w3-padding-small w3-dark-grey w3-center" style="width:75%">75%</div>
+    <div class="w3-containerH w3-padding-small w3-dark-grey w3-center" style="width:75%">75%</div>
   </div>
 </div>
 

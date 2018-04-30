@@ -49,8 +49,9 @@ public class ScheduleController {
 			schedule.setStartdate(times(schedule.getStartdate()));
 			schedule.setEnddate(times(schedule.getEnddate()));
 			int result = userDAO.insertUserSchedule(schedule);
+			System.out.println(schedule);
 			
-			return "redirect:/personal";
+			return "redirect:/personalCalendar";
 		}
 		
 		//개인일정 수정
@@ -61,7 +62,7 @@ public class ScheduleController {
 			schedule.setEnddate(times(schedule.getEnddate()));
 			int result = userDAO.updateUserSchedule(schedule);
 			logger.info("개인일정 수정 : " + schedule);
-			return "redirect:/personal";
+			return "redirect:/personalCalendar";
 		}
 		//개인일정 삭제
 		@RequestMapping(value = "/deleteUserSchedule", method = RequestMethod.POST)
@@ -69,7 +70,7 @@ public class ScheduleController {
 
 			int result = userDAO.deleteUserSchedule(schedule);
 			
-			return "redirect:/personal";
+			return "redirect:/personalCalendar";
 		}
 		
 		//프로젝트 일정을 내 일정으로

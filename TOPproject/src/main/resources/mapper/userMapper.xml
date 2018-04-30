@@ -40,7 +40,8 @@
   	UPDATE schedule_user
   	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
   		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
-  		content = #{content}
+  		content = #{content},
+  		color = #{color}
   	WHERE schedule_num = #{schedule_num}
   </update>
   
@@ -101,12 +102,13 @@
   
   <insert id="insertUserSchedule" parameterType="Schedule">
   	INSERT INTO schedule_user(
-  		id, startdate, enddate, content, schedule_num
+  		id, startdate, enddate, content, color, schedule_num
   	)VALUES(
   		#{id}, 
   		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
   		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
   		#{content},
+  		#{color},
   		s_u_seq.nextval
   	)
   </insert>

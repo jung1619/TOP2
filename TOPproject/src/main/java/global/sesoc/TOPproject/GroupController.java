@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,8 +37,10 @@ public class GroupController {
 	
 	
 	@RequestMapping(value="groupForm", method=RequestMethod.GET)
-	public String groupForm(String id){
-		
+	public String groupForm(String id, Model model){
+		//네비게이터에 임시로 값 담는 용도
+		int page = 4;
+		model.addAttribute("page", page);
 		return "group_form";
 	}
 	

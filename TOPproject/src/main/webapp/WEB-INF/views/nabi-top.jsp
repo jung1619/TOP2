@@ -8,8 +8,9 @@
 </head>
 
 <body>
-<div class="w3-top shadow">
-  <div class="w3-row w3-white" id="myNavbar">
+<div class="w3-top shadow" style="background: white; z-index: 2;">
+  <!-- <div class="w3-row w3-white" id="myNavbar"> -->
+  <div>
    <!-- 메인 페이지 -->
     <div class="nabi-col s3">
     	<a href="<c:url value='/'/>" class="w3-block nabi-button">TOP</a>
@@ -31,14 +32,14 @@
 	</c:if>	
 	
     <!-- 로그인을 했을 때 보이는 메뉴(개인 메뉴까지만 보임. 그룹 페이지는 적용할지 말지 아직 고민중) -->
-	<c:if test="${personal != null}">
+<%-- 	<c:if test="${personal != null}">
 		<div class="nabi-col s3">
 	    	<a href="<c:url value='/groupForm'/>" class="w3-block nabi-button">프로젝트 생성</a>
 	    </div>
 	    <div class="nabi-col s3">
 	    	<a href="<c:url value='/edit'/>" class="w3-block nabi-button">에디터</a>
 	    </div>
-	</c:if>
+	</c:if> --%>
 	
 	<form class="top" action="login" method="POST">
 	    <c:choose>
@@ -48,7 +49,7 @@
 			    <input type="submit" value="login">
 	    	</c:when>
 	    	<c:otherwise>
-	    		${sessionScope.loginedId}님 
+	    		<span class="site__title">${sessionScope.loginedId}</span>님 
 				<span class="logout"><a href="logout">LOGOUT</a></span>
 	    	</c:otherwise>
 	    </c:choose>

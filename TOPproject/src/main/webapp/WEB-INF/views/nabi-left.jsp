@@ -22,27 +22,71 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="#"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li class="active"><a href="widgets.html"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
-			<li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
-			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
-			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
+			<c:choose>
+				<c:when test="${page == 1}">
+					<li class="active"><a href="#"><em class="fa"><img src="./resources/icon/human.png">&nbsp;</em> MAIN PAGE</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="personal"><em class="fa"><img src="./resources/icon/human.png">&nbsp;</em> MAIN PAGE</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${page == 2}">
+					<li class="active"><a href="#"><em class="fa fa-calendar">&nbsp;</em> Calendar</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="personalCalendar"><em class="fa fa-calendar">&nbsp;</em> Calendar</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+			
+			<!-- <li><a href="#"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li> -->
+			 
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon">&nbsp;</em> PROJECT GROUP <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 1
+				<c:forEach var="group" items="${groupList}">
+					<li><a class="" href="group?groupNum=${group}">
+						<span class="fa fa-arrow-right">&nbsp;</span>${group}그룹
 					</a></li>
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 2
-					</a></li>
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 3
-					</a></li>
+				</c:forEach>
 				</ul>
 			</li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<!-- <li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li> -->
+			<c:choose>
+				<c:when test="${page == 3}">
+					<li class="active"><a href="#"><em class="fa"><img src="./resources/icon/human2.png">&nbsp;</em> Friends</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#"><em class="fa"><img src="./resources/icon/human2.png">&nbsp;</em> Friends</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${page == 4}">
+					<li class="active"><a href="#"><em class="fa fa-toggle-off">&nbsp;</em> Create Project</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="groupForm"><em class="fa fa-toggle-off">&nbsp;</em> Create Project</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${page == 5}">
+					<li class="active"><a href="#"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${page == 6}">
+					<li class="active"><a href="#"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="edit"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 <!-- <div id="naviLeft">
