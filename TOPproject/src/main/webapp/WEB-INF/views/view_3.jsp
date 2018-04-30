@@ -21,7 +21,13 @@
 				
 				$("#send").on("click",function(){
 					sendMessage();
-				})		
+				});
+				
+				$("#message").keydown(function(event){
+					if( event.keyCode == 13 ){
+						sendMessage();
+					}
+				});
 				
 				document.onkeydown = function (event){
 					if(event.keyCode==116
@@ -47,9 +53,9 @@
 					
 					stompClient.subscribe('/subscribe/chat/${p_num}',function(message){
 						var data = JSON.parse(message.body);                                                                                                 
-						if( data.id == myId ){
+						if( data.id == myId )
 							$('#chatLogView').append('<div class="mine">'+data.message+"</div><br>");
-						}else
+						else
 							$('#chatLogView').append('<div class="other">'+data.nickName+ "님 ->"+data.message+"</div><br>");
 					});
 					
@@ -74,30 +80,9 @@
 							}
 						}, 10);
 						
-						
-						
-						/*
-						setTimeout(function() {
-							var pre = CKEDITOR.instances.editor1.getData();
-							console.log('가져온 현재 : '+pre);
-							console.log('가져온 디비 : '+data.context);
-							
-							if( pre != data.context ){ //계속해서 입력했다는 뜻
-								console.log('그녀는 계속 입력을 했었다는 것이다는 것이다');
-							}else{ //마지막 입력 후 3초가 지났음
-								editor.setData( data.context );
-								console.log('----------------------------------------------');
-							}
-						}, 3000);
-						*/
-						
-						//editor.insertHtml( data.context );
-						//.document.getBody().setHtml나 setData나..똑같아..커서문제..
-						
-						//config.extraPlugins = 'liveedit';
-					});
-				});
-			}
+					}); //stomp_context
+				}); //stomp
+			} //connect
 			
 			
 			function sendMessage(){
