@@ -34,12 +34,7 @@ public class ProjectDAO {
 		
 		try{
 			result = mapper.insertNotice(notice);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		
+		}catch(Exception e){ e.printStackTrace(); }
 		return result;
 	}
 	
@@ -51,26 +46,19 @@ public class ProjectDAO {
 		
 		try{
 			mapper.insertContext(context);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
+		}catch(Exception e){ e.printStackTrace(); }
 	}
-	
 	
 	
 	public int insertProject(Project project){
 		logger.info("프로젝트 생성 : " + project);
 		Project selectProject   = null;
 		
-		
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 		int result = 0;
 		
 		try{
 			result = mapper.insertProject(project);
-			
 			logger.info("프로젝트 생성 성공");
 		}catch(Exception e){ logger.info("프로젝트 생성 실패"); e.printStackTrace(); }
 		return result;
@@ -103,6 +91,7 @@ public class ProjectDAO {
 		}catch(Exception e){ logger.info("프로젝트 공지 등록 실패"); e.printStackTrace(); }
 		return result;
 	}
+	
 	
 	
 	// U P D A T E ------------------------------------------------------------------
@@ -153,17 +142,15 @@ public class ProjectDAO {
 	public void upDateContext(Context context){
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 			
-		
 		try{
 			mapper.upDateContext(context);
 			logger.info("작업내용 저장 성공(임시) : " + context + "/n" 
 					+ "-----------------------------------------------------------------------------------------------");
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		}catch(Exception e){ e.printStackTrace(); }
 
 	}
+	
+	
 	
 	// D E L E T E ------------------------------------------------------------------
 	
@@ -195,7 +182,9 @@ public class ProjectDAO {
 	}
 	
 	
+	
 	//S E L E C T ------------------------------------------------------------------
+	
 	
 	public Context selectContext(String p_num){
 		Context result_context=null;
@@ -205,17 +194,10 @@ public class ProjectDAO {
 		try{
 			result_context = mapper.selectContext(p_num);
 			logger.info("selectContext in DAO : " +result_context);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		}catch(Exception e){ e.printStackTrace(); }
 		
-		return result_context;
-		
+		return result_context; 
 	}
-	
-	
-	
-	
 	
 	
 	public ArrayList<Notice> noticeList(String p_num){
@@ -336,13 +318,8 @@ public class ProjectDAO {
 		ProjectMapperInterface mapper  = sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
-			notice =mapper.selectNotice(p_num);
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
+			notice =mapper.selectNotice(p_num); 
+		}catch(Exception e){ e.printStackTrace(); }
 		
 		return notice;
 	}

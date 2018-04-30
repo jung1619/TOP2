@@ -152,7 +152,7 @@ button.social-signin:focus {
     <input type="password" placeholder="Retype password" class="joinText" id="pw2"/>
     <div id="pwCheckDiv"></div>
     
-    <input type="text" name="email" placeholder="(필수) E-mail" class="joinText" id="email"/>
+    <input type="text" name="email" placeholder="(필수) E-mail (ex) u1u2@uj.com" class="joinText" id="email"/>
     <div id="emailCheckDiv"></div>
     
     <input type="text" name="name" placeholder="(필수) Username" class="joinText" id="name" />

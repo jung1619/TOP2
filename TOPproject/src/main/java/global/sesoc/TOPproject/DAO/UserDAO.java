@@ -2,6 +2,7 @@ package global.sesoc.TOPproject.DAO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,12 +19,77 @@ import global.sesoc.TOPproject.VO.User;
 @Repository
 public class UserDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserDAO.class);
 	
 	@Inject
 	SqlSession sqls;
 	
 
+	
+
+
+	
+	public int insertReq(HashMap<String, String> map){
+		logger.info("친구 요청 등록 : " + map);
+		
+		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
+		int result = 0;
+		
+		try {
+			result = mapper.insertReq(map);
+			logger.info("친구 요청 등록 성공");
+		} catch (Exception e) { e.printStackTrace(); logger.info("친구 요청 등록 실패"); }
+		
+		return result;
+	}
+	
+	public int updateReq(HashMap<String, String> map){
+		logger.info("친구 요청 상태 변화 : " + map);
+		
+		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
+		int result = 0;
+		
+		try {
+			result = mapper.updateReq(map);
+			if( result == 0 )
+				logger.info("친구 요청 상태 변화 실패 " + result);
+			else
+				logger.info("친구 요청 상태 변화 성공 " + result);
+		} catch (Exception e) { e.printStackTrace(); logger.info("친구 요청 상태 변화 실패"); }
+		
+		return result;
+	}
+	
+	public int deleteReq(HashMap<String, String> map){
+		logger.info("친구 요청 삭제 : " + map);
+		
+		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
+		int result = 0;
+		
+		try {
+			result = mapper.deleteReq(map);
+			logger.info("친구 요청 삭제 성공");
+		} catch (Exception e) { e.printStackTrace(); logger.info("친구 요청 삭제 실패"); }
+		
+		return result;
+	}
+	
+	public List<HashMap<String, String>> searchReqList(HashMap<String, String> map){
+		logger.info("친구 요청 목록 조회 : " + map);
+		
+		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
+		List<HashMap<String, String>> list = null;
+		
+		try {
+			list = mapper.searchReqList(map);
+			logger.info("친구 요청 목록 조회 성공 : " + map.get("who")+ " ~ " + list);
+		} catch (Exception e) { e.printStackTrace(); logger.info("친구 요청 목록 조회 실패"); }
+		
+		return list;
+	}
+	
+	
+	
 	// I N S E R T ------------------------------------------------------------------
 	
 	
@@ -124,7 +190,25 @@ public class UserDAO {
 	}
 	
 	
+	public ArrayList<User> searchUserList(String id){
+		logger.info("해당 ID의 회원 목록 검색 : " + id);
+		
+		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
+		ArrayList<User> userList = new ArrayList<User>();
+		
+		try{
+			userList = mapper.searchUserList(id);
+			logger.info("해당 ID의 회원 목록 검색 성공 : " + userList);
+		}catch(Exception e){ logger.info("해당 ID의 회원 목록 검색 실패"); e.printStackTrace(); }
+		
+		return userList;
+	}
+	
+	
+	
 	// U P D A T E ------------------------------------------------------------------
+	
+	
 	//p_num_list에 추가
 	public int updateUser_p_num_list(User user){
 		int result = 0 ;

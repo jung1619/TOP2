@@ -1,26 +1,25 @@
 package global.sesoc.TOPproject;
 
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.VO.Notice;
 import global.sesoc.TOPproject.VO.Project;
+import global.sesoc.TOPproject.VO.Schedule;
 import global.sesoc.TOPproject.VO.User;
 
 @Controller
@@ -42,19 +41,6 @@ public class GroupController {
 		int page = 4;
 		model.addAttribute("page", page);
 		return "group_form";
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="loadFL", method=RequestMethod.GET)
-	public String[] loadFL(String id){
-		logger.info("친구목록 조회 : " + id);
-		
-		String fl = uDao.searchUserFL(id);
-		String[] list = fl.split("/");
-		
-		logger.info("친구목록 조회 결과 : " + list);
-		return list;
 	}
 	
 	
@@ -130,15 +116,115 @@ public class GroupController {
 				logger.info("성공여부 : "+result2);
 			}
 			
-			
-			
 			return "1";
 			
 		}else{
 			return "2";
 		}
+	}
+	
+	
+	// 그룹 수정
+	@RequestMapping(value = "group", method = RequestMethod.GET)
+	public String group(HttpSession hs, ModelMap modelMap,HttpServletRequest req,Model model, String groupNum) {
 		
-	//	return "group";
+		//켈린더 관련
+		String p_num = req.getParameter("groupNum");
+		logger.info("p_num : " + p_num);
+		if(p_num == null){
+			p_num = groupNum;
+			logger.info("p_num1 : " + p_num);
+		}
+		ArrayList<Schedule> scheduleListview = pDao.selectProjectSchedule(p_num);
+		logger.info("스케쥴 : " + scheduleListview);
+		modelMap.addAttribute("listview", scheduleListview);
+		
+		//일반멤버
+		String memberList = pDao.memberList(groupNum);
+		System.out.println(memberList);
+		
+		if( memberList != null ){				
+			String [] mList = memberList.split("/");
+			for(String s : mList){
+				System.out.println(s);
+			}
+			logger.info("memberList : " + mList);
+			model.addAttribute("mList", mList);
+		}
+		
+		//프로젝트매니져
+		String pm = pDao.selectPm(groupNum);
+		model.addAttribute("pm", pm);
+		
+		
+		//공지사항 
+		
+		System.out.println("get으로 받아온 파라미터: "+p_num);
+		//p_num을 받아다가 다오로 넣어서 끌어와야함
+		ArrayList<Notice> n_list = pDao.noticeList(p_num);
+		
+		System.out.println("보내짐");
+		
+		for(Notice n  : n_list){
+			System.out.println(n+"받아온 노티스 출력");
+		}
+		model.addAttribute("n_list", n_list);
+		model.addAttribute("p_num",p_num);
+		return "group";
+	}
+	
+	@RequestMapping(value="personal",method=RequestMethod.GET)
+	public String personal(User user, HttpSession hs, Model model){
+		
+		String id = (String) hs.getAttribute("loginedId");
+		User loginedUser = uDao.searchUser(id);
+			
+		hs.setAttribute("loginedId", loginedUser.getId());
+		
+		//그룹리스트
+		String [] groupArr=null;
+		String groupList = loginedUser.getP_num_list();
+		if( groupList != null ){				
+			groupArr = groupList.split("/");
+			logger.info("groupArr : " + groupArr);
+			model.addAttribute("groupList", groupArr);
+			//담을 notice
+			Notice notice = null;
+			ArrayList <Notice> noticeArr = new ArrayList<Notice>();			
+			
+			//그룹리스트의 공지사항 불러오기
+			for(int i = 0 ; i<groupArr.length;i++){
+				logger.info("groupArr in HomeController : "+groupArr[i] );
+				// 그룹리스트를 불러와서
+					notice = pDao.selectNotice(groupArr[i]);
+					logger.info("받아온 notice in HomController : " + notice);
+					if(notice != null){
+						noticeArr.add(notice);
+						model.addAttribute("noticeArr", noticeArr);
+						
+					}else{
+						System.out.println("notice를 추가하지 못했습니다.");
+					}
+			}
+			
+		}
+		ArrayList<Schedule> scheduleListview = uDao.selectSchedule(id);
+		model.addAttribute("listview", scheduleListview);
+		
+		//네비게이터에 임시로 값 담는 용도
+		String personal = "personal";
+		model.addAttribute("personal", personal);
+		
+		//친구리스트
+		String fList = uDao.searchUserFL(loginedUser.getId());
+		String [] friendList = fList.split("/");
+		for(String f : friendList) {
+			System.out.println(f);
+		}
+		model.addAttribute("fList", friendList);
+		
+		
+		return "personal";
 	}
 	
 	

@@ -11,21 +11,29 @@ $(document).ready(function(){
 	$('#id').blur(function(){
 		var id = $('#id').val();
 		var msg = '';
+		
 		if( id != null ){
-			$.ajax({
-				url :'CheckIdEmail',
-				type : 'POST',
-				data :{ 'idEmail' : id },
-				dataType : 'text',
-				success	:function(data){
-					if( data == 1 ) msg = "중복입니다. 다시 작성해주십시오.";
-					else if( data == 2 ) msg = "사용 가능합니다.";
-					$('#idCheckDiv').html( msg );
-					idCheck = true;
-					console.log('id'+idCheck+" : "+msg);
-				},
-				error:function(err){ console.log("에러발생"); }
-			});
+			
+			var reg = /[가-힣A-Z]/g;
+			if( (reg.test(id)) || (id.length < 4) || (id.length >= 10) ){
+				msg = '아이디는 4자 이상으로 알파벳 소문자와 숫자만 가능합니다.';
+				$('#idCheckDiv').html( msg );
+			}else{				
+				$.ajax({
+					url :'CheckIdEmail',
+					type : 'POST',
+					data :{ 'idEmail' : id },
+					dataType : 'text',
+					success	:function(data){
+						if( data == 1 ) msg = "중복입니다. 다시 작성해주십시오.";
+						else if( data == 2 ) msg = "사용 가능합니다.";
+						$('#idCheckDiv').html( msg );
+						idCheck = true;
+						console.log('id'+idCheck+" : "+msg);
+					},
+					error:function(err){ console.log("에러발생"); }
+				});
+			}
 		}
 	});
 	
@@ -33,21 +41,28 @@ $(document).ready(function(){
 	$('#email').blur(function(){
 		var email = $('#email').val();
 		var msg = '';
-		if( email != null ){
-			$.ajax({
-				url :'CheckIdEmail',
-				type : 'POST',
-				data :{ idEmail : email },
-				dataType : 'text',
-				success	:function(data){
-					if( data == 1 ) msg = "중복입니다. 다시 작성해주십시오.";
-					else if( data == 2 ) msg = "사용 가능합니다.";
-					$('#emailCheckDiv').html( msg );
-					emailCheck = true;
-					console.log('email'+emailCheck);
-				},
-				error:function(err){ console.log("에러발생"); }
-			});
+		
+		if( email != '' ){
+			var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+			if( reg.test(email) ){
+				msg = '이메일 형식을 다시 확인해주십시오.';
+				$('#idCheckDiv').html( msg );
+			}else{
+				$.ajax({
+					url :'CheckIdEmail',
+					type : 'POST',
+					data :{ idEmail : email },
+					dataType : 'text',
+					success	:function(data){
+						if( data == 1 ) msg = "중복입니다. 다시 작성해주십시오.";
+						else if( data == 2 ) msg = "사용 가능합니다.";
+						$('#emailCheckDiv').html( msg );
+						emailCheck = true;
+						console.log('email'+emailCheck);
+					},
+					error:function(err){ console.log("에러발생"); }
+				});
+			}
 		}
 	});
 	
@@ -64,13 +79,14 @@ $(document).ready(function(){
 		var pw1 = $('#pw1').val();
 		var pw2 = $('#pw2').val();
 		var msg = '';
-		
+
 		if( pw1 == pw2 ){
-			if( pw1.length >= 10 ){ //이후 10자 이상으로 수정 요망
+			if( (pw1.length >= 4) || (pw1.length <= 10) ){ 
 				msg = "비밀번호가 일치합니다.";
 				pwCheck = true;
-				console.log('pw'+pwCheck);
-			}
+				console.log('pw' + pwCheck);
+			}else
+				msg = "비밀번호는 4자 이상으로 알파벳 소문자와 숫자만 입력 가능합니다.";
 		}else
 			msg = "비밀번호가 일치하지 않습니다.";
 		$('#pwCheckDiv').html(msg);

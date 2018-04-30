@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 
 <head>
-	
+	<script type="text/javascript" src="<c:url value='resources/js/login.js'/>"></script>
 </head>
 
 <body>

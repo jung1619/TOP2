@@ -1,7 +1,9 @@
 DROP TABLE top_user; 
 DROP TABLE friend_list;
+DROP TABLE personalEdit;
 DROP TABLE top_project;
 DROP SEQUENCE p_num_seq;
+DROP SEQUENCE n_num_seq;
 DROP TABLE notice;
 DROP TABLE memo;
 DROP SEQUENCE s_u_seq; 
@@ -34,6 +36,19 @@ CREATE SEQUENCE p_num_seq
 START WITH 1
 MAXVALUE 2000;
 
+CREATE SEQUENCE n_num_seq
+START WITH 1
+MAXVALUE 2000;
+
+CREATE TABLE personalEdit(
+    id VARCHAR(30) NOT NULL,
+    title VARCHAR(50) DEFAULT '제목 없음',
+    context CLOB,
+    indate DATE DEFAULT SYSDATE,
+    CONSTRAINT FK_top_user_pe FOREIGN KEY(id)
+    REFERENCES top_user (id) on delete cascade
+);
+
 CREATE TABLE top_project(
     p_num NUMBER NOT NULL,
     p_m_id VARCHAR2(30) NOT NULL,
@@ -48,6 +63,7 @@ CREATE TABLE top_project(
 
 CREATE TABLE notice(
     p_num NUMBER NOT NULL,
+    n_num NUMBER NOT NULL,
     n_content VARCHAR2(100) NOT NULL,
     n_indate DATE DEFAULT SYSDATE,
     n_deldate DATE,

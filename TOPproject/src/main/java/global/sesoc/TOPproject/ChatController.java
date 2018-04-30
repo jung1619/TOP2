@@ -1,12 +1,10 @@
 package global.sesoc.TOPproject;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -17,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
-import global.sesoc.TOPproject.DAO.ProjectMapperInterface;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Message;
-import global.sesoc.TOPproject.VO.Project;
 import global.sesoc.TOPproject.VO.User;
 
 @Controller

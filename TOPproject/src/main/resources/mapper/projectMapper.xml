@@ -170,9 +170,9 @@
   
   <insert id="insertProjectNotice" parameterType="Memo">
   	INSERT INTO notice(
-  		p_num, n_content
+  		p_num, n_num, n_content
   	)VALUES(
-  		#{p_num}, #{n_content}
+  		#{p_num}, n_num_seq.nextval, #{n_content}
   	)
   </insert>
   

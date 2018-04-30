@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
-import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Notice;
 import global.sesoc.TOPproject.VO.Schedule;
 import global.sesoc.TOPproject.VO.User;

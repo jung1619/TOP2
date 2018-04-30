@@ -6,16 +6,16 @@
   <mapper namespace="global.sesoc.TOPproject.DAO.UserMapperInterface">
   
   
-  <!-- U P D A T E -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~ U P D A T E ~~~~~~~~~~~~~~~~~~~~ -->
+  
   
   <update id="updateUser_p_num_list" parameterType="User">
-  		UPDATE
-  			TOP_USER
-  		SET
-  			P_NUM_LIST = #{p_num_list}
-  		WHERE
-  		    ID = #{id}
-  
+	UPDATE
+		TOP_USER
+	SET
+		P_NUM_LIST = #{p_num_list}
+	WHERE
+	    ID = #{id}
   </update>
   
   
@@ -53,8 +53,15 @@
   </update>
   
   
-  <!-- S E L E C T -->
+   <update id="updateReq" parameterType="Map">
+  	UPDATE friend_request
+  	SET check_req = #{check_req}
+  	WHERE receiver = #{receiver} AND requester = #{requester}
+  </update>
   
+  
+<!-- ~~~~~~~~~~~~~~~~~~~~ S E L E C T ~~~~~~~~~~~~~~~~~~~~ -->
+   
   <select id="searchUser" parameterType="String" resultType="User">
   	SELECT id, pw, email, name, nickname, company, p_num_list
   	FROM top_user
@@ -69,14 +76,33 @@
   </select>
   
   
-  <select parameterType="String" id="searchUserFL" resultType="String"> 
+  <select id="searchUserFL" parameterType="String" resultType="String"> 
   	SELECT fl 
   	FROM friend_list 
   	WHERE id = #{id} 
   </select>
   
   
-  <!-- I N S E R T -->
+    <select id="searchUserList" parameterType="String" resultType="User">
+  	SELECT id, name, nickname
+  	FROM top_user
+  	WHERE id LIKE '%'||#{id}||'%' 
+  </select>
+  
+  
+  <select id="searchReqList" parameterType="Map" resultType="Map">
+  	SELECT requester, receiver, check_req
+  	FROM friend_request
+  	WHERE 
+  		<if test="who.equals('requester')"> check_req = '0' AND requester = #{myId}  
+  			ORDER BY requester </if> 
+  		<if test="who.equals('receiver')"> check_req = '0' AND receiver = #{myId} 
+  			ORDER BY receiver </if>
+  </select> 
+  
+  
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ I N S E R T ~~~~~~~~~~~~~~~~~~~~ -->
 
 
   <insert id="insertUser" parameterType="User">
@@ -123,7 +149,18 @@
   </insert>
   
   
-  <!-- D E L E T E -->
+ <insert id="insertReq" parameterType="Map">
+  	INSERT INTO friend_request(
+  		requester, receiver
+  	)VALUES(
+  		#{requester}, #{receiver}
+  	)
+  </insert>
+  
+  
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ D E L E T E ~~~~~~~~~~~~~~~~~~~~ -->
+  
   
   <update id="deleteUserMemo" parameterType="Memo">
   	UPDATE memo
@@ -139,6 +176,14 @@
   		and id = #{id} 
   		and deldate is NULL
   </update>
+  
+  
+  <delete id="deleteReq" parameterType="Map">
+  	DELETE FROM friend_request 
+  	WHERE requester = #{requester} AND receiver = #{receiver}
+  </delete>
+  
+  
   
   
   </mapper>
