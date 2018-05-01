@@ -11,7 +11,7 @@
 		extraAllowedContent: 'img[width,height,align]',
 		/* extraPlugins: 'tableresize,uploadimage,uploadfile', */
 		extraPlugins: '',
-		height: 800,
+		height: 580,
 		removeButtons : 'About',
 		contentsCss: [ './resources/css/mystyles.css', 'mystyles.css' ],
 		bodyClass: 'document-editor',

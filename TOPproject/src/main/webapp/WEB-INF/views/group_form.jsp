@@ -56,16 +56,6 @@ var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
   outline: none;
 }
 
-/* body {
-  margin: 0;
-  padding: 0;
-  background: #DDD;
-  font-size: 16px;
-  color: #222;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-} */
-
 #login-box {
   position: relative;
   margin: 5% auto;
@@ -174,9 +164,9 @@ button.social-signin:focus {
 }
 </style>
 </head>
-<body>
+<body id="bodyP">
 <%@ include file="nabi-left.jsp" %>
-<%@ include file="nabi-top.jsp" %>
+<%@ include file="nabi-top2.jsp" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
@@ -201,7 +191,7 @@ button.social-signin:focus {
 						    <input type="text" placeholder="아이디로 검색할 수 있습니다." class="joinText" id="fl">
 						    
 						    
-						    <ul id="menu" style="width:600px">
+						    <ul id="menu" style="width:450px">
 							  <li class="ui-widget-header"> <div>프로젝트 매니저 : ${sessionScope.loginedId}</div> </li>
 							  <!-- 선택된 멤버가 추가되는 부분 -->
 							  
@@ -209,11 +199,11 @@ button.social-signin:focus {
 							<input type="button" value="선택 삭제" onclick="del()"><br><br><br>
 					
 					    	프로젝트 기간을 설정하십시오.<br>
-					    	<p>시작일: <input type="text" id="datepicker_start"></p>
-					    	<p>종료일: <input type="text" id="datepicker_end"></p>
+					    	<p>시작일: <input type="text" class="form-controlp" id="datepicker_start" style="width:400px"></p>
+					    	<p>종료일: <input type="text" class="form-controlp" id="datepicker_end" style="width:400px"></p>
 							
 							
-						    <input type="button" value="Create" onclick="create()" />
+						    <input type="button" value="Create" class="btn btn-primary btn-md" onclick="create()" />
 						    </div>
 					</div>
 				</div><!--End .articles-->

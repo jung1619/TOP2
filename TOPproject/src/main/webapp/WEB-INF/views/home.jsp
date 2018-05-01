@@ -13,10 +13,24 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- css 추가부분 -->
+<script src="https://medialoot.com/preview/lumino/js/chart.min.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/chart-data.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/easypiechart.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/easypiechart-data.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/bootstrap-datepicker.js"></script>
+<script src="https://medialoot.com/preview/lumino/js/custom.js"></script>
+<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
+
+
 </head>
 <body>
 	<!-- 상단 네비게이터. 메인과 로그인 후 개인화면에서 사용할 예정 -->
-	<%@ include file="nabi-top.jsp" %>
+	<%-- <%@ include file="nabi-top.jsp" %> --%>
 	
 	<!-- 슬라이드 쇼 -->
 <header class="w3-display-containerH w3-center">
@@ -28,11 +42,31 @@
 	    	<div class="group_middle">최상의 그룹 오피스</div>
 	    	<br><br>
 	    	<div class="group_buttom">
-		    	<c:if test="${sessionScope.loginedId == null}">
+		    	<c:choose>
+	    			<c:when test="${sessionScope.loginedId == null}">
 		    		<p><button class="w3-button w3-block w3-yellow w3-round" onclick="location.href='joinForm'">가입하기</button></p>
-			    </c:if>
-	    	</div>
-  		</div>
+			    	</c:when>
+	    		<c:otherwise>
+	    			<p><button class="w3-button w3-block w3-blue w3-round" onclick="location.href='personal'">개인 페이지로</button></p>
+	    		</c:otherwise>
+	    		</c:choose>
+	    	</div><br><br>
+	    	<div class="group_buttom">
+	    	<form class="top2" action="login" method="POST">
+	    		<c:choose>
+	    			<c:when test="${sessionScope.loginedId == null}">
+			    	<input type="text" class="form-controlp" placeholder=" ID" name="id" id="loginID">
+			    	<input type="password" class="form-controlp" placeholder=" PW" name="pw" id="loginPW">
+			    	<input type="submit" class="btn btn-primary btn-md" value="login" style="margin-top: 3px">
+	    		</c:when>
+	    		<c:otherwise>
+	    			<span class="fontsize20"><span class="site__title">${sessionScope.loginedId}</span>님 
+					<span class="logout"><a href="logout">&nbsp; <span style="color:white;">LOGOUT</span></a></span></span>
+	    		</c:otherwise>
+	    		</c:choose>
+			</form>
+		</div>
+  	</div>
   </div>
   <div class="mySlides w3-animate-opacity">
     <img src="./resources/img/team4.jpg" alt="Image 1" style="min-width:500px" width="100%" height="90%">

@@ -40,7 +40,7 @@
 </head>
 <body id="bodyP">
 <%@ include file="nabi-left.jsp" %>
-<%@ include file="nabi-top.jsp" %>
+<%@ include file="nabi-top2.jsp" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">

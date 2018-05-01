@@ -49,13 +49,15 @@ body{
 
 .chatLogView{
 	height: 70%;
-	background :#DEB887;
+	background :#282b3d;
+	overflow-y: auto;
+	padding:15px;
 }
 
 
 .outer_chatEditor{
 	height: 20%;
-	background :#6495ED;
+	/* background :#6495ED; */
 }
 
 .chatEditor_menubar{
@@ -63,17 +65,21 @@ body{
 }
 
 .chatEditor_textView{
-	background :#00BFFF;
+	background :#1c213e;
+	height: 100px;
+	padding-top: 5px;
 }
 
 .mine{
 	float: right;
-	background-color: yellow;
+	background-color: #d8ffff;
+	color:#44757e;
 }
 
 .other{
 	float: left;
-	background-color: blue;
+	background-color: #1abbbe;
+	color:white;
 }
 
 .mine, .other{

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div class="w3-top" style="background: white; z-index: 3;">
+<div class="w3-top shadow" style="background: #222; z-index: 3;">
   <!-- <div class="w3-row w3-white" id="myNavbar"> -->
   <div>
    <!-- 메인 페이지 -->
@@ -39,8 +39,8 @@
 			    <input type="submit" value="login">
 	    	</c:when>
 	    	<c:otherwise>
-	    		<span class="site__title" style="font-size:16px;">${sessionScope.loginedId}</span>님 
-				<span class="logout"><a href="logout">&nbsp; <span class="site__title3">LOGOUT</span></a></span>
+	    		<a href="personal" class="site__title4">${sessionScope.loginedId}</a><span class="site__title6">님 &nbsp;&nbsp;
+				<a href="logout" class="logout"> LOGOUT</a></span>
 	    	</c:otherwise>
 	    </c:choose>
 	</form>

@@ -49,7 +49,50 @@ a{
     color: #30a5ff;
 }
 
-.site__title, .site__title2:hover, .site__title2:focus,.site__title3:hover, .site__title3:focus {
+.site__title3{
+	text-decoration:none !important;
+    color: #5F5F5F;
+    font-size: 25px;
+}
+
+.site__title33{
+	text-decoration:none !important;
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.site__title4{
+	text-decoration:none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+
+.site__title5{
+	text-decoration:none !important;
+    color: #5F5F5F;
+    font-size:17px !important;
+}
+
+.site__title6{
+	text-decoration:none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+
+.logout{
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+.fontsize16{
+	font-size:16px !important;
+}
+
+.fontsize20{
+	font-size:20px !important;
+}
+
+.site__title, .site__title2:hover, .site__title2:focus,.site__title3:hover, .site__title3:focus,.site__title4:hover, .site__title4:focus {
     text-decoration:none !important;
     color: #30a5ff;
     background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
@@ -247,8 +290,20 @@ a{
 
 .top{
 	float:right;
-	padding:8px 16px;
+	padding:16px;
 	font-weight: lighter;
+}
+
+.top2{
+	padding:16px 0px;
+	font-weight: lighter;
+}
+
+.p3-block {
+    display: block;
+    width: 100%;
+    height: 60px;
+    font-size: 20px !important;
 }
 
 .nabi-col.s3 {
@@ -259,7 +314,7 @@ a{
 .nabi-button{
 	border:none;
 	display:inline-block;
-	padding:8px 16px;
+	padding-top:16px;
 	vertical-align:middle;
 	overflow:hidden;
 	text-decoration:none;
@@ -275,7 +330,7 @@ a{
 	-ms-user-select:none;
 	user-select:none;
 	white-space:normal;
-	border-bottom: 1px solid white;
+	/* border-bottom: 1px solid white; */
  	transition: .7s ease-in-out; 
 }
 

@@ -322,9 +322,9 @@ var dataset = [
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
                 <h4 class="modal-title">일정 수정</h4>
             </div>
-            <div id="modalBody" class="modal-body">
             <form action="updateUserSchedule" method="post">
-	            <table class="scledulecss">
+	            <div id="modalBody" class="modal-body">
+		            <table class="scledulecss">
 	           		 <tr>
 	           		 	<th>프로젝트명</th>
 						<td>
@@ -377,13 +377,14 @@ var dataset = [
 						</td>
 					</tr>
 				</table>
-            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
-            </form>
             </div>
             <div class="modal-footer">
+            	<button type="button" class="btn btn-default" data-dismiss="modal">완료</button>
+            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                 <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteUserSchedule()">일정 삭제</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

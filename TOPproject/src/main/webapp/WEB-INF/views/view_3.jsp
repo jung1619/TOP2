@@ -12,6 +12,19 @@
 		<script type="text/javascript" src="<c:url value='resources/js/sockjs.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='resources/js/stomp.js'/>"></script>
 	
+		<!-- css 추가부분 -->
+		<script src="https://medialoot.com/preview/lumino/js/chart.min.js"></script>
+		<script src="https://medialoot.com/preview/lumino/js/chart-data.js"></script>
+		<script src="https://medialoot.com/preview/lumino/js/easypiechart.js"></script>
+		<script src="https://medialoot.com/preview/lumino/js/easypiechart-data.js"></script>
+		<script src="https://medialoot.com/preview/lumino/js/bootstrap-datepicker.js"></script>
+		<script src="https://medialoot.com/preview/lumino/js/custom.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
+		<link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
+
 		<script type="text/javascript">
 			var myId = '<%=(String)session.getAttribute("loginedId")%>';
 			
@@ -57,8 +70,8 @@
 							$('#chatLogView').append('<div class="mine">'+data.message+"</div><br>");
 						else
 							$('#chatLogView').append('<div class="other">'+data.nickName+ "님 ->"+data.message+"</div><br>");
+						$('#chatLogView').scrollTop(1000000);
 					});
-					
 					stompClient.subscribe('/subscribe/chat/${p_num}/context',function(context){
 						//var editor = CKEDITOR.document.getById('editor1');
 						var editor = CKEDITOR.instances.editor1;
@@ -138,9 +151,9 @@
 				</div>
 				
 				<div class="chatEditor_textView">
-					<textarea rows="5" cols="44" id="message" class="message"></textarea><br>
-					<input type="button" value="SEND" id="send" class="send">
+					<textarea id="message" class="message form-controlp" style="resize: none; width:290px; height:90px;"></textarea><br>
 				</div>
+				<input type="button" value="SEND" id="send" class="send btn btn-primary btn-md" style="width:304px">
 				
 			</div>
 			
