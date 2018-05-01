@@ -10,11 +10,12 @@ public class Schedule {
 	private String color;
 	private String deldate;
 	private int schedule_num;	//시퀀스
+	private int complete;
 	
 	public Schedule(){}
 
 	public Schedule(String id, int p_num, String startdate, String enddate, String content, String color,
-			String deldate, int schedule_num) {
+			String deldate, int schedule_num, int complete) {
 		super();
 		this.id = id;
 		this.p_num = p_num;
@@ -24,6 +25,7 @@ public class Schedule {
 		this.color = color;
 		this.deldate = deldate;
 		this.schedule_num = schedule_num;
+		this.complete = complete;
 	}
 
 	public String getId() {
@@ -89,12 +91,20 @@ public class Schedule {
 	public void setSchedule_num(int schedule_num) {
 		this.schedule_num = schedule_num;
 	}
+	
+	public int getComplete() {
+		return complete;
+	}
+
+	public void setComplete(int complete) {
+		this.complete = complete;
+	}
 
 	@Override
 	public String toString() {
 		return "Schedule [id=" + id + ", p_num=" + p_num + ", startdate=" + startdate + ", enddate=" + enddate
 				+ ", content=" + content + ", color=" + color + ", deldate=" + deldate + ", schedule_num="
-				+ schedule_num + "]";
+				+ schedule_num + ", complete=" + complete + "]";
 	}
 	
 	

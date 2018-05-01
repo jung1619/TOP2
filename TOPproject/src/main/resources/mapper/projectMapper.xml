@@ -6,7 +6,7 @@
   <mapper namespace="global.sesoc.TOPproject.DAO.ProjectMapperInterface">
   
   
-  <!-- U P D A T E -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~ U P D A T E ~~~~~~~~~~~~~~~~~~~~ -->
   
   <update id="updateProject" parameterType="Project">
   	UPDATE top_project
@@ -15,23 +15,12 @@
   </update>
   
   
-  <update id="updateProjectSchedule" parameterType="Schedule">
-  UPDATE schedule_project
-  	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
-  		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
-  		content = #{content},
-  		color = #{color}
-  	WHERE schedule_num = #{schedule_num}
-  			and
-  			p_num = #{p_num}
-  </update>
-  
-  
   <update id="updateProjectNotice" parameterType="Memo">
   	UPDATE notice
   	SET n_content = #{n_content}
   	WHERE p_num = #{p_num}
   </update>
+  
   
   <!-- 정광철 context적용   update-->
   <update id="upDateContext" parameterType="Context">
@@ -44,7 +33,8 @@
   </update>
   
   
-  <!-- S E L E C T -->
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ S E L E C T ~~~~~~~~~~~~~~~~~~~~ -->
   
   <select id="noticeList"  parameterType="String" resultType="Notice">
   SELECT
@@ -56,8 +46,8 @@
    	notice
   WHERE
     p_num = #{p_num} 	
-  
   </select>
+  
   
   <select id="memberList" parameterType="String" resultType="String">
   SELECT
@@ -68,7 +58,8 @@
   	p_num=#{p_num} 	
   </select>
   
-    <select id="selectPj" parameterType="String" resultType="Project">
+  
+  <select id="selectPj" parameterType="String" resultType="Project">
   SELECT
   	p_m_id,
   	p_name
@@ -78,11 +69,6 @@
   	p_num=#{p_num}
   </select>
   
-  <select id="selectProjectSchedule" parameterType="String" resultType="Schedule">
-	 SELECT p_num, startdate, enddate, content, color, schedule_num
-	 FROM schedule_project
-	 WHERE p_num = #{p_num} and deldate is NULL
-  </select>
   
   <select id="selectProject" parameterType="Project" resultType="Project">
 	SELECT
@@ -104,6 +90,7 @@
 		p_memberlist = #{p_memberlist}
 	
   </select>
+  
   
   <!--selectContext 정광철  -->
   <select id="selectContext" parameterType="String" resultType="Context">
@@ -137,14 +124,24 @@
   	WHERE p_num = #{p_num}
   </select>
   
+  
   <select id="searchContext" parameterType="int" resultType="Context">
   	SELECT p_num, title, context, writer
   	FROM context
   	WHERE p_num = #{p_num}
   </select>
   
+  
+  <select id="fileList_pj" parameterType="int" resultType="Context">
+  	SELECT p_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
+  	FROM context
+  	WHERE p_num = #{p_num}
+  </select>
+  
+  
   	
-  <!-- I N S E R T -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~ I N S E R T ~~~~~~~~~~~~~~~~~~~~ -->
+  
  
   <insert id="insertProject" parameterType="Project">
 	INSERT INTO top_project(
@@ -154,20 +151,6 @@
 	  TO_DATE(#{p_startdate}, 'yyyyMMddhh24miss')
 	  ,TO_DATE(#{p_enddate}, 'yyyyMMddhh24miss')
 	)
-  </insert>
-  
-  
-  <insert id="insertProjectSchedule" parameterType="Schedule">
-  	INSERT INTO schedule_project(
-  		p_num, startdate, enddate, content, color, schedule_num
-  	)VALUES(
-  		#{p_num}, 
-  		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
-  		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
-  		#{content},
-  		#{color},
-  		s_p_seq.nextval
-  	)
   </insert>
   
   
@@ -205,6 +188,7 @@
   	)
   </insert>
   
+  
   <insert id="insertContext" parameterType="Context">
   INSERT INTO context(
   	p_num, title, context
@@ -215,7 +199,7 @@
   
   
   
-  <!-- D E L E T E -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~ D E L E T E ~~~~~~~~~~~~~~~~~~~~ -->
   
   <update id="deleteProjectNotice" parameterType="Memo">
   	UPDATE notice
@@ -223,13 +207,7 @@
   	WHERE p_num = #{p_num}
   </update>
   
-  <update id="deleteProjectSchedule" parameterType="Schedule">
-  	UPDATE schedule_project
-  	SET deldate = SYSDATE
-  	WHERE schedule_num = #{schedule_num} 
-  		and p_num = #{p_num} 
-  		and deldate is NULL
-  </update>  
+  
   
   
   </mapper>

@@ -17,17 +17,6 @@
 		/* 드디어 성공이다!!!!! */
 		$(document).ready(function(){
 			var editor = CKEDITOR.instances.editor1;
-			//var editor = $('#editor1');
-			
-			/*
-			editor.on( 'keyup', function( event ) {
-			    alert( 't' );
-			});
-			editor.on('change',function(evt){
-				sendContext();
-			});*/
-			
-			
 			
 			editor.on("instanceReady", function(){
 				this.document.on("keyup", function(){
@@ -37,27 +26,27 @@
 			
 			
 			//파일 저장부
-			 	$('.makedocs').on('click',function() {
-					var data = CKEDITOR.instances.editor1.getData();
-					alert(data);
-					$.ajax({
-						url : 'makedocx'
-						, type : 'post'
-						, data : {
-							textt : data
-						}
-						, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-						, dataType : 'json'
-						,success : function(e) {
-							console.log(e);
-							console.log(e.file);
-							location.href=e.file;
-						}
-						, error : function(e) {
-							console.log(e);
-						}
-					})  
-				}); 
+		 	$('.makedocs').on('click',function() {
+				var data = CKEDITOR.instances.editor1.getData();
+				alert(data);
+				$.ajax({
+					url : 'makedocx'
+					, type : 'post'
+					, data : {
+						textt : data
+					}
+					, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+					, dataType : 'json'
+					,success : function(e) {
+						console.log(e);
+						console.log(e.file);
+						location.href=e.file;
+					}
+					, error : function(e) {
+						console.log(e);
+					}
+				})  
+			}); 
 			
 			$('.makePDF').on('click',function() {
 				var data = CKEDITOR.instances.editor1.getData();

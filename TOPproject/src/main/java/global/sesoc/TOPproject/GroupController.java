@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
+import global.sesoc.TOPproject.DAO.ScheduleDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.DAO.UserMapperInterface;
+import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Notice;
 import global.sesoc.TOPproject.VO.Project;
 import global.sesoc.TOPproject.VO.Schedule;
@@ -32,6 +35,8 @@ public class GroupController {
 	ProjectDAO projectDAO;
 	@Inject
 	UserDAO userDAO;
+	@Inject
+	ScheduleDAO shceduleDAO;
 	
 	
 	
@@ -56,17 +61,6 @@ public class GroupController {
 		return "group_form";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="loadFL", method=RequestMethod.GET)
-	public String[] loadFL(String id){
-		logger.info("친구목록 조회 : " + id);
-		
-		String fl = userDAO.searchUserFL(id);
-		String[] list = fl.split("/");
-		
-		logger.info("친구목록 조회 결과 : " + list);
-		return list;
-	}
 	
 	@ResponseBody
 	@RequestMapping(value="createProject", method=RequestMethod.POST)
@@ -147,6 +141,7 @@ public class GroupController {
 		}
 	}
 	
+	
 	//그룹 일정 페이지
 	@RequestMapping(value = "groupCal", method = RequestMethod.GET)
 	public String groupCal(HttpSession hs, ModelMap modelMap,HttpServletRequest req, Model model, String groupNum) {
@@ -158,7 +153,7 @@ public class GroupController {
 			p_num = groupNum;
 			logger.info("p_num1 : " + p_num);
 		}
-		ArrayList<Schedule> scheduleListview = projectDAO.selectProjectSchedule(p_num);
+		ArrayList<Schedule> scheduleListview = shceduleDAO.selectProjectSchedule(p_num);
 		logger.info("스케쥴 : " + scheduleListview);
 		modelMap.addAttribute("listview", scheduleListview);
 		
@@ -171,6 +166,7 @@ public class GroupController {
 		model.addAttribute("p_num",p_num);
 		return "group-cal";
 	}
+	
 	
 	//그룹 내 멤버 페이지
 	@RequestMapping(value = "groupMem", method = RequestMethod.GET)
@@ -206,6 +202,7 @@ public class GroupController {
 		return "group-mem";
 	}
 	
+	
 	// 그룹 이동
 	@RequestMapping(value = "group", method = RequestMethod.GET)
 	public String group(HttpSession hs, ModelMap modelMap,HttpServletRequest req, Model model, String groupNum) {
@@ -217,7 +214,7 @@ public class GroupController {
 			p_num = groupNum;
 			logger.info("p_num1 : " + p_num);
 		}
-		ArrayList<Schedule> scheduleListview = projectDAO.selectProjectSchedule(p_num);
+		ArrayList<Schedule> scheduleListview = shceduleDAO.selectProjectSchedule(p_num);
 		logger.info("스케쥴 : " + scheduleListview);
 		modelMap.addAttribute("listview", scheduleListview);
 		
@@ -257,6 +254,7 @@ public class GroupController {
 		model.addAttribute("p_num",p_num);
 		return "group";
 	}
+	
 	
 	@RequestMapping(value="personal",method=RequestMethod.GET)
 	public String personal(User user, HttpSession hs, Model model){
@@ -300,6 +298,7 @@ public class GroupController {
 		return "personal";
 	}
 	
+	
 	@RequestMapping(value="personalCalendar",method=RequestMethod.GET)
 	public String personalCalendar(User user, HttpSession hs, Model model){
 		
@@ -316,7 +315,7 @@ public class GroupController {
 			logger.info("groupArr : " + groupArr);
 			model.addAttribute("groupList", groupArr);
 		}
-		ArrayList<Schedule> scheduleListview = userDAO.selectSchedule(id);
+		ArrayList<Schedule> scheduleListview = shceduleDAO.selectSchedule(id);
 		model.addAttribute("listview", scheduleListview);
 		
 		//네비게이터에 임시로 값 담는 용도
@@ -327,5 +326,20 @@ public class GroupController {
 
 		return "personal_cal";
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="fileList_pj", method=RequestMethod.POST)
+	public ArrayList<Context> fileList_pj(int p_num){
+		logger.info("해당 프로젝트의 파일 목록 검색 시도 : " + p_num);
+		
+		ArrayList<Context> fileList_pj = projectDAO.fileList_pj(p_num);
+		logger.info("해당 프로젝트의 파일 목록 검색 시도 결과 : " + fileList_pj);
+		
+		return fileList_pj;
+	}
+	
+	
+	
 	
 }//class

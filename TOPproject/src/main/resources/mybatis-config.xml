@@ -18,6 +18,7 @@
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" />
 		<mapper resource="mapper/projectMapper.xml" />
+		<mapper resource="mapper/scheduleMapper.xml" />
 	</mappers>
 	
 </configuration>

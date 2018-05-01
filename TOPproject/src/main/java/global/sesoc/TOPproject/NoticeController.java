@@ -2,6 +2,7 @@ package global.sesoc.TOPproject;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,19 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
+import global.sesoc.TOPproject.DAO.ScheduleDAO;
 import global.sesoc.TOPproject.VO.Notice;
 import global.sesoc.TOPproject.VO.Project;
 //noticecontroller
 import global.sesoc.TOPproject.VO.Schedule;
 
 
-
 @Controller
 public class NoticeController {
 	
+	private final static Logger logger= LoggerFactory.getLogger(NoticeController.class);
+	
+	
 	@Autowired
 	ProjectDAO projectDAO;
-	private final static Logger logger= LoggerFactory.getLogger(NoticeController.class);
+	@Inject
+	ScheduleDAO shceduleDAO;
+	
+	
 	
 	@RequestMapping(value="NoticeInsert", method=RequestMethod.POST)
 	public String boardinsert(String context, String p_num, Model model,ModelMap modelMap, HttpSession hs){
@@ -52,7 +59,7 @@ public class NoticeController {
 		//켈린더 관련
 		
 	
-		ArrayList<Schedule> scheduleListview = projectDAO.selectProjectSchedule(p_num);
+		ArrayList<Schedule> scheduleListview = shceduleDAO.selectProjectSchedule(p_num);
 		logger.info("스케쥴 : " + scheduleListview);
 		modelMap.addAttribute("listview", scheduleListview);
 		

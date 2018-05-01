@@ -37,12 +37,23 @@ public class ChatController {
 		// 회의하기 버튼을 눌러서 채팅방 이동 시 해당 파일내용이 있는지 체크해서 없으면 기본 워드파일 하나를 만들어놓기
 		Context context = projectDAO.searchContext(p_num);
 		if( context == null ){
-			context = new Context(p_num, "임시 파일명1", "할 수 있다!!", (String)hs.getAttribute("loginedId"));
+	//		context = new Context(p_num, "임시 파일명1", "할 수 있다!!", (String)hs.getAttribute("loginedId"));
 			projectDAO.insertContext(context);
 		}
 		System.out.println(context);
 		model.addAttribute("test", context.getContext());
 		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전~~~~~~~~~~~~~~");
+		
+		return "view_3";
+	}
+	
+	@RequestMapping(value="readFile", method=RequestMethod.GET)
+	public String readFile(Model model, int c_num){
+		logger.info("특정 파일 에디터에서 읽기 : " + c_num);
+		
+		Context context = projectDAO.searchContext(c_num);
+		
+		model.addAttribute("test", context.getContext());
 		
 		return "view_3";
 	}

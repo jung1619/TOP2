@@ -73,7 +73,7 @@
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-										<h4><a href="#">여기엔 그룹공지 날짜</a></h4>
+										<h4><a href="test">여기엔 그룹공지 날짜</a></h4>
 										<p>여기엔 그룹공지 내용</p>
 									</div>
 								</div>

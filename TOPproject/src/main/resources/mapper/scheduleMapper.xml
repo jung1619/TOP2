@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="global.sesoc.TOPproject.DAO.ScheduleMapperInterface">
+  
+  
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ U P D A T E ~~~~~~~~~~~~~~~~~~~~ -->
+  
+  <update id="updateUserSchedule" parameterType="Schedule">
+  	UPDATE schedule_user
+  	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		content = #{content},
+  		color = #{color}
+  	WHERE schedule_num = #{schedule_num}
+  </update>
+  
+  
+  <update id="updateProjectSchedule" parameterType="Schedule">
+  UPDATE schedule_project
+  	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		content = #{content},
+  		color = #{color}
+  	WHERE schedule_num = #{schedule_num}
+  			and
+  			p_num = #{p_num}
+  </update>
+  
+  
+  <update id="updateUserComplete" parameterType="int">
+	 UPDATE schedule_user
+	 SET complete = 1
+	 WHERE schedule_num = #{schedule_num}
+  </update>
+  
+  
+  <update id="updateProjectComplete" parameterType="int">
+	 UPDATE schedule_project
+	 SET complete = 1
+	 WHERE schedule_num = #{schedule_num}
+  </update>
+  
+  
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ S E L E C T ~~~~~~~~~~~~~~~~~~~~ -->
+  
+  <select id="selectSchedule" parameterType="String" resultType="Schedule">
+  	SELECT id, startdate, enddate, content, color, deldate, schedule_num, complete
+  	FROM schedule_user
+  	WHERE id = #{id} and deldate is NULL
+  </select>
+  
+  
+  <select id="selectProjectSchedule" parameterType="String" resultType="Schedule">
+	 SELECT p_num, startdate, enddate, content, color, schedule_num, complete
+	 FROM schedule_project
+	 WHERE p_num = #{p_num} and deldate is NULL
+  </select>
+  
+  
+  <select id="selectProjectComplete" parameterType="int" resultType="Schedule">
+  	SELECT complete 
+  	FROM schedule_project
+  	WHERE p_num = #{p_num} 
+  </select>
+  
+  
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ I N S E R T ~~~~~~~~~~~~~~~~~~~~ -->
+  
+  <insert id="insertUserSchedule" parameterType="Schedule">
+  	INSERT INTO schedule_user(
+  		id, startdate, enddate, content, color, schedule_num
+  	)VALUES(
+  		#{id}, 
+  		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		#{content},
+  		#{color},
+  		s_u_seq.nextval
+  	)
+  </insert>
+  
+  
+  <insert id="insertProjectSchedule" parameterType="Schedule">
+  	INSERT INTO schedule_project(
+  		p_num, startdate, enddate, content, color, schedule_num
+  	)VALUES(
+  		#{p_num}, 
+  		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
+  		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
+  		#{content},
+  		#{color},
+  		s_p_seq.nextval
+  	)
+  </insert>
+  
+  
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~ D E L E T E ~~~~~~~~~~~~~~~~~~~~ -->
+  
+  <update id="deleteUserSchedule" parameterType="Schedule">
+  	UPDATE schedule_user
+  	SET deldate = SYSDATE
+  	WHERE schedule_num = #{schedule_num} 
+  		and id = #{id} 
+  		and deldate is NULL
+  </update>
+  
+  
+  <update id="deleteProjectSchedule" parameterType="Schedule">
+  	UPDATE schedule_project
+  	SET deldate = SYSDATE
+  	WHERE schedule_num = #{schedule_num} 
+  		and p_num = #{p_num} 
+  		and deldate is NULL
+  </update>  
+  
+  
+  
+  
+  
+  </mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.User;
 
 @Controller
@@ -129,6 +130,7 @@ public class UserController {
 		return userList;
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="insertReq", method=RequestMethod.POST)
 	public void insertReq(String myId, String herId){ 
@@ -140,6 +142,7 @@ public class UserController {
 		
 		logger.info("친구 요청 등록 시도  종료");
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="updateReq", method=RequestMethod.POST)
@@ -159,6 +162,7 @@ public class UserController {
 		}
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="deleteReq", method=RequestMethod.POST)
 	public void deleteReq(String myId, String herId){ 
@@ -171,6 +175,7 @@ public class UserController {
 		logger.info("친구 요청 삭제 시도 종료");
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="searchReqList", method=RequestMethod.POST)
 	public List<HashMap<String, String>> searchReq(String who, String myId){
@@ -182,6 +187,18 @@ public class UserController {
 		List<HashMap<String, String>> reqList = uDao.searchReqList(map);
 		
 		return reqList;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="fileList_ps", method=RequestMethod.POST)
+	public ArrayList<Context> fileList_ps(String myId){
+		logger.info("해당 ID의 파일 목록 검색 시도 : " + myId);
+		
+		ArrayList<Context> fileList_ps = uDao.fileList_ps(myId);
+		logger.info("해당 ID의 파일 목록 검색 시도 결과 : " + fileList_ps);
+		
+		return fileList_ps;
 	}
 	
 	

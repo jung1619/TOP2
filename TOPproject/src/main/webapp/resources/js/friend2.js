@@ -14,7 +14,8 @@ function load_friendList(){
 			for( var i in flList )
 				content += '<tr><td>'+ flList[i] +'</td><td><input type="button" onclick="" value="삭제"></td></tr>';
 			$("#flTable").append(content);
-		}
+		},
+		error : function( err ){ $("#errArea").html( JSON.stringify(err) ); }
 	});
 } //load_friendList
 
@@ -36,7 +37,8 @@ function load_friendReq(){
 				content += '</td><td><input type="button" onclick="task_2(\''+data[i].RECEIVER+'\')" value="취소"></td></tr>';
 			}
 			$("#reqTable_req").append(content);
-		}
+		},
+		error : function( err ){ $("#errArea").html( JSON.stringify(err) ); }
 	});
 } //load_friendReq
 

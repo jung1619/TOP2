@@ -29,7 +29,7 @@
 	    	<br><br>
 	    	<div class="group_buttom">
 		    	<c:if test="${sessionScope.loginedId == null}">
-		    		<p><button class="w3-button w3-block w3-yellow w3-round" onclick="location.href='join'">가입하기</button></p>
+		    		<p><button class="w3-button w3-block w3-yellow w3-round" onclick="location.href='joinForm'">가입하기</button></p>
 			    </c:if>
 	    	</div>
   		</div>

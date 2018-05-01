@@ -15,7 +15,6 @@ import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Memo;
 import global.sesoc.TOPproject.VO.Notice;
 import global.sesoc.TOPproject.VO.Project;
-import global.sesoc.TOPproject.VO.Schedule;
 
 @Repository
 public class ProjectDAO {
@@ -26,7 +25,9 @@ public class ProjectDAO {
 	SqlSession sqls;
 	
 	
+	
 	// I N S E R T ------------------------------------------------------------------
+	
 	public int insertNotice(Notice notice){
 		int result = 0;
 		logger.info("insertNotice in Dao : " + notice);
@@ -65,20 +66,6 @@ public class ProjectDAO {
 	}
 	
 	
-	public int insertProjectSchedule(Schedule schedule){
-		logger.info("프로젝트 스케쥴 등록 : " + schedule);
-		
-		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
-		int result = 0;
-		
-		try{
-			result = mapper.insertProjectSchedule(schedule);
-			logger.info("프로젝트 스케쥴 등록 성공");
-		}catch(Exception e){ logger.info("프로젝트 스케쥴 등록 실패"); e.printStackTrace(); }
-		return result;
-	}
-	
-	
 	public int insertProjectNotice(Memo memo){
 		logger.info("프로젝트 공지 등록 : " + memo);
 		
@@ -96,7 +83,6 @@ public class ProjectDAO {
 	
 	// U P D A T E ------------------------------------------------------------------
 	
-	
 	public int updateProject(Project project){
 		logger.info("프로젝트 수정 : " + project);
 		
@@ -107,20 +93,6 @@ public class ProjectDAO {
 			result = mapper.updateProject(project);
 			logger.info("프로젝트 수정 성공");
 		}catch(Exception e){ logger.info("프로젝트 수정 실패"); e.printStackTrace(); }
-		return result;
-	}
-	
-	
-	public int updateProjectSchedule(Schedule schedule){
-		logger.info("프로젝트 스케쥴 수정 : " + schedule);
-		
-		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
-		int result = 0;
-		
-		try{
-			result = mapper.updateProjectSchedule(schedule);
-			logger.info("프로젝트 스케쥴 수정 성공");
-		}catch(Exception e){ logger.info("프로젝트 스케쥴 수정 실패"); e.printStackTrace(); }
 		return result;
 	}
 	
@@ -154,7 +126,6 @@ public class ProjectDAO {
 	
 	// D E L E T E ------------------------------------------------------------------
 	
-	
 	public int deleteProjectNotice(Memo memo){
 		logger.info("프로젝트 공지 삭제 : " + memo);
 		
@@ -168,23 +139,9 @@ public class ProjectDAO {
 		return result;
 	}
 	
-	public int deleteProjectSchedule(Schedule schedule){
-		logger.info("프로젝트 스케쥴 삭제 : " + schedule);
-		
-		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
-		int result = 0;
-		
-		try{
-			result = mapper.deleteProjectSchedule(schedule);
-			logger.info("프로젝트 스케쥴 삭제 성공");
-		}catch(Exception e){ logger.info("프로젝트 스케쥴 삭제 실패"); e.printStackTrace(); }
-		return result;
-	}
-	
 	
 	
 	//S E L E C T ------------------------------------------------------------------
-	
 	
 	public Context selectContext(String p_num){
 		Context result_context=null;
@@ -219,24 +176,6 @@ public class ProjectDAO {
 		return  n_list;
 	}
 	
-	public ArrayList<Schedule> selectProjectSchedule(String p_num){
-		System.out.println(p_num);
-		ArrayList<Schedule> schedule = new ArrayList<Schedule>();
-		
-		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
-		
-		try{
-			schedule = mapper.selectProjectSchedule(p_num);
-			logger.info(p_num + " 프로젝트 스케쥴 리스트 ");
-		}catch(Exception e){
-			
-			logger.info("프로젝트 불러오기 실패");
-			e.printStackTrace();
-		}
-		
-		return  schedule;
-	}
-	
 	
 	public String memberList(String p_num){
 		String p_memberList = "";
@@ -255,6 +194,7 @@ public class ProjectDAO {
 		return p_memberList;			
 	}
 	
+	
 	public Project selectPj(String p_num){
 		Project pj = new Project();
 		
@@ -270,6 +210,7 @@ public class ProjectDAO {
 		}
 		return pj;
 	}
+	
 	
 	public Project selectProject(Project beforeProject){
 		Project selectProject=  null;
@@ -287,6 +228,7 @@ public class ProjectDAO {
 		return selectProject;
 	}
 	
+	
 	public Project searchProject(int p_num){
 		logger.info("프로젝트 검색 : " + p_num);
 		
@@ -299,6 +241,7 @@ public class ProjectDAO {
 		}catch(Exception e){ logger.info("프로젝트 스케쥴 검색 실패"); e.printStackTrace(); }
 		return project;
 	}
+	
 	
 	public Context searchContext(int p_num){
 		logger.info("작업내용 검색(임시) : " + p_num);
@@ -313,6 +256,7 @@ public class ProjectDAO {
 		return context;
 	}
 	
+	
 	public Notice selectNotice(String p_num){
 		Notice notice = null;
 		ProjectMapperInterface mapper  = sqls.getMapper(ProjectMapperInterface.class);
@@ -324,5 +268,20 @@ public class ProjectDAO {
 		return notice;
 	}
 	
+	
+	public ArrayList<Context> fileList_pj(int p_num){
+		logger.info("프로젝트별 파일 목록 조회 : " + p_num);
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		ArrayList<Context> context = new ArrayList<>();
+		
+		try{
+			context = mapper.fileList_pj(p_num);
+			logger.info("프로젝트별 파일 목록 조회 성공 : " + context);
+		}catch(Exception e){ logger.info("프로젝트별 파일 목록 조회 실패"); e.printStackTrace(); }
+		return context;
+	}
+	
 
-}
+	
+}//class
