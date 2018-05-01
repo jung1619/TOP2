@@ -34,7 +34,7 @@ public interface ProjectMapperInterface {
 	public String memberList(String p_num);
 	
 	//PM 불러오기
-	public String selectPm(String p_num);
+	public Project selectPj(String p_num);
 	
 	//context저장
 	public void upDateContext(Context context);

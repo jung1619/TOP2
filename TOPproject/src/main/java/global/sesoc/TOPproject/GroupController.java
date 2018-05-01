@@ -29,20 +29,44 @@ public class GroupController {
 	
 
 	@Inject
-	ProjectDAO pDao;
+	ProjectDAO projectDAO;
 	@Inject
-	UserDAO uDao;
+	UserDAO userDAO;
 	
 	
 	
 	@RequestMapping(value="groupForm", method=RequestMethod.GET)
-	public String groupForm(String id, Model model){
+	public String groupForm(User user, HttpSession hs, Model model){
+		String id = (String) hs.getAttribute("loginedId");
+		User loginedUser = userDAO.searchUser(id);
+			
+		hs.setAttribute("loginedId", loginedUser.getId());
+		
+		//그룹리스트
+		String [] groupArr=null;
+		String groupList = loginedUser.getP_num_list();
+		if( groupList != null ){				
+			groupArr = groupList.split("/");
+			logger.info("groupArr : " + groupArr);
+			model.addAttribute("groupList", groupArr);
+		}
 		//네비게이터에 임시로 값 담는 용도
 		int page = 4;
 		model.addAttribute("page", page);
 		return "group_form";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="loadFL", method=RequestMethod.GET)
+	public String[] loadFL(String id){
+		logger.info("친구목록 조회 : " + id);
+		
+		String fl = userDAO.searchUserFL(id);
+		String[] list = fl.split("/");
+		
+		logger.info("친구목록 조회 결과 : " + list);
+		return list;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="createProject", method=RequestMethod.POST)
@@ -51,18 +75,18 @@ public class GroupController {
 		Project selectProject = null;
 		
 		
-		int result = pDao.insertProject(project);
+		int result = projectDAO.insertProject(project);
 		if( result == 1 ){
 			String setP_num = null;
 			// 프로젝트 넘버를 불러다가 user정보에 update를 해줘야한다.
 			// p_memeber_list에 애들 넣어주기
 			logger.info("찾기위한 project:"+project);
-			selectProject =  pDao.selectProject(project);
+			selectProject =  projectDAO.selectProject(project);
 			logger.info("selectProject in GroupController : " +selectProject);
 			String updateProject = selectProject.getP_num()+"";
 			//<---마스터 아이디p_num에 추가--->
 			String masterId = selectProject.getP_m_id();
-			User updateMUser = uDao.searchUser(masterId);
+			User updateMUser = userDAO.searchUser(masterId);
 			logger.info("updateProject : "+updateProject);
 			//업데이트 할 numberlist 붙여 넣음
 			
@@ -75,7 +99,7 @@ public class GroupController {
 			
 			logger.info("setP_num : "+setP_num);
 			updateMUser.setP_num_list(setP_num);
-			int ressult = uDao.updateUser_p_num_list(updateMUser);
+			int ressult = userDAO.updateUser_p_num_list(updateMUser);
 			logger.info("성공여부 : "+ressult);
 			
 			//<--구성원 확인-->//
@@ -97,7 +121,7 @@ public class GroupController {
 			
 			for(int i =1 ; i<updateMamberArr.length;i++){
 				logger.info("m : "+ updateMamberArr[i]);
-				updateUser = uDao.searchUser(updateMamberArr[i]);
+				updateUser = userDAO.searchUser(updateMamberArr[i]);
 				logger.info(updateUser.toString());
 				
 				
@@ -112,7 +136,7 @@ public class GroupController {
 				}
 				logger.info("setP_num2 : "+setP_num2);
 				updateUser.setP_num_list(setP_num2);
-				int result2 = uDao.updateUser_p_num_list(updateUser);
+				int result2 = userDAO.updateUser_p_num_list(updateUser);
 				logger.info("성공여부 : "+result2);
 			}
 			
@@ -123,10 +147,9 @@ public class GroupController {
 		}
 	}
 	
-	
-	// 그룹 수정
-	@RequestMapping(value = "group", method = RequestMethod.GET)
-	public String group(HttpSession hs, ModelMap modelMap,HttpServletRequest req,Model model, String groupNum) {
+	//그룹 일정 페이지
+	@RequestMapping(value = "groupCal", method = RequestMethod.GET)
+	public String groupCal(HttpSession hs, ModelMap modelMap,HttpServletRequest req, Model model, String groupNum) {
 		
 		//켈린더 관련
 		String p_num = req.getParameter("groupNum");
@@ -135,12 +158,71 @@ public class GroupController {
 			p_num = groupNum;
 			logger.info("p_num1 : " + p_num);
 		}
-		ArrayList<Schedule> scheduleListview = pDao.selectProjectSchedule(p_num);
+		ArrayList<Schedule> scheduleListview = projectDAO.selectProjectSchedule(p_num);
+		logger.info("스케쥴 : " + scheduleListview);
+		modelMap.addAttribute("listview", scheduleListview);
+		
+		//프로젝트매니져, 프로젝트 이름
+		Project pj = projectDAO.selectPj(groupNum);
+		model.addAttribute("pj", pj);
+		
+		int page = 2;
+		model.addAttribute("page", page);
+		model.addAttribute("p_num",p_num);
+		return "group-cal";
+	}
+	
+	//그룹 내 멤버 페이지
+	@RequestMapping(value = "groupMem", method = RequestMethod.GET)
+	public String groupMem(HttpSession hs, ModelMap modelMap,HttpServletRequest req, Model model, String groupNum) {
+		
+		String p_num = req.getParameter("groupNum");
+		logger.info("p_num : " + p_num);
+		if(p_num == null){
+			p_num = groupNum;
+			logger.info("p_num1 : " + p_num);
+		}
+		
+		//일반멤버
+		String memberList = projectDAO.memberList(groupNum);
+		System.out.println(memberList);
+				
+		if( memberList != null ){				
+			String [] mList = memberList.split("/");
+			for(String s : mList){
+				System.out.println(s);
+			}
+			logger.info("memberList : " + mList);
+			model.addAttribute("mList", mList);
+		}
+
+		//프로젝트매니져, 프로젝트 이름
+		Project pj = projectDAO.selectPj(groupNum);
+		model.addAttribute("pj", pj);
+		
+		int page = 3;
+		model.addAttribute("page", page);
+		model.addAttribute("p_num",p_num);
+		return "group-mem";
+	}
+	
+	// 그룹 이동
+	@RequestMapping(value = "group", method = RequestMethod.GET)
+	public String group(HttpSession hs, ModelMap modelMap,HttpServletRequest req, Model model, String groupNum) {
+		
+		//켈린더 관련
+		String p_num = req.getParameter("groupNum");
+		logger.info("p_num : " + p_num);
+		if(p_num == null){
+			p_num = groupNum;
+			logger.info("p_num1 : " + p_num);
+		}
+		ArrayList<Schedule> scheduleListview = projectDAO.selectProjectSchedule(p_num);
 		logger.info("스케쥴 : " + scheduleListview);
 		modelMap.addAttribute("listview", scheduleListview);
 		
 		//일반멤버
-		String memberList = pDao.memberList(groupNum);
+		String memberList = projectDAO.memberList(groupNum);
 		System.out.println(memberList);
 		
 		if( memberList != null ){				
@@ -152,16 +234,19 @@ public class GroupController {
 			model.addAttribute("mList", mList);
 		}
 		
-		//프로젝트매니져
-		String pm = pDao.selectPm(groupNum);
-		model.addAttribute("pm", pm);
+		//프로젝트매니져, 프로젝트 이름
+		Project pj = projectDAO.selectPj(groupNum);
+		model.addAttribute("pj", pj);
+		
+		int page = 1;
+		model.addAttribute("page", page);
 		
 		
 		//공지사항 
 		
 		System.out.println("get으로 받아온 파라미터: "+p_num);
 		//p_num을 받아다가 다오로 넣어서 끌어와야함
-		ArrayList<Notice> n_list = pDao.noticeList(p_num);
+		ArrayList<Notice> n_list = projectDAO.noticeList(p_num);
 		
 		System.out.println("보내짐");
 		
@@ -177,7 +262,7 @@ public class GroupController {
 	public String personal(User user, HttpSession hs, Model model){
 		
 		String id = (String) hs.getAttribute("loginedId");
-		User loginedUser = uDao.searchUser(id);
+		User loginedUser = userDAO.searchUser(id);
 			
 		hs.setAttribute("loginedId", loginedUser.getId());
 		
@@ -196,7 +281,7 @@ public class GroupController {
 			for(int i = 0 ; i<groupArr.length;i++){
 				logger.info("groupArr in HomeController : "+groupArr[i] );
 				// 그룹리스트를 불러와서
-					notice = pDao.selectNotice(groupArr[i]);
+					notice = projectDAO.selectNotice(groupArr[i]);
 					logger.info("받아온 notice in HomController : " + notice);
 					if(notice != null){
 						noticeArr.add(notice);
@@ -206,27 +291,41 @@ public class GroupController {
 						System.out.println("notice를 추가하지 못했습니다.");
 					}
 			}
-			
 		}
-		ArrayList<Schedule> scheduleListview = uDao.selectSchedule(id);
+		
+		//네비게이터에 임시로 값 담는 용도
+		int page = 1;
+		model.addAttribute("page", page);
+		
+		return "personal";
+	}
+	
+	@RequestMapping(value="personalCalendar",method=RequestMethod.GET)
+	public String personalCalendar(User user, HttpSession hs, Model model){
+		
+		String id = (String) hs.getAttribute("loginedId");
+		User loginedUser = userDAO.searchUser(id);
+			
+		hs.setAttribute("loginedId", loginedUser.getId());
+		
+		//그룹리스트
+		String [] groupArr=null;
+		String groupList = loginedUser.getP_num_list();
+		if( groupList != null ){				
+			groupArr = groupList.split("/");
+			logger.info("groupArr : " + groupArr);
+			model.addAttribute("groupList", groupArr);
+		}
+		ArrayList<Schedule> scheduleListview = userDAO.selectSchedule(id);
 		model.addAttribute("listview", scheduleListview);
 		
 		//네비게이터에 임시로 값 담는 용도
 		String personal = "personal";
 		model.addAttribute("personal", personal);
-		
-		//친구리스트
-		String fList = uDao.searchUserFL(loginedUser.getId());
-		String [] friendList = fList.split("/");
-		for(String f : friendList) {
-			System.out.println(f);
-		}
-		model.addAttribute("fList", friendList);
-		
-		
-		return "personal";
+		int page = 2;
+		model.addAttribute("page", page);
+
+		return "personal_cal";
 	}
-	
-	
 	
 }//class

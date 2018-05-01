@@ -2,6 +2,8 @@ package global.sesoc.TOPproject;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.VO.Notice;
+import global.sesoc.TOPproject.VO.Project;
 //noticecontroller
 import global.sesoc.TOPproject.VO.Schedule;
 
@@ -26,7 +29,10 @@ public class NoticeController {
 	private final static Logger logger= LoggerFactory.getLogger(NoticeController.class);
 	
 	@RequestMapping(value="NoticeInsert", method=RequestMethod.POST)
-	public String boardinsert(String context, String p_num, Model model,ModelMap modelMap){
+	public String boardinsert(String context, String p_num, Model model,ModelMap modelMap, HttpSession hs){
+		String id = (String) hs.getAttribute("loginedId");
+		hs.setAttribute("loginedId", id);
+		
 		logger.info("p_num: "+p_num+" context : "+context);
 		Notice notice = new Notice();
 		int result = 0;
@@ -64,10 +70,9 @@ public class NoticeController {
 		}
 		
 		//프로젝트매니져
-		String pm = projectDAO.selectPm(p_num);
-		model.addAttribute("pm", pm);
-		
-		
+		Project pj = projectDAO.selectPj(p_num);
+		model.addAttribute("pm", pj.getP_m_id());
+	
 		//공지사항 
 		
 		System.out.println("get으로 받아온 파라미터: "+p_num);

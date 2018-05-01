@@ -12,19 +12,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- 슬라이더, 풀캘린더  -->
-<%-- <link rel="stylesheet" type="text/css" href="./resources/css/fullcalendar.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/fullcalendar.min.css" />
-<link rel="stylesheet" href='./resources/css/fullcalendar.print.min.css' media='print' />
-<script type="text/javascript" src="<c:url value='/resources/js/jquery.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/moment.min.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/fullcalendar.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/ko.js'/>"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" rel="stylesheet" />
-<link rel="stylesheet" href='./resources/css/jquery.qtip.css' media='print' />
-<script type="text/javascript" src="<c:url value='/resources/js/jquery.qtip.js'/>"></script> --%>
 
 <link href="http://www.mikesmithdev.com/shared/css/bootstrapmodal.css" rel="stylesheet" />
 <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.js'/>"></script>
@@ -50,11 +37,8 @@
 
 
 <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script>
-<style type="text/css">
-
-</style>
 </head>
-<body>
+<body id="bodyP">
 <%@ include file="nabi-left.jsp" %>
 <%@ include file="nabi-top.jsp" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -138,34 +122,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Friend List
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body">
-						<ul class="todo-list">
-							<c:forEach var="friend" items="${fList}">
-								<li class="todo-list-item">
-									${friend} 오른쪽에 친구 삭제기능 넣어야 함
-									<div class="pull-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
-					<!-- <div class="panel-heading">친구검색</div> -->
-					<div class="panel-footer">
-							<div class="input-group">
-							<input id="searchId" type="text" class="form-control input-md" placeholder="추가할 친구 ID를 입력하세요">
-							<span class="input-group-btn">
-							<button class="btn btn-primary btn-md" id="searchBtn">검색</button></span></div>
-					</div>
-					<div class="panel-footer">
-						<div class="searchedId">
-							<a id="idSearchDiv"></a>
-							<input type="button" id="addBtn" value="ADD">
-						</div>
-					</div>
-				</div>
 			</div>
 			
 			
@@ -194,16 +150,7 @@
 										
 					</div>
 				</div><!--End .articles-->
-				
 			</div>
-			
-
-
-<%-- 	<div class="groupList">
-		<c:forEach var="group" items="${groupList}">
-				<a href="group?groupNum=${group}">${group}그룹</a><br>
-		</c:forEach>
-	</div> --%>
 </div>
 
 

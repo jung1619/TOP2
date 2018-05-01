@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PERSONAL PAGE</title>
+	<title>GROUP PAGE</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -134,27 +134,42 @@ var dataset = [
     	          });
     	      },
     	      eventClick:  function(event, jsEvent, view) {
-    	    	    $('#startTime').val(moment(event.start).format('YYYY-MM-DD')+'T'+moment(event.start).format('HH:mm'));
-    	    	    $('#endTime').val(moment(event.end).format('YYYY-MM-DD')+'T'+moment(event.end).format('HH:mm'));
-     	    	    $('#startTimes').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
+    	    	    $('.startTime').val(moment(event.start).format('YYYY-MM-DD')+'T'+moment(event.start).format('HH:mm'));
+    	    	    $('.endTime').val(moment(event.end).format('YYYY-MM-DD')+'T'+moment(event.end).format('HH:mm'));
+    	            
+    	    	    $('.startTime1').html(moment(event.start).format('YYYY')+'년 '
+    	    	    		+moment(event.start).format('MM')+'월 '
+    	    	    		+moment(event.start).format('DD')+'일 '
+    	    	    		+moment(event.start).format('HH')+'시 '
+    	    	    		+moment(event.start).format('mm')+'분 '
+    	    	    		);
+    	    	    $('.endTime1').html(moment(event.end).format('YYYY')+'년 '
+    	    	    		+moment(event.end).format('MM')+'월 '
+    	    	    		+moment(event.end).format('DD')+'일 '
+    	    	    		+moment(event.end).format('HH')+'시 '
+    	    	    		+moment(event.end).format('mm')+'분 '
+    	    	    		);
+    	    	    $('#startTimes').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
     	    	    $('#endTimes').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
     	    	    $("#eventInfo").html(event.description);
     	            $("#eventLink").attr('href', event.url);
     	            $("#eventContent").dialog({ modal: true, title: event.title, width:350});
-    	            /* $('.modalTitle').html(event.title); */
+    	            $('.modalTitle').html(event.title);
     	            //$('#modalId').html(event.id);
-    	            $('#modalId').attr('value', event.id);
+    	            $('.modalId').attr('value', event.id);
+    	            $('#modalIdUP').attr('value', event.id);
     	            $('.modalTitle').attr('value', event.title);
     	            $('#modalBody').html(event.description);
     	            $('#eventUrl').attr('href',event.url);
+    	            $('.color').attr('value', event.color);
     	            $('#fullCalModal').modal();
     	        }
     	    });
     	  });
  
- function deleteUserSchedule(){
+ function deleteProjectSchedule(){
 	 $('#fullCalModal').modal('toggle'); 
-	 var schedule_num = document.getElementById('modalId').value;
+	 var schedule_num = document.getElementById('modalIdUP').value;
 	 $('.schedule_num').attr('value', schedule_num);
 	 var startTimes = document.getElementById('startTimes').value;
 	    $('.startTimes').html(startTimes);
@@ -165,33 +180,20 @@ var dataset = [
  
 
  </script>
-
-<style type="text/css">
-
-@-webkit-keyframes hue {
-  from {
-    -webkit-filter: hue-rotate(0deg);
-  }
-
-  to {
-    -webkit-filter: hue-rotate(-360deg);
-  }
-}
-</style>
 </head>
-<body id="bodyP">
-<%@ include file="nabi-top.jsp"  %>
-<%@ include file="nabi-left.jsp" %>
+<body id="bodyPj">
+<%@ include file="nabi-top2.jsp"  %>
+<%@ include file="nabi-left2.jsp" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">PERSONAL PAGE</h1>
+				<h1 class="page-header">GROUP PAGE</h1>
 			</div>
 
 			<div class="col-lg-12" style="width:1200px">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Your Calendar</div>
+						GROUP Calendar</div>
 					<div class="panel-body">
 						<div id='calendar' style="z-index: 1;"></div>
 					</div>
@@ -200,8 +202,6 @@ var dataset = [
 		</div>
 
 
-<!-- <div id='calendar'></div> -->
-
 <div id="delcalendar" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -209,7 +209,7 @@ var dataset = [
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
                 <h4 class="modal-title">일정을 삭제하시겠습니까?</h4>
             </div>
-            <form action="deleteUserSchedule" method="post">
+            <form action="deleteProjectSchedule" method="post">
             <div id="modalBody" class="modal-body">
 	            <table>
 	            	<tr>
@@ -229,7 +229,7 @@ var dataset = [
 		            </tr>
 	           		 <tr>
 						<td>
-							<input type="hidden" name="id" value="${sessionScope.loginedId}">
+							<input type="hidden" name="p_num" value="${p_num}">
 							<input type="hidden" class="schedule_num" name="schedule_num" required="required">
 						</td>
 					</tr>
@@ -253,13 +253,13 @@ var dataset = [
                 <h4 class="modal-title">새로운 일정 등록</h4>
             </div>
             <div id="modalBody" class="modal-body">
-            <form action="insertUserSchedule" method="post">
+            <form action="insertProjectSchedule" method="post">
 	            <table class="scledulecss">
 	           		 <tr>
-	           		 	<th>프로젝트명</th>
+	           		 	<th>일정명</th>
 						<td>
 							<input type="text" class="form-control input-md" name="content" required="required">
-							<input type="hidden" name="id" value="${sessionScope.loginedId}">
+							<input type="hidden" name="p_num" value="${p_num}">
 						</td>
 					</tr>
 					<tr>
@@ -315,78 +315,121 @@ var dataset = [
     </div>
 </div>
 
-<div id="fullCalModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 class="modal-title">일정 수정</h4>
-            </div>
-            <div id="modalBody" class="modal-body">
-            <form action="updateUserSchedule" method="post">
-	            <table class="scledulecss">
+	<div id="fullCalModal" class="modal fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+	                <!-- 내 일정으로 추가 -->
+	                <h4 class="modal-title">내 일정으로 추가</h4>
+	            </div>
+	             <div id="modalBody" class="modal-body" style="border-bottom: 1px solid #e5e5e5;">
+            	<form action="copyUserSchedule" method="post">
+            	<table>
+            		<tr>
+            			<td>해당 스케쥴을 내 프로젝트에 추가합니다</td>
+            		</tr>
+            		<tr><td>&nbsp;</td></tr>
 	           		 <tr>
-	           		 	<th>프로젝트명</th>
 						<td>
-							<input type="text" name="content" class="modalTitle form-control input-md" required="required">
-							<input type="hidden" name="schedule_num" id="modalId">
-						</td>
-					</tr>
-					<tr>
-						<th>시작일자</th>
-						<td>
-							<input type="datetime-local" class="form-control input-md" id="startTime" name="startdate">
-							<input type="hidden" id="startTimes">
-						</td>
-					</tr>
-					<tr>
-						<th>종료일자</th>
-						<td>
-							<input type="datetime-local" class="form-control input-md" id="endTime" name="enddate">
-							<input type="hidden" id="endTimes">
-						</td>
-					</tr>
-					</table>
-					<table>
-					<tr><td>&nbsp;</td></tr>
-					<tr>
-						<td>COLOR</td>
-					</tr>
-					<tr>
-						<td>
-						<label class="container">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#3a87ad">BLUE</span>
-						  <input type="radio" checked="checked" id="blue" name="color" value="#3a87ad">
-						  <span class="checkmarkb"></span>
-						</label>
+							<input type="hidden" name="p_num" value="${p_num}">
+							<!-- <input type="text" class="modalId" name="schedule_num" required="required"> -->
+							<input type="hidden" name="color" class="color">
+							<input type="hidden" class="id" name="id" value="${sessionScope.loginedId}" required="required">
+							<span class="modalTitle"></span><input type="hidden" name="content" class="modalTitle">
 						</td>
 					</tr>
 					<tr>
 						<td>
-						<label class="container">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#fa6565">RED</span>
-						  <input type="radio" id="red" name="color" value="#fa6565">
-						  <span class="checkmarkr"></span>
-						</label>
+							시작시간 : <span class="startTime1"></span>
+							<input type="hidden" class="startTime" name="startdate">
 						</td>
 					</tr>
 					<tr>
 						<td>
-						<label class="container">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffe111">YELLOW</span>
-						  <input type="radio" id="yellow" name="color" value="#ffe111">
-						  <span class="checkmarky"></span>
-						</label>
+							종료시간 : <span class="endTime1"></span>
+							<input type="hidden" class="endTime" name="enddate">
 						</td>
 					</tr>
 				</table>
-            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
-            </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteUserSchedule()">일정 삭제</button>
-            </div>
-        </div>
-    </div>
-</div>
+            	<input type="submit" id="eventUrl" class="btn btn-primary" value="추가">
+	            </form>
+	            </div>
+
+            
+                
+	        <!-- 일정 수정 / 프로젝트 리더만 보이도록 해야함 -->
+			<c:if test="${pj.p_m_id==sessionScope.loginedId}">   
+	           	<h4 class="modal-title">일정 수정</h4>
+	            <div id="modalBody" class="modal-body">
+	            <form action="updateProjectSchedule" method="post">
+		            <table class="scledulecss">
+		           		 <tr>
+		           		 	<th>프로젝트명</th>
+							<td>
+								<input type="hidden" name="p_num" value="${p_num}">
+								<input type="hidden" id="modalIdUP" name="schedule_num" required="required">
+								<input type="text" name="content" class="modalTitle form-control input-md" required="required">
+							</td>
+						</tr>
+						<tr>
+							<th>시작일자</th>
+							<td>
+								<input type="datetime-local" class="startTime form-control input-md" name="startdate">
+								<input type="hidden" id="startTimes">
+							</td>
+						</tr>
+						<tr>
+							<th>종료일자</th>
+							<td>
+								<input type="datetime-local" class="endTime form-control input-md" name="enddate">
+								<input type="hidden" id="endTimes">
+							</td>
+						</tr>
+						</table>
+						<table>
+						<tr><td>&nbsp;</td></tr>
+						<tr>
+							<td>COLOR</td>
+						</tr>
+						<tr>
+							<td>
+							<label class="container">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#3a87ad">BLUE</span>
+							  <input type="radio" checked="checked" id="blue" name="color" value="#3a87ad">
+							  <span class="checkmarkb"></span>
+							</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<label class="container">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#fa6565">RED</span>
+							  <input type="radio" id="red" name="color" value="#fa6565">
+							  <span class="checkmarkr"></span>
+							</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<label class="container">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffe111">YELLOW</span>
+							  <input type="radio" id="yellow" name="color" value="#ffe111">
+							  <span class="checkmarky"></span>
+							</label>
+							</td>
+						</tr>
+					</table>
+	            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
+	            </form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteProjectSchedule()">일정 삭제</button>
+	            </div>
+	            </c:if>
+	            <!-- 관리자메뉴 끝 -->
+	            
+	        </div>
+	    </div>
+	</div>
 
 </div>
 </body>

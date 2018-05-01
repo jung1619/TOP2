@@ -19,7 +19,8 @@
   UPDATE schedule_project
   	SET startdate = to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
   		enddate = to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
-  		content = #{content}
+  		content = #{content},
+  		color = #{color}
   	WHERE schedule_num = #{schedule_num}
   			and
   			p_num = #{p_num}
@@ -67,9 +68,10 @@
   	p_num=#{p_num} 	
   </select>
   
-    <select id="selectPm" parameterType="String" resultType="String">
+    <select id="selectPj" parameterType="String" resultType="Project">
   SELECT
-  	p_m_id
+  	p_m_id,
+  	p_name
   FROM
    	top_project
   WHERE
@@ -157,12 +159,13 @@
   
   <insert id="insertProjectSchedule" parameterType="Schedule">
   	INSERT INTO schedule_project(
-  		p_num, startdate, enddate, content, schedule_num
+  		p_num, startdate, enddate, content, color, schedule_num
   	)VALUES(
   		#{p_num}, 
   		to_date(#{startdate}, 'yyyy-mm-dd hh24:mi'), 
   		to_date(#{enddate}, 'yyyy-mm-dd hh24:mi'), 
   		#{content},
+  		#{color},
   		s_p_seq.nextval
   	)
   </insert>

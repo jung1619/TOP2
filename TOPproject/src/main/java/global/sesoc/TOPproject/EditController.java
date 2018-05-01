@@ -80,7 +80,7 @@ public class EditController {
 											String a = textt.substring(0,j);
 											String b = textt.substring(j);
 											textt = a+ "px" + b;
-											System.out.println("뿅 ="+textt);
+											System.out.println("textt ="+textt);
 										}
 									}
 									

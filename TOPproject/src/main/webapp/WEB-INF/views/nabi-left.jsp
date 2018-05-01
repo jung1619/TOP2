@@ -4,10 +4,10 @@
 	pageEncoding="UTF-8"%>
 <!-- 개인페이지의 좌측 메뉴입니다 -->
 <body>
-<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar collapse in" aria-expanded="true" style="">
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar collapse in" aria-expanded="true" style="z-index: 2;">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="./resources/img/rurueo.jpg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">${sessionScope.loginedId}</div>
@@ -24,16 +24,18 @@
 		<ul class="nav menu">
 			<c:choose>
 				<c:when test="${page == 1}">
-					<li class="active"><a href="#"><em class="fa"><img src="./resources/icon/human.png">&nbsp;</em> MAIN PAGE</a></li>
+					<li class="active"><a><em class="fa"><img src="./resources/icon/human1.png" style="width:17px">&nbsp;</em>MAIN PAGE</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="personal"><em class="fa"><img src="./resources/icon/human.png">&nbsp;</em> MAIN PAGE</a></li>
+					<li onmouseover="mainpage1.src='./resources/icon/human1.png'"
+						onmouseout="mainpage1.src='./resources/icon/human.png'">
+					<a href="personal"><em class="fa"><img src="./resources/icon/human.png" id="mainpage1" style="width:17px">&nbsp;</em>MAIN PAGE</a></li>
 				</c:otherwise>
 			</c:choose>
 			
 			<c:choose>
 				<c:when test="${page == 2}">
-					<li class="active"><a href="#"><em class="fa fa-calendar">&nbsp;</em> Calendar</a></li>
+					<li class="active"><a><em class="fa fa-calendar">&nbsp;</em> Calendar</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="personalCalendar"><em class="fa fa-calendar">&nbsp;</em> Calendar</a></li>
@@ -57,15 +59,17 @@
 			<!-- <li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li> -->
 			<c:choose>
 				<c:when test="${page == 3}">
-					<li class="active"><a href="#"><em class="fa"><img src="./resources/icon/human2.png">&nbsp;</em> Friends</a></li>
+					<li class="active"><a><em class="fa"><img src="./resources/icon/human22.png" style="width:17px">&nbsp;</em> Friends</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#"><em class="fa"><img src="./resources/icon/human2.png">&nbsp;</em> Friends</a></li>
+					<li onmouseover="mainpage2.src='./resources/icon/human22.png'"
+						onmouseout="mainpage2.src='./resources/icon/human2.png'">
+					<a href="#"><em class="fa"><img src="./resources/icon/human2.png" id="mainpage2" style="width:17px">&nbsp;</em> Friends</a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
 				<c:when test="${page == 4}">
-					<li class="active"><a href="#"><em class="fa fa-toggle-off">&nbsp;</em> Create Project</a></li>
+					<li class="active"><a><em class="fa fa-toggle-off">&nbsp;</em> Create Project</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="groupForm"><em class="fa fa-toggle-off">&nbsp;</em> Create Project</a></li>
@@ -73,7 +77,7 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${page == 5}">
-					<li class="active"><a href="#"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
+					<li class="active"><a><em class="fa fa-clone">&nbsp;</em> File List</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="#"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
@@ -81,7 +85,7 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${page == 6}">
-					<li class="active"><a href="#"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
+					<li class="active"><a><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="edit"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>

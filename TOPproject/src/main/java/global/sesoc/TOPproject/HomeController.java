@@ -23,7 +23,7 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	
+	//ArrayList<Notice> n_list= new ArrayList<Notice>();
 	@Autowired
 	UserDAO userDAO;
 	@Autowired
@@ -38,8 +38,8 @@ public class HomeController {
 	public String gohome() { return "redirect:/"; }
 
 	
-	@RequestMapping(value = "join", method = RequestMethod.GET)
-	public String join() { return "join"; }
+/*	@RequestMapping(value = "join", method = RequestMethod.GET)
+	public String join() { return "join"; }*/
 
 	@RequestMapping(value = "friend", method = RequestMethod.GET)
 	public String friend() { return "friend"; }
@@ -58,7 +58,52 @@ public class HomeController {
 		return "notice";
 	}
 
-	
+/*	// 친구검색
+	@ResponseBody
+	@RequestMapping(value = "idSearch", method = RequestMethod.POST)
+	public String idSearch(String searchId, HttpSession session) {
+		logger.info("친구검색 시도 : " + searchId);
+		User user = userDAO.searchUser(searchId);
+		logger.info("친구검색 종료 : " + searchId);
+		logger.info("sessionId : " + session.getAttribute("loginedId"));
+
+		if(user != null && !(session.getAttribute("loginedId").equals(searchId))) {
+			logger.info("success");
+			return user.getId();
+		}
+		else {
+			logger.info("failed");
+			return "failed";
+		}
+		
+	}*/
+/*	
+	//친구추가
+	@ResponseBody
+	@RequestMapping(value = "friendAdd", method = RequestMethod.POST)
+	public String friendAdd(String searchId, HttpSession session) {
+		logger.info("친구추가 시도 : " + searchId);
+
+		String sessionId = (String) session.getAttribute("loginedId");
+		logger.info(sessionId);
+		logger.info(searchId);
+		
+		
+		userDAO.updateFriendList(sessionId, searchId);
+		
+		//친구목록꺼내기
+		String fList = userDAO.searchUserFL(sessionId);
+		System.out.println(fList);
+//		String [] friendList = fList.split("/");
+//		for(String f : friendList) {
+//			System.out.println(f);
+//		}
+		logger.info(fList);
+		logger.info("친구추가 종료 : " + searchId);
+		
+		
+		return fList;
+	}*/
 
 
 }// class

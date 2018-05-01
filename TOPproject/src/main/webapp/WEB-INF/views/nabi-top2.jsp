@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div class="w3-top shadow" style="background: white; z-index: 3;">
+<div class="w3-top" style="background: white; z-index: 3;">
   <!-- <div class="w3-row w3-white" id="myNavbar"> -->
   <div>
    <!-- 메인 페이지 -->
@@ -16,20 +16,10 @@
     	<a href="<c:url value='/'/>" class="w3-block nabi-button"><span class="site__title3">TOP</span></a>
     </div>
     
-    <!-- 로그인을 하지 않았을 때 보이는 메뉴 -->
-	<c:if test="${sessionScope.loginedId == null}">
-	    <div class="nabi-col s3">
-	    	<a href="<c:url value='/'/>" class="w3-block nabi-button"><span class="site__title3">사용방법</span></a>
-	    </div>
-	    <div class="nabi-col s3">
-	    	<a href="<c:url value='/'/>" class="w3-block nabi-button"><span class="site__title3">HELP</span></a>
-	    </div>
-	</c:if>	
-	<c:if test="${sessionScope.loginedId != null}">
-		<div class="nabi-col s3">
-		    <a href="<c:url value='/personal'/>" class="w3-block nabi-button"><span class="site__title3">개인 페이지</span></a>
-		</div>
-	</c:if>
+<!-- 	<div class="nabi-col s3">
+		<span class="w3-block nabi-button">SMART GROUP WARE</span>
+	</div> -->
+
 	
     <!-- 로그인을 했을 때 보이는 메뉴(개인 메뉴까지만 보임. 그룹 페이지는 적용할지 말지 아직 고민중) -->
 <%-- 	<c:if test="${personal != null}">

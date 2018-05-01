@@ -255,20 +255,20 @@ public class ProjectDAO {
 		return p_memberList;			
 	}
 	
-	public String selectPm(String p_num){
-		String pm = "";
+	public Project selectPj(String p_num){
+		Project pj = new Project();
 		
 		logger.info("DAO p_num : "+p_num);
 		ProjectMapperInterface mapper=  sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
-			pm = mapper.selectPm(p_num);
-			logger.info("DAO pm : "+ pm);
+			pj = mapper.selectPj(p_num);
+			logger.info("DAO pm : "+ pj);
 		}catch(Exception e){
 			logger.info("pm 불러오기 실패");
 			e.printStackTrace();
 		}
-		return pm;
+		return pj;
 	}
 	
 	public Project selectProject(Project beforeProject){
