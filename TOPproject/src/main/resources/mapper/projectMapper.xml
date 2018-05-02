@@ -52,7 +52,8 @@
   FROM
    	notice
   WHERE
-    p_num = #{p_num} 	
+    p_num = #{p_num}
+  order by n_deldate desc	
   </select>
   
   

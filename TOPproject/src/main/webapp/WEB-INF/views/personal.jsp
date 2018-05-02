@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <link href="http://www.mikesmithdev.com/shared/css/bootstrapmodal.css" rel="stylesheet" />
 <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
@@ -34,11 +35,18 @@
 <link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
 <link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
-
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$('#load').hide();
+});
+</script>
 
 <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script>
 </head>
 <body id="bodyP">
+<div id="load"><img src="./resources/img/30.gif" alt="loading"></div>
+
 <%@ include file="nabi-left.jsp" %>
 <%@ include file="nabi-top2.jsp" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">

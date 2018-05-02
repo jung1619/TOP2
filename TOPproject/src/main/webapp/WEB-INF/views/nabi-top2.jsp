@@ -8,12 +8,12 @@
 </head>
 
 <body>
-<div class="w3-top shadow" style="background: #222; z-index: 3;">
+<div class="w3-top shadow" style="background: #222; z-index: 3; height:60px;">
   <!-- <div class="w3-row w3-white" id="myNavbar"> -->
   <div>
    <!-- 메인 페이지 -->
     <div class="nabi-col s3">
-    	<a href="<c:url value='/'/>" class="w3-block nabi-button"><span class="site__title3">TOP</span></a>
+    	<a href="<c:url value='/'/>" class="p3-block nabi-button" style="text-align:left; padding: 11px 13px 13px 30px;"><span class="site__title33">TOP</span></a>
     </div>
     
 <!-- 	<div class="nabi-col s3">

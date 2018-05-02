@@ -27,35 +27,40 @@
 			
 			//파일 저장부
 		 	$('.makedocs').on('click',function() {
+				/* if (confirm('DOCX 파일로 저장하시겠습니까?')) { */
 				var data = CKEDITOR.instances.editor1.getData();
-				alert(data);
-				$.ajax({
-					url : 'makedocx'
-					, type : 'post'
-					, data : {
-						textt : data
-					}
-					, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-					, dataType : 'json'
-					,success : function(e) {
-						console.log(e);
-						console.log(e.file);
-						location.href=e.file;
-					}
-					, error : function(e) {
-						console.log(e);
-					}
-				})  
+				var p_num = document.getElementById('p_num').value;
+					$.ajax({
+						url : 'makedocx'
+						, type : 'post'
+						, data : {
+							textt : data,
+							p_num : p_num
+						}
+						, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+						, dataType : 'json'
+						,success : function(e) {
+							console.log(e);
+							console.log(e.file);
+							location.href=e.file;
+						}
+						, error : function(e) {
+							console.log(e);
+						}
+					}) 
+	           /*  } */
 			}); 
 			
 			$('.makePDF').on('click',function() {
+				/* if (confirm('PDF 파일로 저장하시겠습니까?')) { */
 				var data = CKEDITOR.instances.editor1.getData();
-				alert(data);
+				var p_num = document.getElementById('p_num').value;
 				$.ajax({
 					url : 'makePDF'
 					, type : 'post'
 					, data : {
-						textt : data
+						textt : data,
+						p_num : p_num
 					}
 					, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 					, dataType : 'json'
@@ -68,6 +73,7 @@
 						console.log(e);
 					}
 				})  
+				/* } */
 			}); 
 			
 			
@@ -137,14 +143,14 @@
 	</style>
 
 	<div class="container">
-	
+	<input type="hidden" id="p_num" value="${p_num}">
 	<textarea name="text" id="editor1">
 		
 		${content}
 		
 	</textarea>
-	<input class="makedocs" type="button" value="DOCX 파일로 저장">
-	<input class="makePDF" type="button" value="PDF 파일로 저장">
+	<input class="makedocs btn btn-primary btn-md" type="button" value="DOCX 파일로 저장">
+		<input class="makePDF btn btn-primary btn-md" type="button" value="PDF 파일로 저장">
 
 	</div>
 	

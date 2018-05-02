@@ -7,12 +7,13 @@
 	/* CKEDITOR.replace('editor1'); */
    	CKEDITOR.replace( 'editor1', {
    		customConfig: '',
+   		/* config.js */
 		disallowedContent: 'img{width,height,float}',
 		extraAllowedContent: 'img[width,height,align]',
 		/* extraPlugins: 'tableresize,uploadimage,uploadfile', */
 		extraPlugins: '',
-		height: 580,
-		removeButtons : 'About',
+		height: 520,
+		removeButtons : 'About,Form,Checkbox,Radio,TextField,Textarea,Select,Button,HiddenField,Flash',
 		contentsCss: [ './resources/css/mystyles.css', 'mystyles.css' ],
 		bodyClass: 'document-editor',
 		format_tags: 'p;h1;h2;h3;pre',

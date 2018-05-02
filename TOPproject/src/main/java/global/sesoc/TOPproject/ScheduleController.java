@@ -95,7 +95,7 @@ public class ScheduleController {
 		
 		model.addAttribute("p_num",groupNum);
 		logger.info("프로젝트 일정을 내 일정으로 : " + schedule);
-		return "redirect:group?groupNum="+schedule.getP_num();
+		return "redirect:groupCal?groupNum="+schedule.getP_num();
 	}
 	
 	
@@ -112,7 +112,7 @@ public class ScheduleController {
 		
 		model.addAttribute("p_num",groupNum);
 		
-		return "redirect:group?groupNum="+schedule.getP_num();
+		return "redirect:groupCal?groupNum="+schedule.getP_num();
 	}
 	
 	
@@ -126,7 +126,7 @@ public class ScheduleController {
 		int result = shceduleDAO.updateProjectSchedule(schedule);
 		model.addAttribute("p_num",groupNum);
 		logger.info("그룹스케쥴 수정 : " + schedule);
-		return "redirect:group?groupNum="+schedule.getP_num();
+		return "redirect:groupCal?groupNum="+schedule.getP_num();
 	}
 	
 	
@@ -140,7 +140,7 @@ public class ScheduleController {
 
 		model.addAttribute("p_num",groupNum);
 		
-		return "redirect:group?groupNum="+schedule.getP_num();
+		return "redirect:groupCal?groupNum="+schedule.getP_num();
 	}
 	
 	
@@ -168,7 +168,7 @@ public class ScheduleController {
 		map.put("p_num", p_num); map.put("rate", per);
 		
 		int result = shceduleDAO.updateProjectComplete( map );
-		return "redirect:group?groupNum=" + p_num;
+		return "redirect:groupCal?groupNum=" + p_num;
 	}
 	
 	

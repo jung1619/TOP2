@@ -1,12 +1,17 @@
 @CHARSET "UTF-8";
 
 #bodyP {
-  background: #f1f4f7;
+/*   background: #f1f4f7; */
+  background:#30a5ff;
   padding-top: 60px;
   font-size: 14px;
   color: #444444;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  
+
+#bodyP h1.page-header{
+  color: white;
+}
+
  #bodyPj {
   background: #f4f4f4;
   padding-top: 60px;
@@ -787,7 +792,7 @@ a.label:hover, a.label:focus {
   .sidebar {
     display: block;
     position: fixed;
-    top: 38px;
+    top: 60px;
     bottom: 0;
     left: 0;
     z-index: 1000;
@@ -845,7 +850,7 @@ a.label:hover, a.label:focus {
   margin: 0px 0; }
 
 .profile-sidebar {
-  padding: 10px 0;
+  padding: 10px 0 30px 0;
   border-bottom: 1px solid #e9ecf2;
   /* margin-top:38px; */
    }

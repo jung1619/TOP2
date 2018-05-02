@@ -6,6 +6,7 @@ body{
 }
 
 .outer{
+	top:60px;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -29,7 +30,7 @@ body{
 
 .outer_chat{
 	width: 20%;
-	height: 100%;
+	/* height: 100%; */
 	float: left;
 	background : #F0F8FF;
 }
@@ -44,11 +45,11 @@ body{
 
 .notice_btn{
 	text-align: right;
-	background :#7FFFD4
+	background :#282b3d;
 }
 
 .chatLogView{
-	height: 70%;
+	height: 67%;
 	background :#282b3d;
 	overflow-y: auto;
 	padding:15px;
@@ -61,7 +62,7 @@ body{
 }
 
 .chatEditor_menubar{
-	background :#A9A9A9;
+	background :#1c213e;
 }
 
 .chatEditor_textView{

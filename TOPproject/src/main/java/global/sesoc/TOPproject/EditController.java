@@ -42,9 +42,11 @@ public class EditController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EditController.class);
 	
-	public String fileConverter(HttpSession session, String textt){
+	public String fileConverter(int p_num, HttpSession session, String textt){
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("p_num", p_num);
+		String p_name = projectDAO.searchProject(p_num).getP_name();
 		
 		System.out.println(textt);
 		String startHtml = "<!DOCTYPE html[    <!ENTITY nbsp '&#160;'> ]><html><body>";
@@ -113,7 +115,7 @@ public class EditController {
 					}
 				}
 			}
-
+		
 		String text = startHtml + textt + endHtml;
 		//String text = "<!DOCTYPE html[    <!ENTITY nbsp '&#160;'> ]><html><body><p>1<span style='font-size:10px'><span style='background-color:#27ae60'>212</span></span>1</p><img src='http://cdn.creamheroes.com/communityImages/mypet/20180101131345446.png' style='width:300px;'></img><table border='1' cellpadding='1' cellspacing='1' style='width:500px'>	<tbody>		<tr>			<td>1</td>			<td>1</td>			<td>2</td>		</tr>		<tr>			<td>3</td>			<td>1</td>			<td>4</td>		</tr>		<tr>			<td>5</td>			<td>1</td>			<td>5</td>		</tr>	</tbody></table><p>ㅇㄴㅇㄴㅇ</p><p>ㅈㄷㅈ&nbsp; &nbsp; ㄷ</p><p>1&nbsp; 2&nbsp; 3 4 5&nbsp;</p></body></html>";
 		System.out.println("변환한 애들="+textt);
@@ -133,10 +135,9 @@ public class EditController {
             String filename = "";
             
             int number = 1;
-            String teamname = "프로젝트명";
             String path = "C:/boardfile/";
             while (true) {
-            	filename = teamname + "_" + number +".docx";
+            	filename = p_name + "_" + number +".docx";
             	if (!new File(path+filename).exists()) {
             		break;
             	}
@@ -169,9 +170,9 @@ public class EditController {
 	@ResponseBody
 	@RequestMapping(value ="makedocx", method = RequestMethod.POST
 	, produces = "application/text; charset=utf8")
-	public String makeDOCX(HttpSession session, String textt) {
+	public String makeDOCX(int p_num, HttpSession session, String textt) {
 		
-		String json = fileConverter(session, textt);
+		String json = fileConverter(p_num, session, textt);
 
 		return json;
 	}
@@ -180,9 +181,10 @@ public class EditController {
 	@ResponseBody
 	@RequestMapping(value ="makePDF", method = RequestMethod.POST
 	, produces = "application/text; charset=utf8")
-	public String makePDF(HttpSession session, String textt) {
+	public String makePDF(int p_num, HttpSession session, String textt) {
+		System.out.println("PDF변환작업");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String json2 = fileConverter(session, textt);
+		String json2 = fileConverter(p_num, session, textt);
 		String[] s1 = json2.split("boardfile/");
 		String[] s2 = s1[1].split(".docx\"}");
 		System.out.println("pdf s2 = " + s2[0]);

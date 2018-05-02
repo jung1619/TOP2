@@ -113,7 +113,7 @@ public class LoginController {
 			model.addAttribute("personal", personal);
 			
 			logger.info("로그인 시도 성공");
-			return "personal";
+			return "home";
 			
 		}else{
 			model.addAttribute("msg", "입력하신 아이디와 비밀번호를 다시 확인해 주십시오.");

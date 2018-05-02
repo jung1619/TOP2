@@ -25,8 +25,12 @@
 <link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
 <link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
-
-
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	$(window).load(function() {
+		$('#load').hide();
+	 });
+</script>
 </head>
 <body>
 	<!-- 상단 네비게이터. 메인과 로그인 후 개인화면에서 사용할 예정 -->
@@ -94,6 +98,7 @@
   <a class="w3-button w3-black w3-display-right w3-margin-right w3-round w3-hide-small w3-hover-light-grey" onclick="plusDivs(1)">TOP의 다른 기능을 더 알아볼까요? <i class="fa fa-angle-right"></i></a>
   <a class="w3-button w3-block w3-black w3-hide-large w3-hide-medium" onclick="plusDivs(1)">TOP의 다른 기능을 더 알아볼까요? <i class="fa fa-angle-right"></i></a>
 </header>
+<div id="load"><img src="./resources/img/30.gif" alt="loading"></div>
 <div class="content containerH padding-64" id="about">
   <h3 class="center">ABOUT ME</h3>
   <p class="center"><em>I love </em></p>

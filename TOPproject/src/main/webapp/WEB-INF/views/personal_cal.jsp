@@ -48,7 +48,6 @@
 <link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
 
-
 <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script>
 
 <script type="text/javascript">
@@ -180,8 +179,9 @@ var dataset = [
 </style>
 </head>
 <body id="bodyP">
-<%@ include file="nabi-top.jsp"  %>
+<%@ include file="nabi-top2.jsp"  %>
 <%@ include file="nabi-left.jsp" %>
+
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
@@ -198,10 +198,6 @@ var dataset = [
 				</div>
 			</div>
 		</div>
-
-
-<!-- <div id='calendar'></div> -->
-
 <div id="delcalendar" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -379,7 +375,7 @@ var dataset = [
 				</table>
             </div>
             <div class="modal-footer">
-            	<button type="button" class="btn btn-default" data-dismiss="modal">완료</button>
+
             	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                 <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteUserSchedule()">일정 삭제</button>

@@ -53,6 +53,14 @@
 
 <script type="text/javascript">
 
+var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
+var pmid = '<%=(String)session.getAttribute("pjm")%>';
+var mycustom = '';
+
+if (loginedId == pmid) {
+	mycustom = {myCustomButton: {text: "일정입력", click: function(event) { $("#fullCalNew").modal();}}};
+};
+
 var dataset = [
     <c:forEach var="listview" items="${listview}" varStatus="status">
         <c:if test="${listview.startdate != ''}">
@@ -68,7 +76,6 @@ var dataset = [
         </c:if>
     </c:forEach>
     ];
-
  $(document).ready(function() {
 	 
 	//$("#header").load("/stagestageList.jps")
@@ -87,14 +94,7 @@ var dataset = [
 	
 	//$('.fc-day-number.fc-sat').css('background-color', '#0000FF');
 	$('#calendar').fullCalendar({
-		customButtons: { 
-	        myCustomButton: { 
-	            text: '일정입력', 
-	            click: function(event) { 
-	            	 $('#fullCalNew').modal(); 
-	            	} 
-	        	}
-			}, 	
+		customButtons: mycustom, 	 	
     	 	header: {
     	        left: 'prev,next myCustomButton',
     	        center: 'title',
@@ -178,6 +178,16 @@ var dataset = [
 	 $('#delcalendar').modal();
  }
  
+ //완료처리 부분 작업 오네가이시마스
+ function updateProjectComplete(){
+	if (confirm('완료 처리를 하시겠습니까?')) {
+	var schedule_num = document.getElementById('modalIdUP').value;
+	location.href = 'updateProjectComplete?schedule_num=' + schedule_num;
+			
+	return true;
+	 }else {
+	 }
+ }
 
  </script>
 </head>
@@ -352,6 +362,7 @@ var dataset = [
 						</td>
 					</tr>
 				</table>
+				<br>
             	<input type="submit" id="eventUrl" class="btn btn-primary" value="추가">
 	            </form>
 	            </div>
@@ -359,10 +370,11 @@ var dataset = [
             
                 
 	        <!-- 일정 수정 / 프로젝트 리더만 보이도록 해야함 -->
-			<c:if test="${pj.p_m_id==sessionScope.loginedId}">   
-	           	<h4 class="modal-title">일정 수정</h4>
-	            <div id="modalBody" class="modal-body">
+			<c:if test="${pj.p_m_id==sessionScope.loginedId}">
+				<br>
+	           	<h4 class="modal-title">&nbsp;&nbsp;&nbsp;일정 수정</h4>
 	            <form action="updateProjectSchedule" method="post">
+	            <div id="modalBody" class="modal-body">
 		            <table class="scledulecss">
 		           		 <tr>
 		           		 	<th>프로젝트명</th>
@@ -417,13 +429,14 @@ var dataset = [
 							</td>
 						</tr>
 					</table>
-	            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
-	            </form>
 	            </div>
 	            <div class="modal-footer">
+	            	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:updateProjectComplete()" style="background:#ffe179;">스케쥴 완료</button>
+	            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 	                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteProjectSchedule()">일정 삭제</button>
 	            </div>
+	            </form>
 	            </c:if>
 	            <!-- 관리자메뉴 끝 -->
 	            
