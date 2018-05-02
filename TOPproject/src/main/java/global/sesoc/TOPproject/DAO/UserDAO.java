@@ -135,7 +135,7 @@ public class UserDAO {
 		
 		try{
 			userList = mapper.fileList_ps(id);
-			logger.info("해당 ID의 파일 목록 검색 성공 : " + userList);
+			logger.info("해당 ID의 파일 목록 검색 결과 : " + userList);
 		}catch(Exception e){ logger.info("해당 ID의 파일 목록 검색 실패"); e.printStackTrace(); }
 		
 		return userList;

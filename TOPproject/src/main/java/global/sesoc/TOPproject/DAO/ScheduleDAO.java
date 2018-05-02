@@ -161,14 +161,14 @@ public class ScheduleDAO {
 	}
 	
 	
-	public int updateProjectComplete(int complete){
-		logger.info("프로젝트 스케쥴 완료 처리 : " + complete);
+	public int updateProjectComplete(HashMap<String, Integer> map){
+		logger.info("프로젝트 스케쥴 완료 처리 : " + map);
 		
 		ScheduleMapperInterface mapper = sqls.getMapper(ScheduleMapperInterface.class);
 		int result = 0;
 		
 		try{
-			result = mapper.updateProjectComplete(complete);
+			result = mapper.updateProjectComplete(map);
 			logger.info("프로젝트 스케쥴 완료 처리 성공");
 		}catch(Exception e){ logger.info("프로젝트 스케쥴 완료 처리 실패"); e.printStackTrace(); }
 		

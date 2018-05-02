@@ -56,6 +56,7 @@ var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
   outline: none;
 }
 
+
 #login-box {
   position: relative;
   margin: 5% auto;

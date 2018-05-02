@@ -209,6 +209,7 @@ public class EditController {
 		return json;
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="loadContext",method=RequestMethod.POST,produces="application/text;charset=utf8")
 	public String loadContext(String c_num){
@@ -217,7 +218,7 @@ public class EditController {
 		
 		int c_num1= Integer.parseInt(c_num);
 		
-		PersonalEdit personalEdit = projectDAO.loadContext(c_num1);
+		Context personalEdit = projectDAO.loadContext(c_num1);
 		
 		context = personalEdit.getContext();
 		
@@ -226,7 +227,6 @@ public class EditController {
 		return context;
 		
 	}
-	
 	
 	
 	@ResponseBody

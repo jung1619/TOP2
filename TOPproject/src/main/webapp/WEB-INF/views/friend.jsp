@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html> <!-- 친구 관리 페이지 -->
 
+	<head>
+		<style type="text/css">
+			.searchId{
+				ime-mode:disabled;
+			}
+		</style>
+	</head>
+	
 	<div id="errArea"></div>
 
 	<script type="text/javascript" src="<c:url value='resources/js/jquery-3.3.1.min.js'/>"></script>
@@ -39,7 +47,7 @@
 	
 	<div id="freindReq">
 		회원을 검색하여 친구 요청을 보내십시오. <p />
-		<input type="text" id="searchId" placeholder="ID로만 검색할 수 있습니다." onkeyup="searchId()">
+		<input type="text" id="searchId" class="searchId" placeholder="ID로만 검색할 수 있습니다." onkeyup="searchId()">
 		<div id="searchedIds"></div>
 	</div>
 	

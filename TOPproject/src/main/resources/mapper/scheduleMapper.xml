@@ -33,7 +33,7 @@
   
   <update id="updateUserComplete" parameterType="int">
 	 UPDATE schedule_user
-	 SET complete = 1
+	 SET complete = 1, color = 'GRAY'
 	 WHERE schedule_num = #{schedule_num}
   </update>
   

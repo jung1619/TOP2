@@ -64,7 +64,7 @@
 				<c:otherwise>
 					<li onmouseover="mainpage2.src='./resources/icon/human22.png'"
 						onmouseout="mainpage2.src='./resources/icon/human2.png'">
-					<a href="#"><em class="fa"><img src="./resources/icon/human2.png" id="mainpage2" style="width:17px">&nbsp;</em> Friends</a></li>
+					<a href="friend"><em class="fa"><img src="./resources/icon/human2.png" id="mainpage2" style="width:17px">&nbsp;</em> Friends</a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
@@ -80,7 +80,7 @@
 					<li class="active"><a><em class="fa fa-clone">&nbsp;</em> File List</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
+					<li><a href="fileList_ps?myId=${sessionScope.loginedId}"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>

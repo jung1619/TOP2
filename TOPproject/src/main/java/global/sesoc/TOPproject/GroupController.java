@@ -28,7 +28,7 @@ import global.sesoc.TOPproject.VO.User;
 @Controller
 public class GroupController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 	
 
 	@Inject
@@ -252,10 +252,13 @@ public class GroupController {
 		}
 		model.addAttribute("n_list", n_list);
 		model.addAttribute("p_num",p_num);
+		
+		model.addAttribute("p_master", pj.getP_m_id());
 		return "group";
 	}
 	
 	
+	//개인 페이지
 	@RequestMapping(value="personal",method=RequestMethod.GET)
 	public String personal(User user, HttpSession hs, Model model){
 		
@@ -263,6 +266,8 @@ public class GroupController {
 		User loginedUser = userDAO.searchUser(id);
 			
 		hs.setAttribute("loginedId", loginedUser.getId());
+		
+		//그룹리스트
 		String [] groupArr=null;
 		String groupList = loginedUser.getP_num_list();
 		Project selectProject = null;
@@ -344,7 +349,7 @@ public class GroupController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="fileList_pj", method=RequestMethod.POST)
+	@RequestMapping(value="fileList_pj", method=RequestMethod.GET)
 	public ArrayList<Context> fileList_pj(int p_num){
 		logger.info("해당 프로젝트의 파일 목록 검색 시도 : " + p_num);
 		
@@ -352,6 +357,24 @@ public class GroupController {
 		logger.info("해당 프로젝트의 파일 목록 검색 시도 결과 : " + fileList_pj);
 		
 		return fileList_pj;
+	}
+	
+	
+	// 파일리스트에서 아래로 넘어감
+	// 새로 읽는 페이지를 만들지 ajax할지 뒤로가기 가능하게할라면 새 페이지
+	
+	@RequestMapping(value="readFile_project", method=RequestMethod.GET)
+	public String readFile_project(Model model, int c_num){
+		logger.info("프로젝트의 특정 파일 검색 시도 : " + c_num);
+		
+		Context context = projectDAO.searchContext(c_num);
+		
+		model.addAttribute("content", context.getContext());
+		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전 old ~~~~~~~~~~~~~~");
+		
+		//채팅 로그
+		
+		return "view_3";
 	}
 	
 	

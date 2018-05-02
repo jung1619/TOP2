@@ -23,44 +23,36 @@ import global.sesoc.TOPproject.VO.User;
 
 @Controller
 public class ChatController {
-		
+	
+	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+	
 	
 	@Autowired
 	ProjectDAO projectDAO;
 	
-	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 	
+
 	//chatroom이동 
 	@RequestMapping(value="chat", method=RequestMethod.GET)
 	public String Chatpage(int p_num, Model model, HttpSession hs){
-		model.addAttribute("p_num",p_num);
+		logger.info("프로젝트 새 문서 - 에디터 이동 시도 : " + p_num);
 		
-		// 해당 프로젝트에 여러 파일이 있을 경우 파일명으로 해야하니까 임시로
-		// 회의하기 버튼을 눌러서 채팅방 이동 시 해당 파일내용이 있는지 체크해서 없으면 기본 워드파일 하나를 만들어놓기
-		Context context = projectDAO.searchContext(p_num);
-		if( context == null ){
-	//		context = new Context(p_num, "임시 파일명1", "할 수 있다!!", (String)hs.getAttribute("loginedId"));
-			projectDAO.insertContext(context);
-		}
-		System.out.println(context);
-		model.addAttribute("test", context.getContext());
-		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전~~~~~~~~~~~~~~");
+		model.addAttribute("p_num" ,p_num);
+		
+		Context context = new Context(p_num, "document", (String)hs.getAttribute("loginedId"), "자유롭게 문서를 작성하실 수 있습니다.");
+		projectDAO.insertContext(context);
+		
+		model.addAttribute("content", context.getContext());
+		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전 new ~~~~~~~~~~~~~~");
+		
+		
 		Chat selectChat =  null;
 		selectChat = projectDAO.selectChat(p_num);		
 		model.addAttribute("chat", selectChat);
+		
 		return "view_3";
 	}
 	
-	@RequestMapping(value="readFile", method=RequestMethod.GET)
-	public String readFile(Model model, int c_num){
-		logger.info("특정 파일 에디터에서 읽기 : " + c_num);
-		
-		Context context = projectDAO.searchContext(c_num);
-		
-		model.addAttribute("test", context.getContext());
-		
-		return "view_3";
-	}
 	
 	//메시지 주고 받기
 	@MessageMapping("/chat/{p_num}")
@@ -76,6 +68,7 @@ public class ChatController {
 		logger.info("채팅컨트롤러 종료");
 		return message;
 	}
+	
 	
 	@MessageMapping("/chat/{p_num}/context")
 	@SendTo("/subscribe/chat/{p_num}/context")
@@ -121,9 +114,7 @@ public class ChatController {
 			chat.setP_num(p_num);
 			
 			result = projectDAO.updateChat(chat);
-			
 		}
-		
 		
 		return result;
 	}

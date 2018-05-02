@@ -11,7 +11,7 @@ import global.sesoc.TOPproject.VO.User;
 public interface UserMapperInterface {
 
 	public int insertUser(User user);
-	public void insertFriendList(HashMap<String, String> map);
+	public int insertFriendList(HashMap<String, String> map);
 	public int insertUserMemo(Memo memo);
 	public int insertReq(HashMap<String, String> map);
 	

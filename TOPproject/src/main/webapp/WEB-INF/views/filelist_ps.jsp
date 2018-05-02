@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
 		$(function() {
-			loadList();
+			loadList_ps();
 		});
 	</script>
 

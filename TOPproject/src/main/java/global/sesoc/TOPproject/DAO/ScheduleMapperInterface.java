@@ -1,6 +1,7 @@
 package global.sesoc.TOPproject.DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import global.sesoc.TOPproject.VO.Schedule;
 
@@ -20,7 +21,7 @@ public interface ScheduleMapperInterface {
 	public int updateProjectSchedule(Schedule schedule);
 	public int deleteProjectSchedule(Schedule schedule);
 	public ArrayList<Schedule> selectProjectSchedule(String p_num);
-	public int updateProjectComplete(int complete);
+	public int updateProjectComplete(HashMap<String, Integer> map);
 	public ArrayList<Schedule> selectProjectComplete(int p_num);
 
 	

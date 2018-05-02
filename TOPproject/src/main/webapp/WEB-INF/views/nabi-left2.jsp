@@ -85,7 +85,7 @@
 					<li class="active"><a href=""><em class="fa fa-clone">&nbsp;</em> File List</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
+					<li><a href="fileList_pj?p_num=${p_num}"><em class="fa fa-clone">&nbsp;</em> File List</a></li>
 				</c:otherwise>
 			</c:choose>
 <%-- 			<c:choose>

@@ -6,18 +6,8 @@
   <mapper namespace="global.sesoc.TOPproject.DAO.ProjectMapperInterface">
   
   
+  
   <!-- ~~~~~~~~~~~~~~~~~~~~ U P D A T E ~~~~~~~~~~~~~~~~~~~~ -->
-  
-  <update id="updateChat" parameterType="Chat">
- 	 UPDATE
-  		chat
- 	 SET
- 	 	chat_log = #{chat_log}
- 	 WHERE
- 	 	p_num = #{p_num}
-  </update>
-  
-  
   
   <update id="updateProject" parameterType="Project">
   	UPDATE top_project
@@ -33,81 +23,25 @@
   </update>
   
   
-  <!-- 정광철 context적용   update-->
+  <!-- 정광철 context적용   update
   <update id="upDateContext" parameterType="Context">
   	UPDATE 
-  		context
+  		context_project
   	SET
   		context = #{context}, writer = #{writer}
   	WHERE 
   		p_num = #{p_num}
+  </update> -->
+  
+  <update id="updateProjectComplete" parameterType="Map">
+  	UPDATE top_project
+  	SET p_completerate = #{rate}
+  	WHERE p_num = #{p_num}
   </update>
   
   
   
   <!-- ~~~~~~~~~~~~~~~~~~~~ S E L E C T ~~~~~~~~~~~~~~~~~~~~ -->
-  <select id="saveContext" parameterType="String" resultType="Context">
-   SELECT
-  	p_num
-  	,title
-  	,context
-  	,writer
-  	,indate
-  	,c_num
-  FROM
-  	context
-  WHERE 
-  		writer = #{writer} AND
-		c_num = (SELECT MAX(c_num)AS c_num FROM context)
-  
-  </select>
-  
-  
-  
-  
-  
-  
-  <select id="loadContext" parameterType="int" resultType="PersonalEdit">
-  SELECT
-  	c_num
-  	,title
-  	,id
-  	,context
-  	,indate
-  FROM
-  	CONTEXT_USER
-  WHERE
-  	c_num = #{c_num}
-  
-  </select>
-  
-  
-  <select id="selectContextList" parameterType="String" resultType="Context">
-  SELECT
-  	p_num
-  	,title
-  	,context
-  	,writer
-  	,indate
-  	,c_num
-  FROM
-  	context
-  WHERE
-  	writer = #{writer}			
-  
-  </select>
-  
-  
-  
-  <select id="selectChat" parameterType="int" resultType="Chat">
-  	SELECT
-  		p_num
-  		,chat_log
-  	FROM
-  		chat
-  	WHERE
-  		p_num = #{p_num}	
-  </select>
   
   <select id="noticeList"  parameterType="String" resultType="Notice">
   SELECT
@@ -118,8 +52,7 @@
   FROM
    	notice
   WHERE
-    p_num = #{p_num}
-  order by n_deldate desc
+    p_num = #{p_num} 	
   </select>
   
   
@@ -136,7 +69,11 @@
   <select id="selectPj" parameterType="String" resultType="Project">
   SELECT
   	p_m_id,
-  	p_name
+  	p_name,
+  	p_num,
+	p_startdate,
+	p_enddate,
+	p_completerate
   FROM
    	top_project
   WHERE
@@ -166,7 +103,7 @@
   </select>
   
   
-  <!--selectContext 정광철  -->
+  <!--selectContext 정광철 
   <select id="selectContext" parameterType="String" resultType="Context">
   	SELECT
   		p_num
@@ -176,7 +113,7 @@
   		context
   	WHERE
   		p_num = #{p_num}	
-  </select>
+  </select> -->
   
   
   <select id="selectNotice" parameterType="String" resultType="Notice">
@@ -200,31 +137,21 @@
   
   
   <select id="searchContext" parameterType="int" resultType="Context">
-  	SELECT p_num, title, context, writer
-  	FROM context
-  	WHERE p_num = #{p_num}
+  	SELECT p_num, c_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
+  	FROM context_project
+  	WHERE c_num = #{c_num}
   </select>
   
   
   <select id="fileList_pj" parameterType="int" resultType="Context">
-  	SELECT p_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
-  	FROM context
+  	SELECT p_num, c_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
+  	FROM context_project
   	WHERE p_num = #{p_num}
   </select>
   
   
   	
   <!-- ~~~~~~~~~~~~~~~~~~~~ I N S E R T ~~~~~~~~~~~~~~~~~~~~ -->
-  <insert id="insertChat" parameterType="Chat">
-  	INSERT INTO
-  		chat (
-  			p_num
-  			,chat_log
-  		)VALUES(
-  			#{p_num}
-  			,#{chat_log}
-  		)
-  </insert>
   
  
   <insert id="insertProject" parameterType="Project">
@@ -242,7 +169,7 @@
   	INSERT INTO notice(
   		p_num, n_num, n_content
   	)VALUES(
-  		#{p_num}, n_num_seq.nextval, #{n_content}
+  		#{p_num}, n_num_seq.NEXTVAL, #{n_content}
   	)
   </insert>
   
@@ -274,11 +201,11 @@
   
   
   <insert id="insertContext" parameterType="Context">
-  INSERT INTO context(
-  	p_num, title, context
-  )VALUES(
-  	#{p_num}, #{title}, #{context}
-  )
+  	INSERT INTO context_project(
+  		p_num, c_num, title, writer, context
+  	)VALUES(
+  		#{p_num}, c_num_seq.NEXTVAL, #{title}, #{writer}, #{context}
+  	)
   </insert>
   
   

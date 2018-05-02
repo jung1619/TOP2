@@ -1,6 +1,7 @@
 package global.sesoc.TOPproject.DAO;
  
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import global.sesoc.TOPproject.VO.Chat;
 import global.sesoc.TOPproject.VO.Context;
@@ -20,6 +21,7 @@ public interface ProjectMapperInterface {
 	
 	public int updateProject(Project project);
 	public int updateProjectNotice(Memo memo);
+	public int updateCompleteRate(HashMap<String, Integer> map);
 	
 	public int deleteProjectNotice(Memo memo);
 	
@@ -64,7 +66,7 @@ public interface ProjectMapperInterface {
 	public ArrayList<Context> selectContextList(String write);
 	
 	//load context
-	public PersonalEdit loadContext(int c_num);
+	public Context loadContext(int c_num);
 	
 	//insert 다음 서치해서 불러오기
 	public Context saveContext(String writer);

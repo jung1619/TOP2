@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.ScheduleDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.VO.Project;
 import global.sesoc.TOPproject.VO.Schedule;
 
 @Controller
@@ -154,28 +155,44 @@ public class ScheduleController {
 	
 	
 	// 주의
-	@RequestMapping(value = "updateProjectComplete", method = RequestMethod.POST)
-	public String updateProjectComplete(Model model, HttpServletRequest req, int schedule_num){
+	@RequestMapping(value = "updateProjectComplete", method = RequestMethod.GET)
+	public String updateProjectComplete(Model model, HttpServletRequest req){
 		logger.info("프로젝트 스케쥴 완료 처리 시도");
 		
-		String groupNum = req.getParameter("groupNum");
-		model.addAttribute("p_num",groupNum);
+		int p_num = Integer.parseInt(req.getParameter("groupNum"));
+		model.addAttribute("p_num", p_num);
 		
-		int result = shceduleDAO.updateProjectComplete( 1 );
-		return "redirect:group?groupNum=" + groupNum;
+		int per = completeRate(p_num);
+		
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("p_num", p_num); map.put("rate", per);
+		
+		int result = shceduleDAO.updateProjectComplete( map );
+		return "redirect:group?groupNum=" + p_num;
 	}
 	
 	
 	@RequestMapping(value="selectProjectComplete", method=RequestMethod.GET)
-	public void selectProjectComplete(int p_num){
-		logger.info("프로젝트 스케쥴 완성도를 만들어볼까");
+	public int selectProjectComplete(int p_num){
+		logger.info("프로젝트 스케쥴 완성도 조회 : " + p_num);
 		
-		HashMap<String, Integer> map = new HashMap<>();
-		map = shceduleDAO.selectProjectComplete(p_num);
+		Project pj = projectDAO.searchProject(p_num);
+		int per = pj.getP_completerate();
 		
-		double per = (double)((double)map.get("count")/(double)map.get("length")) * 100;
+		logger.info("프로젝트 스케쥴 완성도 조회 완료 : " + per );
+		return per;
+	}
+	
+	
+	// 완성도 계산
+	public int completeRate(int p_num){
 		
-		logger.info("프로젝트 스케쥴 완성도 : " + per );
+		HashMap<String, Integer> map_per = new HashMap<>();
+		map_per = shceduleDAO.selectProjectComplete(p_num);
+		
+		int per = (int)((double)((double)map_per.get("count")/(double)map_per.get("length")) * 100);
+		
+		return per;
 	}
 	
 	

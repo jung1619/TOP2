@@ -10,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.User;
@@ -26,6 +28,8 @@ public class UserController {
 
 	@Inject
 	UserDAO uDao;
+	@Inject
+	ProjectDAO pDao;
 	
 	
 	// 가입 시 중복 체크
@@ -191,7 +195,7 @@ public class UserController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="fileList_ps", method=RequestMethod.POST)
+	@RequestMapping(value="fileList_ps", method=RequestMethod.GET)
 	public ArrayList<Context> fileList_ps(String myId){
 		logger.info("해당 ID의 파일 목록 검색 시도 : " + myId);
 		
@@ -199,6 +203,19 @@ public class UserController {
 		logger.info("해당 ID의 파일 목록 검색 시도 결과 : " + fileList_ps);
 		
 		return fileList_ps;
+	}
+	
+	
+	@RequestMapping(value="readFile_user", method=RequestMethod.GET)
+	public String readFile_user(Model model, int c_num){
+		logger.info("개인의 특정 파일 검색 시도 : " + c_num);
+		
+		Context context = pDao.searchContext(c_num);
+		
+		model.addAttribute("content", context.getContext());
+		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전 old ~~~~~~~~~~~~~~");
+		
+		return "personalEditor";
 	}
 	
 	

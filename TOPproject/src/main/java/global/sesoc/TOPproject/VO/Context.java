@@ -3,6 +3,7 @@ package global.sesoc.TOPproject.VO;
 public class Context {
 	
 	private int p_num;
+	private String id;
 	private int c_num;
 	private String title;
 	private String context;
@@ -10,12 +11,16 @@ public class Context {
 	private String indate;
 	
 	public Context(){}
-	public Context(int p_num, int c_num, String title, String context, String writer) {
+	public Context(int p_num, String title, String writer, String context) {
 		this.p_num = p_num;
-		this.c_num = c_num;
+		this.title = title;
+		this.writer = writer;
+		this.context = context;
+	}
+	public Context(String id, String title, String context) {
+		this.id = id;
 		this.title = title;
 		this.context = context;
-		this.writer = writer;
 	}
 	
 	public int getP_num() {

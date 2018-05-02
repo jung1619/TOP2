@@ -1,6 +1,7 @@
 package global.sesoc.TOPproject.DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -15,13 +16,12 @@ import global.sesoc.TOPproject.VO.Chat;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Memo;
 import global.sesoc.TOPproject.VO.Notice;
-import global.sesoc.TOPproject.VO.PersonalEdit;
 import global.sesoc.TOPproject.VO.Project;
 
 @Repository
 public class ProjectDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectDAO.class);
 	
 	@Autowired
 	SqlSession sqls;
@@ -29,6 +29,7 @@ public class ProjectDAO {
 	
 	
 	// I N S E R T ------------------------------------------------------------------
+	
 	public int insertChat(Chat chat){
 		int result = 0;
 		logger.info("inseartChat in Dao : "+chat);
@@ -43,7 +44,6 @@ public class ProjectDAO {
 		
 		return result;
 	}
-	
 	
 	
 	public int insertNotice(Notice notice){
@@ -161,6 +161,21 @@ public class ProjectDAO {
 	}
 	
 	
+	public int updateCompleteRate(HashMap<String, Integer> map){
+		logger.info("프로젝트 달성률 수정 : " + map);
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		int result = 0;
+		
+		try {
+			result = mapper.updateCompleteRate(map);
+			logger.info("프로젝트 달성률 수정 성공");
+		} catch (Exception e) { e.printStackTrace(); logger.info("프로젝트 달성률 수정 실패"); }
+		
+		return result;
+	}
+	
+	
 	
 	// D E L E T E ------------------------------------------------------------------
 	
@@ -196,9 +211,9 @@ public class ProjectDAO {
 	}
 	
 	
-	public PersonalEdit loadContext(int c_num){
+	public Context loadContext(int c_num){
 		
-		PersonalEdit personalEdit = null;
+		Context personalEdit = null;
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
@@ -329,16 +344,16 @@ public class ProjectDAO {
 	}
 	
 	
-	public Context searchContext(int p_num){
-		logger.info("작업내용 검색(임시) : " + p_num);
+	public Context searchContext(int c_num){
+		logger.info("프로젝트의 특정 파일 검색 : " + c_num);
 		
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 		Context context = null;
 		
 		try{
-			context = mapper.searchContext(p_num);
-			logger.info("작업내용 검색(임시) 성공 : " + context);
-		}catch(Exception e){ logger.info("작업내용 검색(임시) 실패"); e.printStackTrace(); }
+			context = mapper.searchContext(c_num);
+			logger.info("프로젝트의 특정 파일 검색 성공 : " + context);
+		}catch(Exception e){ logger.info("프로젝트의 특정 파일 검색 실패"); e.printStackTrace(); }
 		return context;
 	}
 	

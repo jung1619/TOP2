@@ -11,8 +11,12 @@ public class Project {
 	private String p_startdate;
 	private String p_enddate;
 	private String p_pdate;
+	private int p_completerate;
+	
+	
+	public Project() {}
 	public Project(int p_num, String p_m_id, String p_name, String p_memberlist, String p_indate, String p_deldate,
-			String p_startdate, String p_enddate, String p_pdate) {
+			String p_startdate, String p_enddate, String p_pdate, int p_completerate) {
 		super();
 		this.p_num = p_num;
 		this.p_m_id = p_m_id;
@@ -24,9 +28,8 @@ public class Project {
 		this.p_enddate = p_enddate;
 		this.p_pdate = p_pdate;
 	}
-	public Project() {
-		super();
-	}
+	
+	
 	public int getP_num() {
 		return p_num;
 	}
@@ -81,13 +84,21 @@ public class Project {
 	public void setP_pdate(String p_pdate) {
 		this.p_pdate = p_pdate;
 	}
+	public int getP_completerate() {
+		return p_completerate;
+	}
+	public void setP_completerate(int p_completerate) {
+		this.p_completerate = p_completerate;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Project [p_num=" + p_num + ", p_m_id=" + p_m_id + ", p_name=" + p_name + ", p_memberlist="
 				+ p_memberlist + ", p_indate=" + p_indate + ", p_deldate=" + p_deldate + ", p_startdate=" + p_startdate
-				+ ", p_enddate=" + p_enddate + ", p_pdate=" + p_pdate + "]";
+				+ ", p_enddate=" + p_enddate + ", p_pdate=" + p_pdate + ", p_completerate=" + p_completerate + "]";
 	}
 	
 	
 	
-	}
+}

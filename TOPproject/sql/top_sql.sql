@@ -2,6 +2,8 @@ DROP TABLE top_user;
 DROP TABLE friend_list;
 DROP TABLE personalEdit;
 DROP TABLE top_project;
+DROP TABLE context;
+DROP SEQUENCE c_num_seq;
 DROP SEQUENCE p_num_seq;
 DROP SEQUENCE n_num_seq;
 DROP TABLE notice;
@@ -58,7 +60,37 @@ CREATE TABLE top_project(
     p_deldate DATE,
     p_startdate DATE NOT NULL,
     p_enddate DATE NOT NULL,
+    p_pdate DATE,
     CONSTRAINT PK_top_project PRIMARY KEY(p_num)
+);
+
+CREATE SEQUENCE c_num_project_seq
+START WITH 1
+MAXVALUE 2000;
+
+CREATE SEQUENCE c_num_user_seq
+START WITH 1
+MAXVALUE 2000;
+
+CREATE TABLE context_project(
+	p_num NUMBER NOT NULL,
+	c_num NUMBER NOT NULL,
+	title VARCHAR2(100) NOT NULL,
+	writer VARCHAR2(20) NOT NULL,
+	context CLOB NOT NULL,
+	indate DATE DEFAULT SYSDATE NOT NULL,
+	CONSTRAINT FK_top_project_c_fk FOREIGN KEY(p_num)
+    REFERENCES top_project (p_num) on delete cascade
+);
+
+CREATE TABLE context_user(
+	id VARCHAR2(20) NOT NULL,
+	c_num NUMBER NOT NULL,
+	title VARCHAR2(100) NOT NULL,
+	context CLOB NOT NULL,
+	indate DATE DEFAULT SYSDATE NOT NULL,
+	CONSTRAINT FK_top_user_c_fk FOREIGN KEY(id)
+    REFERENCES top_user (id) on delete cascade
 );
 
 CREATE TABLE notice(

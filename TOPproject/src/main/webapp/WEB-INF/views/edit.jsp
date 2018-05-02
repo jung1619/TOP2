@@ -104,7 +104,17 @@
 				
 			}
 			
-			
+			/* old 추가 
+			function sendContext(){
+				var context = CKEDITOR.instances.editor1.getData();
+				console.log('지금 여기~~~~'+myId);
+				stompClient.send("/chat/${p_num}/context",{}, JSON.stringify({
+					context :context,
+					writer: myId
+					})
+				);
+				console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
+			}*/
 			
 			
 		}
@@ -128,15 +138,14 @@
 
 	<div class="container">
 	
-	<form action="testUP" method="post" onsubmit="return test1()">
-		<textarea name="text" id="editor1">
-			
-			${test}
-			
-		</textarea>
-		<input class="makedocs" type="button" value="DOCX 파일로 저장">
-		<input class="makePDF" type="button" value="PDF 파일로 저장">
-		</form>
+	<textarea name="text" id="editor1">
+		
+		${content}
+		
+	</textarea>
+	<input class="makedocs" type="button" value="DOCX 파일로 저장">
+	<input class="makePDF" type="button" value="PDF 파일로 저장">
+
 	</div>
 	
 	<%@include file="editorSetting.jsp" %>
