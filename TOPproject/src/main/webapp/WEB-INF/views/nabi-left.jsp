@@ -49,9 +49,9 @@
 				<em class="fa fa-navicon">&nbsp;</em> PROJECT GROUP <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-				<c:forEach var="group" items="${groupList}">
-					<li><a class="" href="group?groupNum=${group}">
-						<span class="fa fa-arrow-right">&nbsp;</span>${group}그룹
+				<c:forEach var="project" items="${p_list}">
+					<li><a class="" href="group?groupNum=${project.p_num}">
+						<span class="fa fa-arrow-right">&nbsp;</span>${project.p_name}
 					</a></li>
 				</c:forEach>
 				</ul>
@@ -88,7 +88,7 @@
 					<li class="active"><a><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="edit"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
+					<li><a href="personalEdit"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

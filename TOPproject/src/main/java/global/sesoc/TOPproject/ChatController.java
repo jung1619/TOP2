@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
+import global.sesoc.TOPproject.VO.Chat;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Message;
 import global.sesoc.TOPproject.VO.User;
@@ -43,7 +45,9 @@ public class ChatController {
 		System.out.println(context);
 		model.addAttribute("test", context.getContext());
 		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전~~~~~~~~~~~~~~");
-		
+		Chat selectChat =  null;
+		selectChat = projectDAO.selectChat(p_num);		
+		model.addAttribute("chat", selectChat);
 		return "view_3";
 	}
 	
@@ -90,6 +94,43 @@ public class ChatController {
 		
 		return context;
 	}
+	
+	
+	//채팅 저장
+	@ResponseBody
+	@RequestMapping(value="saveChat",method=RequestMethod.POST)
+	public int chatSave(String chat_log, int p_num){
+		int result = 0;
+		Chat chat = null;
+		logger.info("chatSave in chatcontroller : "+chat_log+" p_num : "+p_num);
+		
+		
+		chat = projectDAO.selectChat(p_num);
+		
+		//p_num의 채팅이 없을경우에  insert
+		if(chat==null){
+			System.out.println("안들어오나?");
+			chat =   new Chat();
+			chat.setChat_log(chat_log);
+			chat.setP_num(p_num);
+			result = projectDAO.insertChat(chat);
+			
+		}else{
+			//있을 경우에는 update를 합니다.
+			chat.setChat_log(chat_log);
+			chat.setP_num(p_num);
+			
+			result = projectDAO.updateChat(chat);
+			
+		}
+		
+		
+		return result;
+	}
+	
+	
+	
+	
 	
 	
 }

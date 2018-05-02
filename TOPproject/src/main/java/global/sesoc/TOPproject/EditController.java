@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +26,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import global.sesoc.TOPproject.DAO.ProjectDAO;
+import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.VO.Context;
+import global.sesoc.TOPproject.VO.PersonalEdit;
+
 @Controller
 public class EditController {
+	
+	@Autowired
+	UserDAO userDAO;
+	
+	@Autowired
+	ProjectDAO projectDAO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(EditController.class);
 	
@@ -194,5 +207,70 @@ public class EditController {
 		String json = gson.toJson(map);
 
 		return json;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="loadContext",method=RequestMethod.POST,produces="application/text;charset=utf8")
+	public String loadContext(String c_num){
+		String  context = null;
+		logger.info("c_num:"+c_num);
+		
+		int c_num1= Integer.parseInt(c_num);
+		
+		PersonalEdit personalEdit = projectDAO.loadContext(c_num1);
+		
+		context = personalEdit.getContext();
+		
+		logger.info("load context : "+context);
+		
+		return context;
+		
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="personalSave",method=RequestMethod.POST)
+	public Context personalEditor_save(String context,String c_num,HttpSession session){
+		Context returnContext = null;
+		
+		ArrayList<Context> c_list = new ArrayList<Context>();
+		String id = (String)session.getAttribute("loginedId");
+		
+		logger.info("context: "+context);
+		
+		//select해서 같은 제목이있으면 update
+		c_list = projectDAO.selectContextList(id);
+		int result = 0;
+		
+		
+		Context insertContext = new Context();
+		
+		
+		logger.info("view에서 받아온 save text : "+context+ " id : "+id+" c_num: "+c_num);
+		
+		insertContext.setWriter(id);//writer == id
+		insertContext.setContext(context);
+		int int_c_num = Integer.parseInt(c_num);
+		
+		
+		//id로 검색
+		if(int_c_num == 0){
+			logger.info("insert");
+			result = projectDAO.insertContext(insertContext);
+			//젤큰애 가져오기
+			returnContext = projectDAO.saveContext(id);
+			logger.info("결과:"+returnContext);
+			return returnContext;
+			
+		}else{
+			logger.info("update");
+			int c_num1 = Integer.parseInt(c_num);
+			
+			insertContext.setC_num(c_num1);
+			projectDAO.upDateContext(insertContext);
+			
+		}
+		return returnContext;
 	}
 }

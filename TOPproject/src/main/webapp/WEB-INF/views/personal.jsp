@@ -73,8 +73,12 @@
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-										<h4><a href="test">여기엔 그룹공지 날짜</a></h4>
-										<p>여기엔 그룹공지 내용</p>
+										<c:forEach items="${b_noticeArr}" var = "noticeArr">
+										<c:forEach var="Notice" items="${noticeArr}">
+											<h4><a href="#">${Notice.n_indate }</a></h4>
+											<p>${Notice.n_content}</p>
+										</c:forEach> 
+									</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -135,12 +139,12 @@
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body articles-container">
 					
-						<c:forEach var="group" items="${groupList}">
+						<c:forEach var="project" items="${p_list}">
 						<div class="article border-bottom">
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-										<a href="group?groupNum=${group}">${group}그룹</a>
+										<a href="group?groupNum=${project.p_num}">${project.p_name}</a>
 									</div>
 								</div>
 							</div>

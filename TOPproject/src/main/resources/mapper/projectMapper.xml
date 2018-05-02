@@ -8,6 +8,17 @@
   
   <!-- ~~~~~~~~~~~~~~~~~~~~ U P D A T E ~~~~~~~~~~~~~~~~~~~~ -->
   
+  <update id="updateChat" parameterType="Chat">
+ 	 UPDATE
+  		chat
+ 	 SET
+ 	 	chat_log = #{chat_log}
+ 	 WHERE
+ 	 	p_num = #{p_num}
+  </update>
+  
+  
+  
   <update id="updateProject" parameterType="Project">
   	UPDATE top_project
   	SET p_name = #{p_name}, p_memberlist = #{p_memberlist}
@@ -35,6 +46,68 @@
   
   
   <!-- ~~~~~~~~~~~~~~~~~~~~ S E L E C T ~~~~~~~~~~~~~~~~~~~~ -->
+  <select id="saveContext" parameterType="String" resultType="Context">
+   SELECT
+  	p_num
+  	,title
+  	,context
+  	,writer
+  	,indate
+  	,c_num
+  FROM
+  	context
+  WHERE 
+  		writer = #{writer} AND
+		c_num = (SELECT MAX(c_num)AS c_num FROM context)
+  
+  </select>
+  
+  
+  
+  
+  
+  
+  <select id="loadContext" parameterType="int" resultType="PersonalEdit">
+  SELECT
+  	c_num
+  	,title
+  	,id
+  	,context
+  	,indate
+  FROM
+  	CONTEXT_USER
+  WHERE
+  	c_num = #{c_num}
+  
+  </select>
+  
+  
+  <select id="selectContextList" parameterType="String" resultType="Context">
+  SELECT
+  	p_num
+  	,title
+  	,context
+  	,writer
+  	,indate
+  	,c_num
+  FROM
+  	context
+  WHERE
+  	writer = #{writer}			
+  
+  </select>
+  
+  
+  
+  <select id="selectChat" parameterType="int" resultType="Chat">
+  	SELECT
+  		p_num
+  		,chat_log
+  	FROM
+  		chat
+  	WHERE
+  		p_num = #{p_num}	
+  </select>
   
   <select id="noticeList"  parameterType="String" resultType="Notice">
   SELECT
@@ -142,6 +215,16 @@
   
   	
   <!-- ~~~~~~~~~~~~~~~~~~~~ I N S E R T ~~~~~~~~~~~~~~~~~~~~ -->
+  <insert id="insertChat" parameterType="Chat">
+  	INSERT INTO
+  		chat (
+  			p_num
+  			,chat_log
+  		)VALUES(
+  			#{p_num}
+  			,#{chat_log}
+  		)
+  </insert>
   
  
   <insert id="insertProject" parameterType="Project">

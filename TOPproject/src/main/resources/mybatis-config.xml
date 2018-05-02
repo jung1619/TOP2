@@ -13,6 +13,11 @@
 		<typeAlias type="global.sesoc.TOPproject.VO.Notice" alias="Notice" />
 		<!--Contextr 추가  -->
 		<typeAlias type="global.sesoc.TOPproject.VO.Context" alias="Context"/>
+		<!--Chat 추가  -->
+		<typeAlias type="global.sesoc.TOPproject.VO.Chat" alias="Chat"/>
+		
+		<!--PersonalEdit  -->
+		<typeAlias type="global.sesoc.TOPproject.VO.PersonalEdit" alias="PersonalEdit"/>
 	</typeAliases>
 	
 	<mappers>

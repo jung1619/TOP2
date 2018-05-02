@@ -32,6 +32,37 @@
 				
 				connect();
 				
+				$('#chatSave').on('click',function(){
+					
+					
+					var chat_log  =  $('#chatLogView').html();
+					alert(chatSave);
+					
+					
+					$.ajax({
+						url : 'saveChat'
+						,type: 'post'
+						,dataType: 'text'
+						,data : {
+							chat_log : chat_log
+							,p_num : ${p_num}
+						}
+						,success:function(data){
+							if(data==1){
+								
+							console.log('채팅 저장완료');
+							
+							}
+						}
+						,error:function(err){
+							console.log('채팅 저장실패');
+						}
+							
+							
+					});
+					
+				});
+				
 				$("#send").on("click",function(){
 					sendMessage();
 				});
@@ -139,6 +170,7 @@
 			
 			
 			<div class="chatLogView" id="chatLogView">
+			${chat}
 			</div>
 			
 			<div class="outer_chatEditor">
@@ -147,7 +179,7 @@
 					<button type="button" class="test">notice</button>
 					<button type="button">forceout</button>
 					
-					<button type="button">memberList</button>
+					<button type="button" id="chatSave">chat save</button>
 				</div>
 				
 				<div class="chatEditor_textView">

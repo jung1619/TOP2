@@ -75,14 +75,38 @@
 		
 		/* 추가 */
 		function sendContext(){
-			var context = CKEDITOR.instances.editor1.getData();
-			console.log('지금 여기~~~~'+myId);
-			stompClient.send("/chat/${p_num}/context",{}, JSON.stringify({
-				context :context,
-				writer: myId
-				})
-			);
-			console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
+			var data1 = CKEDITOR.instances.editor1.getData();
+			
+			var c_num = $('#c_num').val();
+			var c_num_html =$('#c_num').html();
+			
+			console.log(c_num);
+			if(c_num==''){
+				console.log("c_num이 없어");
+				c_num_html.html("value=${context.c_num}");
+			}else{
+				$.ajax({
+					url : 'personalSave'
+					, type : 'POST'
+					, data : {
+						context : data1
+						,c_num : c_num
+					}
+					, dataType : 'json'
+					,success : function(context) {
+						console.log(context);
+						c_num_html.html("value=${context.c_num}");
+					}
+					, error : function(context) {
+						console.log("실패");
+					}
+				});
+				
+			}
+			
+			
+			
+			
 		}
 	</script>
 	
@@ -110,13 +134,14 @@
 			${test}
 			
 		</textarea>
-		<input type="submit" value="저장">
 		<input class="makedocs" type="button" value="DOCX 파일로 저장">
 		<input class="makePDF" type="button" value="PDF 파일로 저장">
 		</form>
 	</div>
 	
 	<%@include file="editorSetting.jsp" %>
+	
+	<input type="hidden" id="c_num">
 	
 </html>
 

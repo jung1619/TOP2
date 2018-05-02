@@ -2,9 +2,11 @@ package global.sesoc.TOPproject.DAO;
  
 import java.util.ArrayList;
 
+import global.sesoc.TOPproject.VO.Chat;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Memo;
 import global.sesoc.TOPproject.VO.Notice;
+import global.sesoc.TOPproject.VO.PersonalEdit;
 import global.sesoc.TOPproject.VO.Project;
 
 public interface ProjectMapperInterface {
@@ -37,16 +39,35 @@ public interface ProjectMapperInterface {
 	public Context selectContext(String p_num);
 	
 	//context 생성
-	public void insertContext(Context context);
+	public int insertContext(Context context);
 	
 	//Projectselect
 	public Project selectProject(Project beforeProject);
 	
 	//Notice Select
-	public Notice selectNotice(String p_num);
+	public ArrayList<Notice> selectNotice(String p_num);
 	
 	//insert Notice
 	public int insertNotice(Notice notice);
+	
+	//insert chat
+	public int insertChat(Chat chat);
+	
+	
+	//select chat
+	public Chat selectChat(int p_num);
+	
+	//update chat
+	public int updateChat(Chat chat);
+	
+	//select context list
+	public ArrayList<Context> selectContextList(String write);
+	
+	//load context
+	public PersonalEdit loadContext(int c_num);
+	
+	//insert 다음 서치해서 불러오기
+	public Context saveContext(String writer);
 	
 	
 	

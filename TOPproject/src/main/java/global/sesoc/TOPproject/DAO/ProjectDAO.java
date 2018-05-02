@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import global.sesoc.TOPproject.HomeController;
+import global.sesoc.TOPproject.VO.Chat;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Memo;
 import global.sesoc.TOPproject.VO.Notice;
+import global.sesoc.TOPproject.VO.PersonalEdit;
 import global.sesoc.TOPproject.VO.Project;
 
 @Repository
@@ -27,6 +29,22 @@ public class ProjectDAO {
 	
 	
 	// I N S E R T ------------------------------------------------------------------
+	public int insertChat(Chat chat){
+		int result = 0;
+		logger.info("inseartChat in Dao : "+chat);
+		ProjectMapperInterface mapper =  sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			mapper.insertChat(chat);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
 	
 	public int insertNotice(Notice notice){
 		int result = 0;
@@ -40,14 +58,17 @@ public class ProjectDAO {
 	}
 	
 	
-	public void insertContext(Context context){
+	public int insertContext(Context context){
 		logger.info("context생성 = "+context);
-		
+		int result = 0;
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
-			mapper.insertContext(context);
+			result =mapper.insertContext(context);
 		}catch(Exception e){ e.printStackTrace(); }
+		
+		
+		return result;
 	}
 	
 	
@@ -82,6 +103,23 @@ public class ProjectDAO {
 	
 	
 	// U P D A T E ------------------------------------------------------------------
+	
+	public int updateChat(Chat chat){
+		int result = 0;
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			result = mapper.updateChat(chat);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
 	
 	public int updateProject(Project project){
 		logger.info("프로젝트 수정 : " + project);
@@ -142,6 +180,54 @@ public class ProjectDAO {
 	
 	
 	//S E L E C T ------------------------------------------------------------------
+	//insert 다음 서치해서 불러오기
+	public Context saveContext(String writer){
+		Context  context = null;
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			context = mapper.saveContext(writer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return context; 
+	}
+	
+	
+	public PersonalEdit loadContext(int c_num){
+		
+		PersonalEdit personalEdit = null;
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			personalEdit= mapper.loadContext(c_num);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return personalEdit;
+	}
+	
+	
+	
+	
+	public ArrayList<Context> selectContextList(String write){
+		ArrayList<Context> c_list = new ArrayList<Context>();
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			c_list =mapper.selectContextList(write);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return c_list;
+	}
+	
+	
 	
 	public Context selectContext(String p_num){
 		Context result_context=null;
@@ -257,15 +343,24 @@ public class ProjectDAO {
 	}
 	
 	
-	public Notice selectNotice(String p_num){
-		Notice notice = null;
+	public ArrayList<Notice> selectNotice(String p_num){
+		ArrayList<Notice> noticeArr = null;
 		ProjectMapperInterface mapper  = sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
-			notice =mapper.selectNotice(p_num); 
-		}catch(Exception e){ e.printStackTrace(); }
+			noticeArr =mapper.selectNotice(p_num);
+			
+			
+			for(Notice n : noticeArr){
+				logger.info("noticeArr in  DAO : "+n);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
-		return notice;
+		
+		return noticeArr;
 	}
 	
 	
@@ -280,6 +375,25 @@ public class ProjectDAO {
 			logger.info("프로젝트별 파일 목록 조회 성공 : " + context);
 		}catch(Exception e){ logger.info("프로젝트별 파일 목록 조회 실패"); e.printStackTrace(); }
 		return context;
+	}
+	
+	public Chat selectChat(int p_num){
+		Chat chat= null;
+		
+		logger.info("Chat select p_num in DAO: "+p_num);
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			chat = mapper.selectChat(p_num);
+			logger.info("Chat select in DAO : "+chat);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		return chat;
+		
 	}
 	
 

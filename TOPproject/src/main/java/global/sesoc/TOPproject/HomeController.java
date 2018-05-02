@@ -1,5 +1,7 @@
 package global.sesoc.TOPproject;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.User;
 
 /**
@@ -61,6 +64,19 @@ public class HomeController {
 		model.addAttribute("p_num", p_num);
 		
 		return "notice";
+	}
+	
+	
+	@RequestMapping(value="personalEdit",method=RequestMethod.GET)
+	public String personalEdit(HttpSession session, Model model){
+		ArrayList<Context> c_list = new ArrayList<Context>();
+		
+		String writer = (String)session.getAttribute("loginedId");
+		c_list = projectDAO.selectContextList(writer);
+		
+		model.addAttribute("c_list", c_list);
+		
+		return "personalEditor";
 	}
 
 
