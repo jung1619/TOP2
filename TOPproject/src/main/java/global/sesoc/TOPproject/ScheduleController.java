@@ -164,7 +164,7 @@ public class ScheduleController {
 		
 		int per = completeRate(p_num);
 		
-		HashMap<String, Integer> map = new HashMap<>();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("p_num", p_num); map.put("rate", per);
 		
 		int result = shceduleDAO.updateProjectComplete( map );
@@ -187,7 +187,7 @@ public class ScheduleController {
 	// 완성도 계산
 	public int completeRate(int p_num){
 		
-		HashMap<String, Integer> map_per = new HashMap<>();
+		HashMap<String, Integer> map_per = new HashMap<String, Integer>();
 		map_per = shceduleDAO.selectProjectComplete(p_num);
 		
 		int per = (int)((double)((double)map_per.get("count")/(double)map_per.get("length")) * 100);

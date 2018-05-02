@@ -231,7 +231,7 @@
   </select>
   
   
-  <select id="fileList_pj" parameterType="int" resultType="Context">
+  <select id="searchProjectFilelist" parameterType="int" resultType="Context">
   	SELECT p_num, c_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
   	FROM context_project
   	WHERE p_num = #{p_num}
@@ -324,6 +324,13 @@
   	UPDATE notice
   	SET n_deldate = SYSDATE
   	WHERE p_num = #{p_num}
+  </update>
+  
+  
+  <update id="deleteProjectFile" parameterType="int">
+  	UPDATE context_project
+  	SET deldate = SYSDATE
+  	WHERE c_num = #{c_num}
   </update>
   
   

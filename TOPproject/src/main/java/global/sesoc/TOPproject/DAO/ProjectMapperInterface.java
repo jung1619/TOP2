@@ -17,13 +17,14 @@ public interface ProjectMapperInterface {
 	
 	public Project searchProject(int p_num);
 	public Context searchContext(int p_num);
-	public ArrayList<Context> fileList_pj(int p_num);
+	public ArrayList<Context> searchProjectFilelist(int p_num);
 	
 	public int updateProject(Project project);
 	public int updateProjectNotice(Memo memo);
 	public int updateCompleteRate(HashMap<String, Integer> map);
 	
 	public int deleteProjectNotice(Memo memo);
+	public int deleteProjectFile(int c_num);
 	
 	//공지리스트불러오기
 	public ArrayList<Notice> noticeList(String p_num);

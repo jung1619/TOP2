@@ -180,8 +180,8 @@ public class ScheduleDAO {
 		logger.info("프로젝트 스케쥴 완료된 거 몇개냐 : " + p_num);
 		
 		ScheduleMapperInterface mapper = sqls.getMapper(ScheduleMapperInterface.class);
-		ArrayList<Schedule> list = new ArrayList<>();
-		HashMap<String, Integer> map = new HashMap<>();
+		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		int count = 0; int length = 0;
 		
 		try{

@@ -147,7 +147,7 @@ public class UserController {
 		logger.info("친구 요청 등록 시도  종료");
 	}
 	
-	
+	/*
 	@ResponseBody
 	@RequestMapping(value="updateReq", method=RequestMethod.POST)
 	public void updateReq(String myId, String herId, String flag){ 
@@ -161,22 +161,37 @@ public class UserController {
 		
 		if( map.get("flag").equals("1") ){ // 수락
 			// 친구 추가
+			
 		}else if( map.get("flag").equals("2") ){ // 거절
-			// 친구 삭제
+			// 요청 삭제
 		}
 	}
-	
+	*/
 	
 	@ResponseBody
 	@RequestMapping(value="deleteReq", method=RequestMethod.POST)
 	public void deleteReq(String myId, String herId){ 
-		logger.info("친구 요청 삭제 시도 : " + myId + " / " + herId);
+		logger.info("받은 친구 요청 삭제 시도 : " + myId + " / " + herId);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("requester", myId); map.put("receiver", herId);
+		map.put("requester", herId); map.put("receiver", myId);
 		
 		int result = uDao.deleteReq(map);
-		logger.info("친구 요청 삭제 시도 종료");
+		logger.info("받은 친구 요청 삭제 시도 종료");
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="addFriend", method=RequestMethod.POST)
+	public void addFriend(String myId, String herId){ 
+		logger.info("받은 친구 요청 수락 시도 : " + myId + " / " + herId);
+		
+		String fl = uDao.searchUserFL(myId);
+		fl += "/"+herId;
+		
+		uDao.updateFriendList(myId, fl);
+		
+		logger.info("받은 친구 요청 수락 시도 종료");
 	}
 	
 	
@@ -194,12 +209,20 @@ public class UserController {
 	}
 	
 	
-	@ResponseBody
 	@RequestMapping(value="fileList_ps", method=RequestMethod.GET)
-	public ArrayList<Context> fileList_ps(String myId){
+	public String fileList_ps(String myId){
+		logger.info("해당 ID의 파일 목록 이동 시도 : " + myId);
+		
+		return "filelist_ps";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="loadFileList_ps", method=RequestMethod.POST)
+	public ArrayList<Context> searchUserFilelist(String myId){
 		logger.info("해당 ID의 파일 목록 검색 시도 : " + myId);
 		
-		ArrayList<Context> fileList_ps = uDao.fileList_ps(myId);
+		ArrayList<Context> fileList_ps = uDao.searchUserFilelist(myId);
 		logger.info("해당 ID의 파일 목록 검색 시도 결과 : " + fileList_ps);
 		
 		return fileList_ps;
@@ -210,12 +233,36 @@ public class UserController {
 	public String readFile_user(Model model, int c_num){
 		logger.info("개인의 특정 파일 검색 시도 : " + c_num);
 		
-		Context context = pDao.searchContext(c_num);
+		Context context = uDao.searchContext(c_num);
 		
 		model.addAttribute("content", context.getContext());
 		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전 old ~~~~~~~~~~~~~~");
 		
 		return "personalEditor";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="deleteFriend", method=RequestMethod.POST)
+	public void deleteFriend(String myId, String herId){ 
+		logger.info("친구 삭제 시도 : " + myId + " / " + herId);
+		
+		String fl = uDao.searchUserFL(myId);
+		String[] list = fl.split("/");
+
+		for(int i=0; i<list.length; i++){			
+			if ( list[i].equals(herId) ) {
+				for (int j=0; j<list.length-1; j++) {
+					list[j] = list[j+1];
+				}
+				break;
+			}
+		}
+		System.out.println(list);
+		//상대방 목록에서도 삭제가 되어야지
+		int result = uDao.updateFriendList(myId, fl);
+		
+		logger.info("친구 삭제 시도 종료");
 	}
 	
 	

@@ -10,15 +10,15 @@
 		var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
 		
 		$(function() {
-			loadList_pj();
+			readFile();
 		});
 	</script>
 
 	<div id="errArea"></div>
 	
-	<div id="filelistArea">
-		<table id="fileListTable">
-			<tr><td>번호</td><td>제목</td><td>마지막 수정자</td><td>날짜</td></tr>
+	<div id="fileContextArea">
+		<table id="fileContextTable">
+			<tr><td>작성자</td><td>제목</td><td>날짜</td></tr>
 		</table>
 	</div>
 

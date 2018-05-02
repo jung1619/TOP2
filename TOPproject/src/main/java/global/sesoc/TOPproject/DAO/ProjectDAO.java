@@ -437,15 +437,15 @@ public class ProjectDAO {
 	}
 	
 	
-	public ArrayList<Context> fileList_pj(int p_num){
+	public ArrayList<Context> searchProjectFilelist(int p_num){
 		logger.info("프로젝트별 파일 목록 조회 : " + p_num);
 		
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
-		ArrayList<Context> context = new ArrayList<>();
+		ArrayList<Context> context = new ArrayList<Context>();
 		
 		try{
-			context = mapper.fileList_pj(p_num);
-			logger.info("프로젝트별 파일 목록 조회 성공 : " + context);
+			context = mapper.searchProjectFilelist(p_num);
+			logger.info("프로젝트별 파일 목록 조회 성공 : " + context.size() + "개 " + context);
 		}catch(Exception e){ logger.info("프로젝트별 파일 목록 조회 실패"); e.printStackTrace(); }
 		return context;
 	}
@@ -467,6 +467,21 @@ public class ProjectDAO {
 		
 		return chat;
 		
+	}
+	
+	
+	public int deleteProjectFile(int c_num){
+		logger.info("프로젝트의 특정 파일 삭제 : " + c_num);
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		int result = 0;
+		
+		try {
+			result = mapper.deleteProjectFile(c_num);
+			logger.info("프로젝트의 특정 파일 삭제 성공");
+		} catch (Exception e) { logger.info("프로젝트의 특정 파일 삭제 실패"); e.printStackTrace(); }
+		
+		return result;
 	}
 	
 

@@ -127,18 +127,32 @@ public class UserDAO {
 	}
 	
 	
-	public ArrayList<Context> fileList_ps(String id){
+	public ArrayList<Context> searchUserFilelist(String id){
 		logger.info("해당 ID의 파일 목록 검색 : " + id);
 		
 		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
-		ArrayList<Context> userList = new ArrayList<>();
+		ArrayList<Context> userList = new ArrayList<Context>();
 		
 		try{
-			userList = mapper.fileList_ps(id);
+			userList = mapper.searchUserFilelist(id);
 			logger.info("해당 ID의 파일 목록 검색 결과 : " + userList);
 		}catch(Exception e){ logger.info("해당 ID의 파일 목록 검색 실패"); e.printStackTrace(); }
 		
 		return userList;
+	}
+	
+	
+	public Context searchContext(int c_num){
+		logger.info("개인의 특정 파일 검색 : " + c_num);
+		
+		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
+		Context context = null;
+		
+		try{
+			context = mapper.searchContext(c_num);
+			logger.info("개인의 특정 파일 검색 성공 : " + context);
+		}catch(Exception e){ logger.info("개인의 특정 파일 검색 실패"); e.printStackTrace(); }
+		return context;
 	}
 	
 	
@@ -188,26 +202,27 @@ public class UserDAO {
 	}
 	
 	
-	public int updateFriendList(String id, String fl){
-		logger.info("회원 친구목록 수정 : " + id + ", " + fl);
+	public int updateFriendList(String myId, String fl){
+		logger.info("회원 친구목록 수정 : " + myId + " / " + fl);
 		
 		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
 
+		/*
 		String fList = mapper.searchUserFL(id);
 		if(fList.equals("temp")) {
-			fList = fl;
+			fList = oldFl;
 		}
-		else if(fList != null && !(fList.contains(fl))) {
-			fList += "/" + fl;			
+		else if(fList != null && !(fList.contains(oldFl))) {
+			fList += "/" + oldFl;			
 		}
+		*/
 
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("fl", fList);
+		map.put("id", myId); map.put("fl", fl);
 		int result = 0;
 		
 		try{
-			mapper.updateFriendList(map);
+			result = mapper.updateFriendList(map);
 			logger.info("회원 친구목록 수정 성공");
 		}catch(Exception e){ logger.info("회원 친구목록 수정 실패"); e.printStackTrace(); }
 		return result;
@@ -228,7 +243,7 @@ public class UserDAO {
 		return result;
 	}
 	
-	
+	/*
 	public int updateReq(HashMap<String, String> map){
 		logger.info("친구 요청 상태 변화 : " + map);
 		
@@ -245,7 +260,7 @@ public class UserDAO {
 		
 		return result;
 	}
-	
+	*/
 	
 	
 	// D E L E T E ------------------------------------------------------------------
@@ -266,14 +281,14 @@ public class UserDAO {
 	
 	
 	public int deleteReq(HashMap<String, String> map){
-		logger.info("친구 요청 삭제 : " + map);
+		logger.info("받은 친구 요청 삭제 : " + map);
 		
 		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
 		int result = 0;
 		
 		try {
 			result = mapper.deleteReq(map);
-			logger.info("친구 요청 삭제 성공");
+			logger.info("받은 친구 요청 삭제 성공");
 		} catch (Exception e) { e.printStackTrace(); logger.info("친구 요청 삭제 실패"); }
 		
 		return result;

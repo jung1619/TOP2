@@ -84,7 +84,7 @@
   </select> 
   
   
-  <select id="fileList_ps" parameterType="String" resultType="Context">
+  <select id="searchUserFilelist" parameterType="String" resultType="Context">
   	SELECT id, c_num, title, context, TO_CHAR(indate, 'YYYY/MM/DD') indate
   	FROM context_user
   	WHERE id = #{id}

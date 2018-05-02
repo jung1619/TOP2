@@ -19,7 +19,8 @@ public interface UserMapperInterface {
 	public String searchUserFL(String id);
 	public ArrayList<User> searchUserList(String id);
 	public List<HashMap<String, String>> searchReqList(HashMap<String, String> map);
-	public ArrayList<Context> fileList_ps(String id);
+	public ArrayList<Context> searchUserFilelist(String id);
+	public Context searchContext(int c_num);
 	
 	public int updateUser(User user);
 	public int updateFriendList(HashMap<String, String> map);

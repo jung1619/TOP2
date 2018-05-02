@@ -332,30 +332,30 @@ public class GroupController {
 		hs.setAttribute("loginedId", loginedUser.getId());
 		
 		//그룹리스트
-		String [] groupArr=null;
-		String groupList = loginedUser.getP_num_list();
-		Project selectProject = null;
-		ArrayList <Project> p_list = new ArrayList<Project>();
-		if( groupList != null ){				
-			groupArr = groupList.split("/");
-			logger.info("groupArr : " + groupArr);
-			// p_num입력해서 프로젝트 명입력하는 list를 만들어 봅시다
-			
-			for(int i = 0; i<groupArr.length;i++){
-				
-				logger.info("검색할 p_num : "+groupArr[i]);
-				int parse_p_num=Integer.parseInt(groupArr[i]);
-				selectProject = projectDAO.searchProject(parse_p_num);
-				if(selectProject !=null){
-					p_list.add(selectProject);
-				}
-			}
-			logger.info("p_list 확인:"+p_list);
-			model.addAttribute("p_list",p_list);
-			model.addAttribute("groupList", groupArr);
+	      String [] groupArr=null;
+	      String groupList = loginedUser.getP_num_list();
+	      Project selectProject = null;
+	      ArrayList <Project> p_list = new ArrayList<Project>();
+	      if( groupList != null ){            
+	         groupArr = groupList.split("/");
+	         logger.info("groupArr : " + groupArr);
+	         // p_num입력해서 프로젝트 명입력하는 list를 만들어 봅시다
+	         
+	         for(int i = 0; i<groupArr.length;i++){
+	            
+	            logger.info("검색할 p_num : "+groupArr[i]);
+	            int parse_p_num=Integer.parseInt(groupArr[i]);
+	            selectProject = projectDAO.searchProject(parse_p_num);
+	            if(selectProject !=null){
+	               p_list.add(selectProject);
+	            }
+	         }
+	         logger.info("p_list 확인:"+p_list);
+	         model.addAttribute("p_list",p_list);
+	         model.addAttribute("groupList", groupArr);
 
-			}
-		
+         }
+	      
 		
 		//네비게이터에 임시로 값 담는 용도
 		String personal = "personal";
@@ -367,12 +367,20 @@ public class GroupController {
 	}
 	
 	
-	@ResponseBody
 	@RequestMapping(value="fileList_pj", method=RequestMethod.GET)
-	public ArrayList<Context> fileList_pj(int p_num){
+	public String fileList_pj(int p_num){
+		logger.info("해당 프로젝트의 파일 목록 이동 시도 : " + p_num);
+		
+		return "filelist_pj";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="loadFileList_pj", method=RequestMethod.POST)
+	public ArrayList<Context> searchProjectFilelist(int p_num){
 		logger.info("해당 프로젝트의 파일 목록 검색 시도 : " + p_num);
 		
-		ArrayList<Context> fileList_pj = projectDAO.fileList_pj(p_num);
+		ArrayList<Context> fileList_pj = projectDAO.searchProjectFilelist(p_num);
 		logger.info("해당 프로젝트의 파일 목록 검색 시도 결과 : " + fileList_pj);
 		
 		return fileList_pj;
@@ -396,6 +404,29 @@ public class GroupController {
 		return "view_3";
 	}
 	
+	
+	@RequestMapping(value="editFile_project", method=RequestMethod.GET)
+	public String editFile_project(Model model, String myId, int c_num){
+		logger.info("프로젝트의 특정 파일 검색 시도 : " + c_num);
+		
+		Context context = projectDAO.searchContext(c_num);
+		
+		model.addAttribute("content", context.getContext());
+		System.out.println("~~~~~~~~~~~~~~여기까지 뷰쓰리 진입 전 old ~~~~~~~~~~~~~~");
+		
+		//채팅 로그
+		
+		return "view_3";
+	}
+	
+	
+	public int deleteProjectFile(int c_num){
+		logger.info("프로젝트의 특정 파일 삭제 시도 : " + c_num);
+		
+		int result = projectDAO.deleteProjectFile(c_num);
+		
+		return result;
+	}
 	
 	
 	
