@@ -84,12 +84,14 @@
 			var data1 = CKEDITOR.instances.editor1.getData();
 			
 			var c_num = $('#c_num').val();
-			var c_num_html =$('#c_num').html();
-			
 			console.log(c_num);
+			
+			
+			
 			if(c_num==''){
 				console.log("c_num이 없어");
-				c_num_html.html("value=${context.c_num}");
+				$("#c_num").remove();
+				$("#c_numDiv").html("<input type='hidden' id='c_num' value='0'/>");
 			}else{
 				$.ajax({
 					url : 'personalSave'
@@ -100,8 +102,9 @@
 					}
 					, dataType : 'json'
 					,success : function(context) {
-						console.log(context);
-						c_num_html.html("value=${context.c_num}");
+						console.log(context.c_num);
+						$('#c_num').remove();
+						$("#c_numDiv").html("<input type='text' id='c_num' value='"+context.c_num+"'/>");
 					}
 					, error : function(context) {
 						console.log("실패");
@@ -110,6 +113,7 @@
 				
 			}
 			
+		}
 			/* old 추가 
 			function sendContext(){
 				var context = CKEDITOR.instances.editor1.getData();
@@ -150,13 +154,16 @@
 		
 	</textarea>
 	<input class="makedocs btn btn-primary btn-md" type="button" value="DOCX 파일로 저장">
-		<input class="makePDF btn btn-primary btn-md" type="button" value="PDF 파일로 저장">
+	<input class="makePDF btn btn-primary btn-md" type="button" value="PDF 파일로 저장">
 
 	</div>
 	
 	<%@include file="editorSetting.jsp" %>
 	
-	<input type="hidden" id="c_num">
+	<div id="c_numDiv">
+	<input type="hidden" id="c_num" value=''>
+	
+	</div>
 	
 </html>
 

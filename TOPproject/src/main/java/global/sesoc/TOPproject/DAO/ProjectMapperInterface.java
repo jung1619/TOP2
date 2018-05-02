@@ -63,14 +63,21 @@ public interface ProjectMapperInterface {
 	public int updateChat(Chat chat);
 	
 	//select context list
-	public ArrayList<Context> selectContextList(String write);
+	public ArrayList<PersonalEdit> selectContextList(String write);
 	
 	//load context
-	public Context loadContext(int c_num);
+	public PersonalEdit loadContext(int c_num);
 	
 	//insert 다음 서치해서 불러오기
 	public Context saveContext(String writer);
 	
+	//update PersonalEdit
+	public int updatePersonalEdit(PersonalEdit personalEdit);
+	
+	//inseartPersonalEdit
+	public int insertPersonalEdit(PersonalEdit personalEdit);
+	
+	public PersonalEdit selectPersonalEdit(String id);
 	
 	
 }

@@ -3,14 +3,14 @@ package global.sesoc.TOPproject.VO;
 public class PersonalEdit {
 
 	
-	private String p_num;
+	private int c_num;
 	private String title;
 	private String id;
 	private String context;
 	private String indate;
-	public PersonalEdit(String p_num, String title, String id, String context, String indate) {
+	public PersonalEdit(int c_num, String title, String id, String context, String indate) {
 		super();
-		this.p_num = p_num;
+		this.c_num = c_num;
 		this.title = title;
 		this.id = id;
 		this.context = context;
@@ -19,11 +19,11 @@ public class PersonalEdit {
 	public PersonalEdit() {
 		super();
 	}
-	public String getP_num() {
-		return p_num;
+	public int getC_num() {
+		return c_num;
 	}
-	public void setP_num(String p_num) {
-		this.p_num = p_num;
+	public void setC_num(int c_num) {
+		this.c_num = c_num;
 	}
 	public String getTitle() {
 		return title;
@@ -51,9 +51,15 @@ public class PersonalEdit {
 	}
 	@Override
 	public String toString() {
-		return "PersonalEdit [p_num=" + p_num + ", title=" + title + ", id=" + id + ", context=" + context + ", indate="
+		return "PersonalEdit [c_num=" + c_num + ", title=" + title + ", id=" + id + ", context=" + context + ", indate="
 				+ indate + "]";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

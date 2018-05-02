@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
 import global.sesoc.TOPproject.VO.Context;
+import global.sesoc.TOPproject.VO.PersonalEdit;
 import global.sesoc.TOPproject.VO.User;
 
 /**
@@ -69,7 +70,7 @@ public class HomeController {
 	
 	@RequestMapping(value="personalEdit",method=RequestMethod.GET)
 	public String personalEdit(HttpSession session, Model model){
-		ArrayList<Context> c_list = new ArrayList<Context>();
+		ArrayList<PersonalEdit> c_list = new ArrayList<PersonalEdit>();
 		
 		String writer = (String)session.getAttribute("loginedId");
 		c_list = projectDAO.selectContextList(writer);

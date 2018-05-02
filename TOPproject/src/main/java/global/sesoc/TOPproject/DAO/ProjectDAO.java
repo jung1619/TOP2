@@ -16,6 +16,7 @@ import global.sesoc.TOPproject.VO.Chat;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Memo;
 import global.sesoc.TOPproject.VO.Notice;
+import global.sesoc.TOPproject.VO.PersonalEdit;
 import global.sesoc.TOPproject.VO.Project;
 
 @Repository
@@ -29,6 +30,8 @@ public class ProjectDAO {
 	
 	
 	// I N S E R T ------------------------------------------------------------------
+	
+	
 	
 	public int insertChat(Chat chat){
 		int result = 0;
@@ -72,6 +75,24 @@ public class ProjectDAO {
 	}
 	
 	
+	public int insertPersonalEdit(PersonalEdit personalEdit){
+		logger.info("personalEdit생성 = "+personalEdit);
+		int result = 0;
+		
+		//임시로 담아 보겟습니다.
+		personalEdit.setTitle("테스트 제목");
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			result =mapper.insertPersonalEdit(personalEdit);
+		}catch(Exception e){ e.printStackTrace(); }
+		
+		
+		return result;
+	}
+	
+	
 	public int insertProject(Project project){
 		logger.info("프로젝트 생성 : " + project);
 		Project selectProject   = null;
@@ -103,6 +124,22 @@ public class ProjectDAO {
 	
 	
 	// U P D A T E ------------------------------------------------------------------
+	
+	public int updatePersonalEdit(PersonalEdit personalEdit){
+		int result = 0;
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		
+		try{
+			result =mapper.updatePersonalEdit(personalEdit);
+			logger.info("update PersonlEdit:"+result);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	public int updateChat(Chat chat){
 		int result = 0;
@@ -195,7 +232,25 @@ public class ProjectDAO {
 	
 	
 	//S E L E C T ------------------------------------------------------------------
-	//insert 다음 서치해서 불러오기
+
+	public PersonalEdit selectPersonalEdit(String id){
+		PersonalEdit  personalEdit = null;
+		logger.info("select:"+id);
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		
+		try{
+			personalEdit = mapper.selectPersonalEdit(id);
+			logger.info("personaledit : "+personalEdit);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return personalEdit; 
+	}
+	
+	
+	
+	//insert 다음 서치해서 불러오기	
 	public Context saveContext(String writer){
 		Context  context = null;
 		
@@ -211,9 +266,10 @@ public class ProjectDAO {
 	}
 	
 	
-	public Context loadContext(int c_num){
+
+	public PersonalEdit loadContext(int c_num){
 		
-		Context personalEdit = null;
+		PersonalEdit personalEdit = null;
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
@@ -226,21 +282,23 @@ public class ProjectDAO {
 	}
 	
 	
-	
-	
-	public ArrayList<Context> selectContextList(String write){
-		ArrayList<Context> c_list = new ArrayList<Context>();
-		
+	public ArrayList<PersonalEdit> selectContextList(String write){
+		ArrayList<PersonalEdit> c_list = new ArrayList<PersonalEdit>();
+		logger.info("w inDAO :"+write);
 		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
 		
 		try{
 			c_list =mapper.selectContextList(write);
+			
+			logger.info("cList inDOA:"+c_list);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		return c_list;
 	}
+	
+	
 	
 	
 	

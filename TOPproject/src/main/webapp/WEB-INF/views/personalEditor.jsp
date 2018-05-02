@@ -19,7 +19,7 @@
 		<p>파일 list</p>
 		<c:forEach var = "context" items="${c_list }">
 			<div class="context">
-			<input type="button" value="${context.title}" data="${context.c_num}" class="loadContext">
+			<input type="button" value="${context.indate}" data="${context.c_num}" class="loadContext">
 			</div>
 		</c:forEach>
 		

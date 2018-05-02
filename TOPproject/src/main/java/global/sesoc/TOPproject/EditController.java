@@ -211,7 +211,6 @@ public class EditController {
 		return json;
 	}
 	
-	
 	@ResponseBody
 	@RequestMapping(value="loadContext",method=RequestMethod.POST,produces="application/text;charset=utf8")
 	public String loadContext(String c_num){
@@ -220,7 +219,7 @@ public class EditController {
 		
 		int c_num1= Integer.parseInt(c_num);
 		
-		Context personalEdit = projectDAO.loadContext(c_num1);
+		PersonalEdit personalEdit = projectDAO.loadContext(c_num1);
 		
 		context = personalEdit.getContext();
 		
@@ -231,48 +230,62 @@ public class EditController {
 	}
 	
 	
+	
+	
 	@ResponseBody
 	@RequestMapping(value="personalSave",method=RequestMethod.POST)
-	public Context personalEditor_save(String context,String c_num,HttpSession session){
-		Context returnContext = null;
+	public Context personalEditor_save(String context,int c_num,HttpSession session){
+		Context returnContext = new Context();
 		
-		ArrayList<Context> c_list = new ArrayList<Context>();
+		ArrayList<PersonalEdit> p_list = new ArrayList<PersonalEdit>();
 		String id = (String)session.getAttribute("loginedId");
 		
 		logger.info("context: "+context);
 		
 		//select해서 같은 제목이있으면 update
-		c_list = projectDAO.selectContextList(id);
+		p_list = projectDAO.selectContextList(id);
 		int result = 0;
 		
 		
-		Context insertContext = new Context();
+		PersonalEdit personalEdit = new PersonalEdit();
 		
 		
 		logger.info("view에서 받아온 save text : "+context+ " id : "+id+" c_num: "+c_num);
 		
-		insertContext.setWriter(id);//writer == id
-		insertContext.setContext(context);
-		int int_c_num = Integer.parseInt(c_num);
+		personalEdit.setId(id);
+		personalEdit.setContext(context);
+		personalEdit.setC_num(c_num);
+		logger.info("personalEdit:"+personalEdit);
 		
-		
+		logger.info(c_num+"");
 		//id로 검색
-		if(int_c_num == 0){
+		if(c_num == 0){ 
 			logger.info("insert");
-			result = projectDAO.insertContext(insertContext);
+			result = projectDAO.insertPersonalEdit(personalEdit);
 			//젤큰애 가져오기
-			returnContext = projectDAO.saveContext(id);
-			logger.info("결과:"+returnContext);
+			personalEdit = projectDAO.selectPersonalEdit(id);
+			logger.info("결과:"+personalEdit);
+			returnContext.setC_num(personalEdit.getC_num());
+			returnContext.setContext(personalEdit.getContext());
+			
+			
+			logger.info("retrunCotnext inser:"+returnContext);
 			return returnContext;
 			
 		}else{
-			logger.info("update");
-			int c_num1 = Integer.parseInt(c_num);
+			logger.info("===================update===========================");
 			
-			insertContext.setC_num(c_num1);
-			projectDAO.upDateContext(insertContext);
+			logger.info("update : " + personalEdit);
+			result = projectDAO.updatePersonalEdit(personalEdit);
+			logger.info("result :"+result);
+			
+			returnContext.setC_num(personalEdit.getC_num());
+			returnContext.setContext(personalEdit.getContext());
+			logger.info("retrunCotnext update:"+returnContext);
 			
 		}
+		
+		logger.info("returnContext:"+returnContext);
 		return returnContext;
 	}
 }
