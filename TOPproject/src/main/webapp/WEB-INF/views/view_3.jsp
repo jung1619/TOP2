@@ -12,6 +12,8 @@
 		<script type="text/javascript" src="<c:url value='resources/js/sockjs.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='resources/js/stomp.js'/>"></script>
 	
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	
 		<!-- css 추가부분 -->
 		<script src="https://medialoot.com/preview/lumino/js/chart.min.js"></script>
 		<script src="https://medialoot.com/preview/lumino/js/chart-data.js"></script>
@@ -104,7 +106,7 @@
 						if( data.id == myId )
 							$('#chatLogView').append('<div class="mine">'+data.message+"</div><br>");
 						else
-							$('#chatLogView').append('<div class="other">'+data.nickName+ "님 ->"+data.message+"</div><br>");
+							$('#chatLogView').append('<div class="other">'+data.nickName+ "님 ▶"+data.message+"</div><br>");
 						$('#chatLogView').scrollTop(1000000);						
 					});
 					stompClient.subscribe('/subscribe/chat/${p_num}/context',function(context){
@@ -147,10 +149,69 @@
 			}
 		
 		</script>
+<style type="text/css">
+.w3-top, .chatLogView{font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.w3-top{background-color:#1c213e !important;}
+.shadow{    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12); padding:0px}
+.nabi-col.s3 {width: 15%; float: left; }
+.p3-block {
+    display: block;
+    width: 100%;
+    height: 60px;
+    font-size: 20px !important;
+}
+.nabi-button{
+	border:none;
+	display:inline-block;
+	padding-top:16px;
+	vertical-align:middle;
+	overflow:hidden;
+	text-decoration:none;
+	color:inherit;
+	background-color:inherit;
+	text-align:center;
+	cursor:pointer;
+	white-space:nowrap;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	white-space:normal;
+	/* border-bottom: 1px solid white; */
+ 	transition: .7s ease-in-out; 
+}
+.site__title4{
+	text-decoration:none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+
+.site__title6{
+	text-decoration:none !important;
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+.logout{
+    color: #ffffff !important;
+    font-weight: bold;
+}
+.top{
+	float:right;
+	padding:16px;
+	font-weight: lighter;
+}
+.site__title33{
+	text-decoration:none !important;
+    color: #ffffff;
+    font-size: 25px;
+}
+</style>
 </head>
 
 <body>
-	
+<%@ include file="nabi-top2.jsp"  %>
 	<div class="outer">
 		
 		<!-- EDITOR -->

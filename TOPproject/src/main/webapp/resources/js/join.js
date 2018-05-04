@@ -43,26 +43,20 @@ $(document).ready(function(){
 		var msg = '';
 		
 		if( email != '' ){
-			var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
-			if( reg.test(email) ){
-				msg = '이메일 형식을 다시 확인해주십시오.';
-				$('#idCheckDiv').html( msg );
-			}else{
-				$.ajax({
-					url :'CheckIdEmail',
-					type : 'POST',
-					data :{ idEmail : email },
-					dataType : 'text',
-					success	:function(data){
-						if( data == 1 ) msg = "중복입니다. 다시 작성해주십시오.";
-						else if( data == 2 ) msg = "사용 가능합니다.";
-						$('#emailCheckDiv').html( msg );
-						emailCheck = true;
-						console.log('email'+emailCheck);
-					},
-					error:function(err){ console.log("에러발생"); }
-				});
-			}
+			$.ajax({
+				url :'CheckIdEmail',
+				type : 'POST',
+				data :{ idEmail : email },
+				dataType : 'text',
+				success	:function(data){
+					if( data == 1 ) msg = "중복입니다. 다시 작성해주십시오.";
+					else if( data == 2 ) msg = "사용 가능합니다.";
+					$('#emailCheckDiv').html( msg );
+					emailCheck = true;
+					console.log('email'+emailCheck);
+				},
+				error:function(err){ console.log("에러발생"); }
+			});
 		}
 	});
 	

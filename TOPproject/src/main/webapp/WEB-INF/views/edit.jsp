@@ -125,9 +125,6 @@
 				);
 				console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
 			}*/
-			
-			
-		}
 	</script>
 	
 	<style type="text/css">

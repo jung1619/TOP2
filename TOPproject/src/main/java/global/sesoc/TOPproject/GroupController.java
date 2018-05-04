@@ -355,15 +355,18 @@ public class GroupController {
 	         model.addAttribute("groupList", groupArr);
 
          }
-	      
+	      System.out.println(id);
+	      ArrayList<Schedule> scheduleListview = shceduleDAO.selectSchedule(id);
+	      logger.info("스케쥴 : " + scheduleListview);
+	      model.addAttribute("listview", scheduleListview);
 		
-		//네비게이터에 임시로 값 담는 용도
-		String personal = "personal";
-		model.addAttribute("personal", personal);
-		int page = 2;
-		model.addAttribute("page", page);
+	      //네비게이터에 임시로 값 담는 용도
+	      String personal = "personal";
+	      model.addAttribute("personal", personal);
+	      int page = 2;
+	      model.addAttribute("page", page);
 
-		return "personal_cal";
+	      return "personal_cal";
 	}
 	
 	

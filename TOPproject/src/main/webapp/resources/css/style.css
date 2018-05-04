@@ -20,7 +20,7 @@ ul li{text-align:center;height: 60px;} */
 .padding-64{padding-top:64px!important;padding-bottom:64px!important}	
 .center{display:inline-block;width:auto;text-align:center!important}
 .large{font-size:18px!important}
-.wide{letter-spacing:4px}
+.wide{letter-spacing:4px; font-size:20px;}
 .light-grey{color:#000!important;background-color:#f1f1f1!important}
 .dark-grey{color:#fff!important;background-color:#616161!important}
 .padding-small{padding:4px 8px!important}
@@ -553,4 +553,9 @@ a{
 	top: 50%;
 	left: 50%;
 	z-index: 100;
+}
+
+.sut{
+	font-size: 2rem;
+	color:#444444;
 }

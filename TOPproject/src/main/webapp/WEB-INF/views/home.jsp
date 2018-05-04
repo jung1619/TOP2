@@ -30,6 +30,7 @@
 	$(window).load(function() {
 		$('#load').hide();
 	 });
+
 </script>
 </head>
 <body>
@@ -100,28 +101,30 @@
 </header>
 <div id="load"><img src="./resources/img/30.gif" alt="loading"></div>
 <div class="content containerH padding-64" id="about">
-  <h3 class="center">ABOUT ME</h3>
-  <p class="center"><em>I love </em></p>
-  <p>We have created a fictional "personal" website/blog, and our fictional character is a hobby photographer. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-    qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	<p>영어라서 있어보이죠? 사실 나도 뭔뜻인지 모름</p>
-
-  <p class="large center padding-16">TOP 이 점이 좋다</p>
-  <p class="wide"><i class="fa fa-camera"></i>Excel, Power Point, PDF 저장 포맷</p>
-  <div class="w3-light-grey">
-    <div class="w3-containerH w3-padding-small w3-dark-grey w3-center" style="width:90%">90%</div>
+  <h3 class="center">프로젝트를 Take out</h3>
+<p class="center"><em>숫가락, 버스 방지 위원회 </em></p>
+  <br><br>
+	<div class="group_middle">
+	<div>	
+		<img src="./resources/icon/no1.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="./resources/icon/no2.png">
+	</div>
+<!-- 	<div class="rightmain">
+		글씨 애들글씨 애들글씨 애들글씨 애들글씨 애들
+	</div> -->
+	</div><br>
+  <div class="group_middle">
+  <p class="wide" style="font-size:20px;">지긋지긋한 숫가락, 버스는 이제 안녕</p><br><br>
+  <p class="wide" style="font-size:20px;"><i class="fa fa-camera"></i>WORD, PDF 저장 포맷</p>
   </div>
-  <p class="wide"><i class="fa fa-laptop"></i>언제 어디서든 팀 프로젝트 참여</p>
-  <div class="w3-light-grey">
-    <div class="w3-containerH w3-padding-small w3-dark-grey w3-center" style="width:85%">85%</div>
-  </div>
-  <p class="wide button"><i class="fa fa-photo"></i>개인 프로젝트 문서도 작성 가능</p>
-  <div class="w3-light-grey">
-    <div class="w3-containerH w3-padding-small w3-dark-grey w3-center" style="width:75%">75%</div>
-  </div>
+ <!--  <img src="./resources/img/main1.png"> --><br><br><br><br>
+  <div class="group_middle">
+  <p class="wide" style="font-size:20px;"><i class="fa fa-laptop"></i>언제 어디서든 팀 프로젝트 참여</p>
+  <img src="./resources/img/main2.png"></div><br><br><br><br>
+  <div class="group_middle">
+  <p class="wide button" style="font-size:20px;"><i class="fa fa-photo"></i>철저한 스케쥴 관리</p>
+  <img src="./resources/img/main1.png"></div>
 </div>
-
 
 
 		<br><br><br><br><br><br><br><br><br><br><br><br>
@@ -144,6 +147,7 @@ function showDivs(n) {
   }
   x[slideIndex-1].style.display = "block";  
 }
+
 </script>
 </body>
 

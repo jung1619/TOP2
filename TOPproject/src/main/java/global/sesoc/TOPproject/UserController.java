@@ -192,6 +192,20 @@ public class UserController {
 		uDao.updateFriendList(myId, fl);
 		
 		logger.info("받은 친구 요청 수락 시도 종료");
+		
+		/*
+		 * 5월 4일 코드 추가 중 발견. 이 부분이 이전 버전인데 줄어드는 게 맞나요?
+		 * logger.info("받은 친구 요청 수락 시도 : " + myId + " / " + herId);
+		
+		String fl = uDao.searchUserFL(myId);
+		String fl2 = uDao.searchUserFL(herId);
+		fl += "/"+herId;
+		fl += "/"+myId;
+		
+		uDao.updateFriendList(myId, fl);
+		uDao.updateFriendList(herId, fl2);
+		
+		logger.info("받은 친구 요청 수락 시도 종료");*/
 	}
 	
 	

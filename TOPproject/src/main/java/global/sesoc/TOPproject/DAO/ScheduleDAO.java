@@ -42,6 +42,7 @@ public class ScheduleDAO {
 	
 	public ArrayList<Schedule> selectSchedule(String id){
 		ArrayList<Schedule> schedule = new ArrayList<Schedule>();
+		logger.info("스케쥴 검색 가즈아ㅏㅏ : " + id);
 		try {
 			ScheduleMapperInterface mapper = sqls.getMapper(ScheduleMapperInterface.class);
 			schedule = mapper.selectSchedule(id);

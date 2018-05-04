@@ -29,6 +29,7 @@ $(function() {
    	
 	$.ajax({
 		url : "loadFL",
+		/*type : "POST",*/
 		dataType : "json",
 		data : { id : loginedId },
 		success : function( data ){ 
