@@ -8,6 +8,7 @@
   
   
   <!-- ~~~~~~~~~~~~~~~~~~~~ U P D A T E ~~~~~~~~~~~~~~~~~~~~ -->
+  
   <update id="updateChat" parameterType="Chat">
  	 UPDATE
   		chat
@@ -17,43 +18,40 @@
  	 	p_num = #{p_num}
   </update>
   
-   <update id="updatePersonalEdit" parameterType="PersonalEdit">
+  
+  <update id="updatePersonalEdit" parameterType="PersonalEdit">
   	UPDATE context_user
   	SET 
   		context =#{context}
   	WHERE
   		c_num =#{c_num}
-  
   </update>
   
   
   <update id="updateProject" parameterType="Project">
   	UPDATE top_project
-  	SET p_name = #{p_name}, p_memberlist = #{p_memberlist}
+  	SET name = #{name}, memberlist = #{memberlist}
   	WHERE p_num = #{p_num} AND p_m_id = #{p_m_id}
   </update>
   
   
   <update id="updateProjectNotice" parameterType="Memo">
   	UPDATE notice
-  	SET n_content = #{n_content}
+  	SET content = #{content}
   	WHERE p_num = #{p_num}
   </update>
   
   
-  <!-- 정광철 context적용   update
   <update id="upDateContext" parameterType="Context">
-  	UPDATE 
-  		context_project
-  	SET
-  		context = #{context}, writer = #{writer}
-  	WHERE 
-  		p_num = #{p_num}
-  </update> -->
+  	UPDATE context_project
+  	SET context = #{context}, writer = #{writer}
+  	WHERE c_num = (SELECT MAX(c_num)AS c_num FROM context_project WHERE p_num = #{p_num})
+  </update>
+  
   
   <update id="updateProjectComplete" parameterType="Map">
   	UPDATE top_project
-  	SET p_completerate = #{rate}
+  	SET completerate = #{rate}
   	WHERE p_num = #{p_num}
   </update>
   
@@ -86,8 +84,8 @@
   FROM
   	context
   WHERE 
-  		writer = #{writer} AND
-		c_num = (SELECT MAX(c_num)AS c_num FROM context)
+	writer = #{writer} AND
+	c_num = (SELECT MAX(c_num)AS c_num FROM context)
   </select>
   
   
@@ -133,20 +131,20 @@
   <select id="noticeList"  parameterType="String" resultType="Notice">
   SELECT
   	 p_num
-  	,n_content
-  	,n_indate
-  	,n_deldate
+  	,content
+  	,indate
+  	,deldate
   FROM
    	notice
   WHERE
     p_num = #{p_num}
-  order by n_deldate desc	
+  order by deldate desc	
   </select>
   
   
   <select id="memberList" parameterType="String" resultType="String">
   SELECT
-  	p_memberlist
+  	memberlist
   FROM
    	top_project
   WHERE
@@ -157,11 +155,11 @@
   <select id="selectPj" parameterType="String" resultType="Project">
   SELECT
   	p_m_id,
-  	p_name,
+  	name,
   	p_num,
-	p_startdate,
-	p_enddate,
-	p_completerate
+	startdate,
+	enddate,
+	completerate
   FROM
    	top_project
   WHERE
@@ -173,20 +171,20 @@
 	SELECT
 		P_NUM
 		,P_M_ID
-		,P_NAME
-		,P_MEMBERLIST
-		,TO_CHAR(P_INDATE,'YYMMDD')
-		,TO_CHAR(P_DELDATE,'YYMMDD')
-		,TO_CHAR(P_STARTDATE,'YYMMDD')
-		,TO_CHAR(P_ENDDATE,'YYMMDD')
+		,NAME
+		,MEMBERLIST
+		,TO_CHAR(INDATE,'YYMMDD')
+		,TO_CHAR(DELDATE,'YYMMDD')
+		,TO_CHAR(STARTDATE,'YYMMDD')
+		,TO_CHAR(ENDDATE,'YYMMDD')
 	FROM 
 		TOP_PROJECT
 	WHERE
 		p_m_id = #{p_m_id}
 	AND 
-		p_name = #{p_name}
+		name = #{name}
 	AND 
-		p_memberlist = #{p_memberlist}
+		memberlist = #{memberlist}
 	
   </select>
   
@@ -207,9 +205,9 @@
   <select id="selectNotice" parameterType="String" resultType="Notice">
   	SELECT
   		p_num
-  		,n_content
-  		,n_indate
-  		,n_deldate
+  		,content
+  		,indate
+  		,deldate
   	FROM  
   		notice
   	WHERE
@@ -218,7 +216,7 @@
   
   
   <select id="searchProject" parameterType="int" resultType="Project">
-  	SELECT p_num, p_m_id, p_name, p_memberlist, p_startdate, p_enddate
+  	SELECT p_num, p_m_id, name, memberlist, startdate, enddate
   	FROM top_project
   	WHERE p_num = #{p_num}
   </select>
@@ -240,7 +238,8 @@
   
   	
   <!-- ~~~~~~~~~~~~~~~~~~~~ I N S E R T ~~~~~~~~~~~~~~~~~~~~ -->
-   <insert id="insertChat" parameterType="Chat">
+  
+  <insert id="insertChat" parameterType="Chat">
   	INSERT INTO
   		chat (
   			p_num
@@ -252,23 +251,22 @@
   </insert>
   
   
- 
   <insert id="insertProject" parameterType="Project">
 	INSERT INTO top_project(
-	  p_num, p_m_id, p_name, p_memberlist, p_startdate, p_enddate
+	  p_num, p_m_id, name, memberlist, startdate, enddate
 	)values(
-	  p_num_seq.NEXTVAL, #{p_m_id}, #{p_name}, #{p_memberlist}, 
-	  TO_DATE(#{p_startdate}, 'yyyyMMddhh24miss')
-	  ,TO_DATE(#{p_enddate}, 'yyyyMMddhh24miss')
+	  p_num_seq.NEXTVAL, #{p_m_id}, #{name}, #{memberlist}, 
+	  TO_DATE(#{startdate}, 'yyyyMMddhh24miss')
+	  ,TO_DATE(#{enddate}, 'yyyyMMddhh24miss')
 	)
   </insert>
   
   
   <insert id="insertProjectNotice" parameterType="Memo">
   	INSERT INTO notice(
-  		p_num, n_num, n_content
+  		p_num, n_num, content
   	)VALUES(
-  		#{p_num}, n_num_seq.NEXTVAL, #{n_content}
+  		#{p_num}, n_num_seq.NEXTVAL, #{content}
   	)
   </insert>
   
@@ -289,12 +287,10 @@
   INSERT INTO
   	notice(
   	 p_num
-  	 ,n_content
-  	 ,n_indate
+  	 ,content
   	)VALUES(
   		#{p_num}
-  		,#{n_content}
-  		,sysdate
+  		,#{content}
   	)
   </insert>
   
@@ -303,15 +299,16 @@
   	INSERT INTO context_project(
   		p_num, c_num, title, writer, context
   	)VALUES(
-  		#{p_num}, c_num_seq.NEXTVAL, #{title}, #{writer}, #{context}
+  		#{p_num}, project_c_num_seq.NEXTVAL, #{title}, #{writer}, #{context}
   	)
   </insert>
   
+  
   <insert id="insertPersonalEdit" parameterType="PersonalEdit">
    INSERT INTO context_user(
-  	c_num, title, id,context,indate
+  	c_num, title, id,context
   )VALUES(
-  	C_NUM_SEQ.nextval, #{title}, #{id}, #{context},sysdate
+  	user_c_num_seq.nextval, #{title}, #{id}, #{context}
   )
   
   </insert>
@@ -322,7 +319,7 @@
   
   <update id="deleteProjectNotice" parameterType="Memo">
   	UPDATE notice
-  	SET n_deldate = SYSDATE
+  	SET deldate = SYSDATE
   	WHERE p_num = #{p_num}
   </update>
   

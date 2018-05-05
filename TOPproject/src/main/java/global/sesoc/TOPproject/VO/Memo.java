@@ -4,20 +4,18 @@ public class Memo {
 
 	private String id;
 	private int p_num;
-	private String n_content;
-	private String n_indate;
-	private String n_deldate;
+	private String content;
+	private String indate;
+	private String deldate;
 	
 	public Memo(){}
-	public Memo(String id, String n_content, String n_deldate) {
+	public Memo(String id, int p_num, String content, String indate, String deldate) {
+		super();
 		this.id = id;
-		this.n_content = n_content;
-		this.n_deldate = n_deldate;
-	}
-	public Memo(int p_num, String n_content, String n_deldate) {
 		this.p_num = p_num;
-		this.n_content = n_content;
-		this.n_deldate = n_deldate;
+		this.content = content;
+		this.indate = indate;
+		this.deldate = deldate;
 	}
 	
 	public String getId() {
@@ -32,29 +30,32 @@ public class Memo {
 	public void setP_num(int p_num) {
 		this.p_num = p_num;
 	}
-	public String getN_content() {
-		return n_content;
+	public String getContent() {
+		return content;
 	}
-	public void setN_content(String n_content) {
-		this.n_content = n_content;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getN_indate() {
-		return n_indate;
+	public String getIndate() {
+		return indate;
 	}
-	public void setN_indate(String n_indate) {
-		this.n_indate = n_indate;
+	public void setIndate(String indate) {
+		this.indate = indate;
 	}
-	public String getN_deldate() {
-		return n_deldate;
+	public String getDeldate() {
+		return deldate;
 	}
-	public void setN_deldate(String n_deldate) {
-		this.n_deldate = n_deldate;
+	public void setDeldate(String deldate) {
+		this.deldate = deldate;
 	}
 	
 	@Override
 	public String toString() {
-		return "Memo [id=" + id + ", p_num=" + p_num + ", n_content=" + n_content + ", n_indate=" + n_indate
-				+ ", n_deldate=" + n_deldate + "]";
+		return "Memo [id=" + id + ", p_num=" + p_num + ", content=" + content + ", indate=" + indate + ", deldate="
+				+ deldate + "]";
 	}
+	
+	
+	
 	
 }

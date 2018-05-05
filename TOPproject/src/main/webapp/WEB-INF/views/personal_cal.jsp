@@ -55,7 +55,7 @@
 var dataset = [
     <c:forEach var="listview" items="${listview}" varStatus="status">
         <c:if test="${listview.startdate != ''}">
-            {"id":"<c:out value="${listview.schedule_num}" />"
+            {"id":"<c:out value="${listview.s_num}" />"
             ,"title":"<c:out value="${listview.content}" />"
             ,"color":"<c:out value="${listview.color}" />"
             ,"start":"<c:out value="${listview.startdate}" />"
@@ -153,8 +153,8 @@ var dataset = [
  
  function deleteUserSchedule(){
 	 $('#fullCalModal').modal('toggle'); 
-	 var schedule_num = document.getElementById('modalId').value;
-	 $('.schedule_num').attr('value', schedule_num);
+	 var s_num = document.getElementById('modalId').value;
+	 $('.schedule_num').attr('value', s_num);
 	 var startTimes = document.getElementById('startTimes').value;
 	    $('.startTimes').html(startTimes);
 	 var endTimes = document.getElementById('endTimes').value;
@@ -226,7 +226,7 @@ var dataset = [
 	           		 <tr>
 						<td>
 							<input type="hidden" name="id" value="${sessionScope.loginedId}">
-							<input type="hidden" class="schedule_num" name="schedule_num" required="required">
+							<input type="hidden" class="schedule_num" name="s_num" required="required">
 						</td>
 					</tr>
 				</table>
@@ -325,7 +325,7 @@ var dataset = [
 	           		 	<th>프로젝트명</th>
 						<td>
 							<input type="text" name="content" class="modalTitle form-control input-md" required="required">
-							<input type="hidden" name="schedule_num" id="modalId">
+							<input type="hidden" name="s_num" id="modalId">
 						</td>
 					</tr>
 					<tr>

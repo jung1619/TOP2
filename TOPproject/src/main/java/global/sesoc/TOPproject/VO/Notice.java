@@ -4,49 +4,51 @@ public class Notice {
 
 	/*Notice*/
 	private String p_num;
-	private String n_content;
-	private String n_indate;
-	private String n_deledata;
-	public Notice(String p_num, String n_content, String n_indate, String n_deledata) {
-		super();
-		this.p_num = p_num;
-		this.n_content = n_content;
-		this.n_indate = n_indate;
-		this.n_deledata = n_deledata;
-	}
+	private String content;
+	private String indate;
+	private String deledata;
+	
 	public Notice() {
 		super();
 	}
+	public Notice(String p_num, String content, String indate, String deledata) {
+		super();
+		this.p_num = p_num;
+		this.content = content;
+		this.indate = indate;
+		this.deledata = deledata;
+	}
+	
 	public String getP_num() {
 		return p_num;
 	}
 	public void setP_num(String p_num) {
 		this.p_num = p_num;
 	}
-	public String getN_content() {
-		return n_content;
+	public String getContent() {
+		return content;
 	}
-	public void setN_content(String n_content) {
-		this.n_content = n_content;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getN_indate() {
-		return n_indate;
+	public String getIndate() {
+		return indate;
 	}
-	public void setN_indate(String n_indate) {
-		this.n_indate = n_indate;
+	public void setIndate(String indate) {
+		this.indate = indate;
 	}
-	public String getN_deledata() {
-		return n_deledata;
+	public String getDeledata() {
+		return deledata;
 	}
-	public void setN_deledata(String n_deledata) {
-		this.n_deledata = n_deledata;
-	}
-	@Override
-	public String toString() {
-		return "Notice [p_num=" + p_num + ", n_content=" + n_content + ", n_indate=" + n_indate + ", n_deledata="
-				+ n_deledata + "]";
+	public void setDeledata(String deledata) {
+		this.deledata = deledata;
 	}
 	
+	@Override
+	public String toString() {
+		return "Notice [p_num=" + p_num + ", content=" + content + ", indate=" + indate + ", deledata=" + deledata
+				+ "]";
+	}
 	
 	
 	

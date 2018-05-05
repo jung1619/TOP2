@@ -2,6 +2,7 @@ package global.sesoc.TOPproject.VO;
 
 public class Schedule {
 
+	private int s_num;	//시퀀스
 	private String id;
 	private int p_num;
 	private String startdate;
@@ -9,22 +10,32 @@ public class Schedule {
 	private String content;
 	private String color;
 	private String deldate;
-	private int schedule_num;	//시퀀스
 	private int complete;
 	
 	public Schedule(){}
-
-	public Schedule(String id, int p_num, String startdate, String enddate, String content, String color,
-			String deldate, int schedule_num, int complete) {
+	public Schedule(String id, int s_num, String startdate, String enddate, String content, String color,
+			String deldate, int complete) {
 		super();
 		this.id = id;
-		this.p_num = p_num;
+		this.s_num = s_num;
 		this.startdate = startdate;
 		this.enddate = enddate;
 		this.content = content;
 		this.color = color;
 		this.deldate = deldate;
-		this.schedule_num = schedule_num;
+		this.complete = complete;
+	}
+	public Schedule(String id, int p_num, int s_num, String startdate, String enddate, String content, String color,
+			String deldate, int complete) {
+		super();
+		this.id = id;
+		this.p_num = p_num;
+		this.s_num = s_num;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.content = content;
+		this.color = color;
+		this.deldate = deldate;
 		this.complete = complete;
 	}
 
@@ -84,12 +95,12 @@ public class Schedule {
 		this.deldate = deldate;
 	}
 
-	public int getSchedule_num() {
-		return schedule_num;
+	public int getS_num() {
+		return s_num;
 	}
 
-	public void setSchedule_num(int schedule_num) {
-		this.schedule_num = schedule_num;
+	public void setS_num(int s_num) {
+		this.s_num = s_num;
 	}
 	
 	public int getComplete() {
@@ -103,8 +114,8 @@ public class Schedule {
 	@Override
 	public String toString() {
 		return "Schedule [id=" + id + ", p_num=" + p_num + ", startdate=" + startdate + ", enddate=" + enddate
-				+ ", content=" + content + ", color=" + color + ", deldate=" + deldate + ", schedule_num="
-				+ schedule_num + ", complete=" + complete + "]";
+				+ ", content=" + content + ", color=" + color + ", deldate=" + deldate + ", s_num="
+				+ s_num + ", complete=" + complete + "]";
 	}
 	
 	

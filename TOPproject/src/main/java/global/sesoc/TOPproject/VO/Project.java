@@ -4,32 +4,33 @@ public class Project {
 
 	private int p_num;
 	private String p_m_id;
-	private String p_name;
-	private String p_memberlist;
-	private String p_indate;
-	private String p_deldate;
-	private String p_startdate;
-	private String p_enddate;
+	private String name;
+	private String memberlist;
+	private String indate;
+	private String deldate;
+	private String startdate;
+	private String enddate;
 	private String p_pdate;
-	private int p_completerate;
+	private int completerate;
 	
 	
 	public Project() {}
-	public Project(int p_num, String p_m_id, String p_name, String p_memberlist, String p_indate, String p_deldate,
-			String p_startdate, String p_enddate, String p_pdate, int p_completerate) {
+	public Project(int p_num, String p_m_id, String name, String memberlist, String indate, String deldate,
+			String startdate, String enddate, String p_pdate, int completerate) {
 		super();
 		this.p_num = p_num;
 		this.p_m_id = p_m_id;
-		this.p_name = p_name;
-		this.p_memberlist = p_memberlist;
-		this.p_indate = p_indate;
-		this.p_deldate = p_deldate;
-		this.p_startdate = p_startdate;
-		this.p_enddate = p_enddate;
+		this.name = name;
+		this.memberlist = memberlist;
+		this.indate = indate;
+		this.deldate = deldate;
+		this.startdate = startdate;
+		this.enddate = enddate;
 		this.p_pdate = p_pdate;
+		this.completerate = completerate;
 	}
 	
-	
+
 	public int getP_num() {
 		return p_num;
 	}
@@ -42,63 +43,62 @@ public class Project {
 	public void setP_m_id(String p_m_id) {
 		this.p_m_id = p_m_id;
 	}
-	public String getP_name() {
-		return p_name;
+	public String getName() {
+		return name;
 	}
-	public void setP_name(String p_name) {
-		this.p_name = p_name;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getP_memberlist() {
-		return p_memberlist;
+	public String getMemberlist() {
+		return memberlist;
 	}
-	public void setP_memberlist(String p_memberlist) {
-		this.p_memberlist = p_memberlist;
+	public void setMemberlist(String memberlist) {
+		this.memberlist = memberlist;
 	}
-	public String getP_indate() {
-		return p_indate;
+	public String getIndate() {
+		return indate;
 	}
-	public void setP_indate(String p_indate) {
-		this.p_indate = p_indate;
+	public void setIndate(String indate) {
+		this.indate = indate;
 	}
-	public String getP_deldate() {
-		return p_deldate;
+	public String getDeldate() {
+		return deldate;
 	}
-	public void setP_deldate(String p_deldate) {
-		this.p_deldate = p_deldate;
+	public void setDeldate(String deldate) {
+		this.deldate = deldate;
 	}
-	public String getP_startdate() {
-		return p_startdate;
+	public String getStartdate() {
+		return startdate;
 	}
-	public void setP_startdate(String p_startdate) {
-		this.p_startdate = p_startdate;
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
 	}
-	public String getP_enddate() {
-		return p_enddate;
+	public String getEnddate() {
+		return enddate;
 	}
-	public void setP_enddate(String p_enddate) {
-		this.p_enddate = p_enddate;
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
 	}
-	public String getP_pdate() {
+	public String getPdate() {
 		return p_pdate;
 	}
-	public void setP_pdate(String p_pdate) {
+	public void setPdate(String p_pdate) {
 		this.p_pdate = p_pdate;
 	}
-	public int getP_completerate() {
-		return p_completerate;
+	public int getCompleterate() {
+		return completerate;
 	}
-	public void setP_completerate(int p_completerate) {
-		this.p_completerate = p_completerate;
+	public void setCompleterate(int completerate) {
+		this.completerate = completerate;
 	}
-	
 	
 	@Override
 	public String toString() {
-		return "Project [p_num=" + p_num + ", p_m_id=" + p_m_id + ", p_name=" + p_name + ", p_memberlist="
-				+ p_memberlist + ", p_indate=" + p_indate + ", p_deldate=" + p_deldate + ", p_startdate=" + p_startdate
-				+ ", p_enddate=" + p_enddate + ", p_pdate=" + p_pdate + ", p_completerate=" + p_completerate + "]";
+		return "Project [p_num=" + p_num + ", p_m_id=" + p_m_id + ", name=" + name + ", memberlist=" + memberlist
+				+ ", indate=" + indate + ", deldate=" + deldate + ", startdate=" + startdate + ", enddate=" + enddate
+				+ ", p_pdate=" + p_pdate + ", completerate=" + completerate + "]";
 	}
-	
+
 	
 	
 }

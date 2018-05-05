@@ -171,13 +171,13 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="deleteReq", method=RequestMethod.POST)
 	public void deleteReq(String myId, String herId){ 
-		logger.info("받은 친구 요청 삭제 시도 : " + myId + " / " + herId);
+		logger.info("받은 친구 요청 거절 시도 : " + myId + " / " + herId);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("requester", herId); map.put("receiver", myId);
 		
 		int result = uDao.deleteReq(map);
-		logger.info("받은 친구 요청 삭제 시도 종료");
+		logger.info("받은 친구 요청 거절 시도 종료");
 	}
 	
 	
@@ -187,25 +187,18 @@ public class UserController {
 		logger.info("받은 친구 요청 수락 시도 : " + myId + " / " + herId);
 		
 		String fl = uDao.searchUserFL(myId);
-		fl += "/"+herId;
-		
-		uDao.updateFriendList(myId, fl);
-		
-		logger.info("받은 친구 요청 수락 시도 종료");
-		
-		/*
-		 * 5월 4일 코드 추가 중 발견. 이 부분이 이전 버전인데 줄어드는 게 맞나요?
-		 * logger.info("받은 친구 요청 수락 시도 : " + myId + " / " + herId);
-		
-		String fl = uDao.searchUserFL(myId);
 		String fl2 = uDao.searchUserFL(herId);
 		fl += "/"+herId;
-		fl += "/"+myId;
+		fl2 += "/"+myId;
 		
 		uDao.updateFriendList(myId, fl);
 		uDao.updateFriendList(herId, fl2);
 		
-		logger.info("받은 친구 요청 수락 시도 종료");*/
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("requester", herId); map.put("receiver", myId);
+		uDao.deleteReq(map);
+		
+		logger.info("받은 친구 요청 수락 시도 종료");
 	}
 	
 	
@@ -222,6 +215,33 @@ public class UserController {
 		return reqList;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="deleteFriend", method=RequestMethod.POST)
+	public void deleteFriend(String myId, String herId){ 
+		logger.info("친구 삭제 시도 : " + myId + " / " + herId);
+		
+		String fl = uDao.searchUserFL(myId);
+		String[] list = fl.split("/");
+
+		for(int i=0; i<list.length; i++){			
+			if ( list[i].equals(herId) ) {
+				for (int j=0; j<list.length-1; j++) {
+					list[j] = list[j+1];
+				}
+				break;
+			}
+		}
+		System.out.println(list);
+		//상대방 목록에서도 삭제가 되어야지
+		int result = uDao.updateFriendList(myId, fl);
+		
+		logger.info("친구 삭제 시도 종료");
+	}
+	
+	
+	
+	// F I L E ------------------------------------------------------------------
 	
 	@RequestMapping(value="fileList_ps", method=RequestMethod.GET)
 	public String fileList_ps(String myId){
@@ -256,28 +276,7 @@ public class UserController {
 	}
 	
 	
-	@ResponseBody
-	@RequestMapping(value="deleteFriend", method=RequestMethod.POST)
-	public void deleteFriend(String myId, String herId){ 
-		logger.info("친구 삭제 시도 : " + myId + " / " + herId);
-		
-		String fl = uDao.searchUserFL(myId);
-		String[] list = fl.split("/");
-
-		for(int i=0; i<list.length; i++){			
-			if ( list[i].equals(herId) ) {
-				for (int j=0; j<list.length-1; j++) {
-					list[j] = list[j+1];
-				}
-				break;
-			}
-		}
-		System.out.println(list);
-		//상대방 목록에서도 삭제가 되어야지
-		int result = uDao.updateFriendList(myId, fl);
-		
-		logger.info("친구 삭제 시도 종료");
-	}
+	
 	
 	
 	

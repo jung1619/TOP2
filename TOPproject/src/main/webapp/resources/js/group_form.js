@@ -29,7 +29,7 @@ $(function() {
    	
 	$.ajax({
 		url : "loadFL",
-		/*type : "POST",*/
+		type : "POST",
 		dataType : "json",
 		data : { id : loginedId },
 		success : function( data ){ 
@@ -59,31 +59,31 @@ $(function() {
 });
 
 function create(){
-	var p_name = $('#projacename').val();
-	var p_memberlist = '';
-	var p_startdate = $('#datepicker_start').val();
-	p_startdate = parseInt(p_startdate.replace(/-/gi, ""));
-	var p_enddate = $('#datepicker_end').val();
-	p_enddate = parseInt(p_enddate.replace(/-/gi, ""));
+	var name = $('#projacename').val();
+	var memberlist = '';
+	var startdate = $('#datepicker_start').val();
+	startdate = parseInt(startdate.replace(/-/gi, ""));
+	var enddate = $('#datepicker_end').val();
+	enddate = parseInt(enddate.replace(/-/gi, ""));
 	
 	
-	if( (p_name != '') && (memberList.length >= 1) && (p_startdate != '') && (p_enddate != '') ){
-		if( p_startdate < p_enddate ){
+	if( (name != '') && (memberList.length >= 1) && (startdate != '') && (enddate != '') ){
+		if( startdate < enddate ){
 			
 			for( var i in memberList ){ 
-				p_memberlist += ('/' + memberList[i]); 
+				memberlist += ('/' + memberList[i]); 
 			}
 			
-			if( (p_name != null) ){ //인원제한+시작일마감일
+			if( (name != null) ){ //인원제한+시작일마감일
 				$.ajax({
 					url : 'createProject',
 					type : "POST",
 					data : {
-						'p_name' : p_name, //인원, 시작일마감일
+						'name' : name, //인원, 시작일마감일
 						'p_m_id' : loginedId,
-						'p_memberlist' : p_memberlist,
-						'p_startdate' : p_startdate + "000000",
-						'p_enddate' : p_enddate + "235959"
+						'memberlist' : memberlist,
+						'startdate' : startdate + "000000",
+						'enddate' : enddate + "235959"
 					},
 					success : function( data ){ 
 						if( data == '1' ){							

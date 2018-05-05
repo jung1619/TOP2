@@ -53,29 +53,30 @@
 
 <script type="text/javascript">
 
-var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
-var pmid = '<%=(String)session.getAttribute("pjm")%>';
-var mycustom = '';
-
-if (loginedId == pmid) {
-	mycustom = {myCustomButton: {text: "일정입력", click: function(event) { $("#fullCalNew").modal();}}};
-};
-
-var dataset = [
-    <c:forEach var="listview" items="${listview}" varStatus="status">
-        <c:if test="${listview.startdate != ''}">
-            {"id":"<c:out value="${listview.schedule_num}" />"
-            ,"title":"<c:out value="${listview.content}" />"
-            ,"color":"<c:out value="${listview.color}" />"
-            ,"start":"<c:out value="${listview.startdate}" />"
-            <c:if test="${listview.enddate != ''}">
-                ,"end":"<c:out value="${listview.enddate}" />"
-        	</c:if>
-            } 
-            <c:if test="${!status.last}">,</c:if>
-        </c:if>
-    </c:forEach>
-    ];
+	var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
+	var pmid = '<%=(String)session.getAttribute("pjm")%>';
+	var mycustom = '';
+	
+	if (loginedId == pmid) {
+		mycustom = {myCustomButton: {text: "일정입력", click: function(event) { $("#fullCalNew").modal();}}};
+	};
+	
+	var dataset = [
+	    <c:forEach var="listview" items="${listview}" varStatus="status">
+	        <c:if test="${listview.startdate != ''}">
+	            {"id":"<c:out value="${listview.s_num}" />"
+	            ,"title":"<c:out value="${listview.content}" />"
+	            ,"color":"<c:out value="${listview.color}" />"
+	            ,"start":"<c:out value="${listview.startdate}" />"
+	            <c:if test="${listview.enddate != ''}">
+	                ,"end":"<c:out value="${listview.enddate}" />"
+	        	</c:if>
+	            } 
+	            <c:if test="${!status.last}">,</c:if>
+	        </c:if>
+	    </c:forEach>
+	];
+	
  $(document).ready(function() {
 	 
 	//$("#header").load("/stagestageList.jps")
@@ -169,8 +170,8 @@ var dataset = [
  
  function deleteProjectSchedule(){
 	 $('#fullCalModal').modal('toggle'); 
-	 var schedule_num = document.getElementById('modalIdUP').value;
-	 $('.schedule_num').attr('value', schedule_num);
+	 var s_num = document.getElementById('modalIdUP').value;
+	 $('.schedule_num').attr('value', s_num);
 	 var startTimes = document.getElementById('startTimes').value;
 	    $('.startTimes').html(startTimes);
 	 var endTimes = document.getElementById('endTimes').value;
@@ -181,8 +182,8 @@ var dataset = [
  //완료처리 부분 작업 오네가이시마스
  function updateProjectComplete(){
 	if (confirm('완료 처리를 하시겠습니까?')) {
-	var schedule_num = document.getElementById('modalIdUP').value;
-	location.href = 'updateProjectComplete?schedule_num=' + schedule_num;
+	var s_num = document.getElementById('modalIdUP').value;
+	location.href = 'updateProjectComplete?s_num=' + s_num;
 			
 	return true;
 	 }else {
@@ -240,7 +241,7 @@ var dataset = [
 	           		 <tr>
 						<td>
 							<input type="hidden" name="p_num" value="${p_num}">
-							<input type="hidden" class="schedule_num" name="schedule_num" required="required">
+							<input type="hidden" class="schedule_num" name="s_num" required="required">
 						</td>
 					</tr>
 				</table>
@@ -380,7 +381,7 @@ var dataset = [
 		           		 	<th>프로젝트명</th>
 							<td>
 								<input type="hidden" name="p_num" value="${p_num}">
-								<input type="hidden" id="modalIdUP" name="schedule_num" required="required">
+								<input type="hidden" id="modalIdUP" name="s_num" required="required">
 								<input type="text" name="content" class="modalTitle form-control input-md" required="required">
 							</td>
 						</tr>

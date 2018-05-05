@@ -46,7 +46,7 @@ public class EditController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("p_num", p_num);
-		String p_name = projectDAO.searchProject(p_num).getP_name();
+		String p_name = projectDAO.searchProject(p_num).getName();
 		
 		System.out.println(textt);
 		String startHtml = "<!DOCTYPE html[    <!ENTITY nbsp '&#160;'> ]><html><body>";

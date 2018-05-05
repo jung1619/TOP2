@@ -177,7 +177,7 @@ public class ScheduleController {
 		logger.info("프로젝트 스케쥴 완성도 조회 : " + p_num);
 		
 		Project pj = projectDAO.searchProject(p_num);
-		int per = pj.getP_completerate();
+		int per = pj.getCompleterate();
 		
 		logger.info("프로젝트 스케쥴 완성도 조회 완료 : " + per );
 		return per;

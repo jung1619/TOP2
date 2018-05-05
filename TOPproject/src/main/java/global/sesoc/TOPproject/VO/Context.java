@@ -2,12 +2,12 @@ package global.sesoc.TOPproject.VO;
 
 public class Context {
 	
-	private int p_num;
-	private String id;
 	private int c_num;
+	private String id;
+	private int p_num;
+	private String writer;
 	private String title;
 	private String context;
-	private String writer;
 	private String indate;
 	
 	public Context(){}

@@ -68,8 +68,8 @@ $(window).load(function() {
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-										<h4><a href="#">${notice.n_indate }</a></h4>
-										<p>${notice.n_content}</p>
+										<h4><a href="#">${notice.indate }</a></h4>
+										<p>${notice.content}</p>
 									</div>
 								</div>
 							</div>
@@ -83,8 +83,8 @@ $(window).load(function() {
 									<div class="col-xs-10 col-md-10">
 										<c:forEach items="${b_noticeArr}" var = "noticeArr">
 										<c:forEach var="Notice" items="${noticeArr}">
-											<h4><a href="#">${Notice.n_indate }</a></h4>
-											<p>${Notice.n_content}</p>
+											<h4><a href="#">${Notice.indate }</a></h4>
+											<p>${Notice.content}</p>
 										</c:forEach> 
 									</c:forEach>
 									</div>
@@ -152,7 +152,7 @@ $(window).load(function() {
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-										<a href="group?groupNum=${project.p_num}">${project.p_name}</a>
+										<a href="group?groupNum=${project.p_num}">${project.name}</a>
 									</div>
 								</div>
 							</div>

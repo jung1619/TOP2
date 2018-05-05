@@ -10,7 +10,7 @@
 				<img src="resources/icon/group.png" class="img-responsive" alt="" style="width:50px">
 			</div>
 			<div class="profile-usertitle" style="margin-top: 20px; margin-left: 15px;">
-				<div class="profile-usertitle-name" style="margin:auto">${pj.p_name}</div>
+				<div class="profile-usertitle-name" style="margin:auto">${pj.name}</div>
 				<!-- <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div> -->
 			</div>
 			<div class="clear"></div>

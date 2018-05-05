@@ -37,7 +37,7 @@
   
   <update id="updateUserMemo" parameterType="Memo">
   	UPDATE memo
-  	SET n_content = #{n_content}
+  	SET content = #{content}
   	WHERE id = #{id}
   </update>
   
@@ -124,9 +124,9 @@
   
   <insert id="insertUserMemo" parameterType="Memo">
   	INSERT INTO memo(
-  		id, n_content
+  		id, content
   	)VALUES(
-  		#{id}, #{n_content}
+  		#{id}, #{content}
   	)
   </insert>
   
@@ -144,7 +144,7 @@
   	INSERT INTO context_user(
   		id, c_num, title, context
   	)VALUES(
-  		#{id}, c_num_user_seq.NEXTVAL, #{title}, #{context}
+  		#{id}, user_c_num_seq.NEXTVAL, #{title}, #{context}
   	)
   </insert>
   
@@ -154,7 +154,7 @@
   
   <update id="deleteUserMemo" parameterType="Memo">
   	UPDATE memo
-  	SET n_deldate = SYSDATE
+  	SET deldate = SYSDATE
   	WHERE id = #{id}
   </update>
   

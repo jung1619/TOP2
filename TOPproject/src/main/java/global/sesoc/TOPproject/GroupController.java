@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.ScheduleDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
-import global.sesoc.TOPproject.DAO.UserMapperInterface;
 import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.Notice;
 import global.sesoc.TOPproject.VO.Project;
@@ -98,7 +97,7 @@ public class GroupController {
 			
 			//<--구성원 확인-->//
 			//프로젝트 불러오기 
-			String updateMember = selectProject.getP_memberlist();
+			String updateMember = selectProject.getMemberlist();
 			logger.info("!!updateMember: "+updateMember);
 			String [] updateMamberArr = updateMember.split("/");
 			

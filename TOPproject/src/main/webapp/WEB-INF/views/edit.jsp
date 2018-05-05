@@ -77,7 +77,7 @@
 			}); 
 			
 			
-		});
+		});// READY FUNCTION 
 		
 		/* 추가 */
 		function sendContext(){
@@ -85,8 +85,6 @@
 			
 			var c_num = $('#c_num').val();
 			console.log(c_num);
-			
-			
 			
 			if(c_num==''){
 				console.log("c_num이 없어");
@@ -113,18 +111,20 @@
 				
 			}
 			
-		}
-			/* old 추가 
-			function sendContext(){
-				var context = CKEDITOR.instances.editor1.getData();
-				console.log('지금 여기~~~~'+myId);
-				stompClient.send("/chat/${p_num}/context",{}, JSON.stringify({
-					context :context,
-					writer: myId
-					})
-				);
-				console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
-			}*/
+		} //SEND CONTEXT
+		
+		/* old 추가 
+		function sendContext(){
+			var context = CKEDITOR.instances.editor1.getData();
+			console.log('지금 여기~~~~'+myId);
+			stompClient.send("/chat/${p_num}/context",{}, JSON.stringify({
+				context :context,
+				writer: myId
+				})
+			);
+			console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
+		}*/
+		
 	</script>
 	
 	<style type="text/css">

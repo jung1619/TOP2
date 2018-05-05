@@ -51,7 +51,7 @@
 				<ul class="children collapse" id="sub-item-1">
 				<c:forEach var="project" items="${p_list}">
 					<li><a class="" href="group?groupNum=${project.p_num}">
-						<span class="fa fa-arrow-right">&nbsp;</span>${project.p_name}
+						<span class="fa fa-arrow-right">&nbsp;</span>${project.name}
 					</a></li>
 				</c:forEach>
 				</ul>

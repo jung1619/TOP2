@@ -60,8 +60,8 @@
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-										<h4><a href="#"><span class="site__title2">${notice.n_indate }</span></a></h4>
-										<p>${notice.n_content}</p>
+										<h4><a href="#"><span class="site__title2">${notice.indate }</span></a></h4>
+										<p>${notice.content}</p>
 									</div>
 								</div>
 							</div>

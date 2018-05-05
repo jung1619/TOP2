@@ -44,7 +44,7 @@ public class NoticeController {
 		Notice notice = new Notice();
 		int result = 0;
 		notice.setP_num(p_num);
-		notice.setN_content(context);
+		notice.setContent(context);
 
 		logger.info("insertNotice : "+notice);
 		result = projectDAO.insertNotice(notice);

@@ -11,13 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
-import global.sesoc.TOPproject.VO.Context;
 import global.sesoc.TOPproject.VO.PersonalEdit;
-import global.sesoc.TOPproject.VO.User;
 
 /**
  * Handles requests for the application home page.
