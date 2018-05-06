@@ -415,6 +415,19 @@ public class ProjectDAO {
 		return context;
 	}
 	
+	public Context searchContext2(int p_num){
+			logger.info("프로젝트의 특정 파일 p_num 검색 : " + p_num);
+		
+		ProjectMapperInterface mapper = sqls.getMapper(ProjectMapperInterface.class);
+		Context context = null;
+		
+		try{
+			context = mapper.searchContext2(p_num);
+			logger.info("프로젝트의 특정 파일 검색 성공 : p_num" + context);
+		}catch(Exception e){ logger.info("프로젝트의 특정 파일 검색 실패"); e.printStackTrace(); }
+		return context;
+	}
+	
 	
 	public ArrayList<Notice> selectNotice(String p_num){
 		ArrayList<Notice> noticeArr = null;

@@ -39,7 +39,6 @@ public class NoticeController {
 	public String boardinsert(String context, String p_num, Model model,ModelMap modelMap, HttpSession hs){
 		String id = (String) hs.getAttribute("loginedId");
 		hs.setAttribute("loginedId", id);
-		
 		logger.info("p_num: "+p_num+" context : "+context);
 		Notice notice = new Notice();
 		int result = 0;
@@ -78,7 +77,7 @@ public class NoticeController {
 		
 		//프로젝트매니져
 		Project pj = projectDAO.selectPj(p_num);
-		model.addAttribute("pm", pj.getP_m_id());
+		model.addAttribute("pj", pj);
 	
 		//공지사항 
 		
@@ -95,6 +94,9 @@ public class NoticeController {
 		model.addAttribute("p_num",p_num);
 		
 		
-		return"group";
+		
+		
+		return "group";
+		
 	}
 }

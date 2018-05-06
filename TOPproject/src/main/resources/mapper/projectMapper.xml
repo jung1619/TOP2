@@ -228,6 +228,12 @@
   	WHERE c_num = #{c_num}
   </select>
   
+  <select id="searchContext2" parameterType="int" resultType="Context">
+  		SELECT p_num, c_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
+		FROM context_project
+  		WHERE  c_num = (SELECT MAX(c_num)AS c_num FROM context_project WHERE p_num = #{p_num})
+  </select>
+  
   
   <select id="searchProjectFilelist" parameterType="int" resultType="Context">
   	SELECT p_num, c_num, title, context, writer, TO_CHAR(indate, 'YYYY/MM/DD') indate
@@ -287,9 +293,11 @@
   INSERT INTO
   	notice(
   	 p_num
+  	 ,n_num
   	 ,content
   	)VALUES(
   		#{p_num}
+  		,N_NUM_SEQ.nextval
   		,#{content}
   	)
   </insert>

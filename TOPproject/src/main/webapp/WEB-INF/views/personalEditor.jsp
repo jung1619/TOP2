@@ -93,6 +93,41 @@
 			
 		});
 	});
+	
+	
+	
+	function sendContext(){
+		var data1 = CKEDITOR.instances.editor1.getData();
+		
+		var c_num = $('#c_num').val();
+		console.log(c_num);
+		
+		if(c_num==''){
+			console.log("c_num이 없어");
+			$("#c_num").remove();
+			$("#c_numDiv").html("<input type='hidden' id='c_num' value='0'/>");
+		}else{
+			$.ajax({
+				url : 'personalSave'
+				, type : 'POST'
+				, data : {
+					context : data1
+					,c_num : c_num
+				}
+				, dataType : 'json'
+				,success : function(context) {
+					console.log(context.c_num);
+					$('#c_num').remove();
+					$("#c_numDiv").html("<input type='text' id='c_num' value='"+context.c_num+"'/>");
+				}
+				, error : function(context) {
+					console.log("실패");
+				}
+			});
+			
+		}
+		
+	}
 
 </script>
 

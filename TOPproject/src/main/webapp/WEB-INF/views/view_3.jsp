@@ -20,7 +20,7 @@
 		<script src="https://medialoot.com/preview/lumino/js/easypiechart.js"></script>
 		<script src="https://medialoot.com/preview/lumino/js/easypiechart-data.js"></script>
 		<script src="https://medialoot.com/preview/lumino/js/bootstrap-datepicker.js"></script>
-		<script src="https://medialoot.com/preview/lumino/js/custom.js"></script>
+		<!-- <script src="https://medialoot.com/preview/lumino/js/custom.js"></script> -->
 		<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
@@ -122,18 +122,35 @@
 							console.log(myId+'가 입력중');
 						}else{
 							console.log('나는 보는중');		
+							setTimeout(function() {
+								if( data.writer != myId ){ 
+									console.log('^^');
+									editor.setData( data.context );								
+								}
+							}, 10); 
 						}
 						
-						setTimeout(function() {
-							if( data.writer != myId ){
-								console.log('^^');
-								editor.setData( data.context );								
-							}
-						}, 10);
+						
 						
 					}); //stomp_context
 				}); //stomp
 			} //connect
+			
+			
+			
+			function sendContext(){
+				var context = CKEDITOR.instances.editor1.getData();
+				console.log('지금 여기~~~~'+myId);
+				stompClient.send("/chat/${p_num}/context",{}, JSON.stringify({
+					context :context,
+					writer: myId,
+					p_num : ${p_num}
+					})
+				);
+				console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
+			}
+			
+			
 			
 			
 			function sendMessage(){

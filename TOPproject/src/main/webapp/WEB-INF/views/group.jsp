@@ -36,6 +36,54 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
 
 <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script>
+<script type="text/javascript">
+
+	/* $(document).ready(function(){
+		
+		
+	 $('#NoticeSearchBtn').on('click',function(){
+		 
+		 var p_num = $('#p_num').val();
+		 var context = $('#context').val();
+		 
+		 
+		 
+		 $.ajax({
+			 url : 'NoticeInsert'
+			 ,type:'POST'
+			 ,data :{
+				 'p_num' : p_num
+				 ,'context':context
+			 }
+			 ,dataType : 'json'
+			 ,success : function(result){
+				 console.log('result :'+result);
+				 
+				 for(var r =0 ,r<result.n_list.length;r++){
+					 
+					 $('#NoticeList').append('<h4><a href="#"><span class="site__title2">'+result{r}.indate+'</span></a></h4><p>'+result[r].context+'</p>');
+				 }
+			 }
+			 ,error:function(err){
+				 console.log("에러발생");
+			 }
+			 
+			 
+		 });
+		 
+		 
+	 });
+		
+	}); */
+
+
+
+
+
+</script>
+
+
+
 
 </head>
 <body id="bodyPj">
@@ -68,10 +116,10 @@
 							<div class="clear"></div>
 						</div><!--End .article-->
 					</c:forEach>
-					<div class="article border-bottom">
+					<!-- <div class="article border-bottom">
 						<div class="col-xs-12">
 							<div class="row">
-								<div class="col-xs-10 col-md-10">
+								<div class="col-xs-10 col-md-10" id='NoticeList'>
 									<h4><a href="#"><span class="site__title2">여기엔 그룹공지 날짜</span></a></h4>
 										<p>여기엔 그룹공지 내용</p>
 								</div>
@@ -79,14 +127,14 @@
 						</div>
 						<div class="clear"></div>
 						<div class="paging"> 1 2 3 4 5 </div>
-					</div><!--End .article-->
+					</div> --><!--End .article-->
 					<form action="NoticeInsert" method="POST">
 						<c:if test="${sessionScope.loginedId == pj.p_m_id}">
 							<div class="panel-footer">
 								<div class="input-group">
 									<input type="text" id="context" name="context" class="form-control input-md" placeholder="추가할 공지사항을 입력하세요 근데 이거 Ajax로 넘어갔음 좋겠당">
 									<input type="hidden" value="${p_num}" id="p_num" name="p_num">
-									<span class="input-group-btn"><input type="submit" class="btn btn-primary btn-md" id="searchBtn" value="작성"></span>
+									<span class="input-group-btn"><input type="submit" class="btn btn-primary btn-md" id="NoticeSearchBtn" value="작성"></span>
 								</div>
 							</div>
 						</c:if>

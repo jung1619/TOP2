@@ -6,10 +6,10 @@
 	<!-- <script src="https://cdn.ckeditor.com/4.9.1/full-all/ckeditor.js"></script> -->
 	<script type="text/javascript" src="<c:url value='resources/js/jquery-3.2.1.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/ckeditor/ckeditor.js'/>"></script>
-	<%-- <script type="text/javascript" src="<c:url value='/resources/ckeditor/samples/js/sample.js'/>"></script>
-	<link rel="stylesheet" href='./resources/css/mystyles.css'/>
+	 <script type="text/javascript" src="<c:url value='/resources/ckeditor/samples/js/sample.js'/>"></script>
+	<link rel="stylesheet" href='./resources/css/mystyles.css'/> 
 	<link rel="stylesheet" href='./resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css'/>
-	<link rel="stylesheet" href='./resources/ckeditor/samples/css/samples.css'/>	 --%>
+	<link rel="stylesheet" href='./resources/ckeditor/samples/css/samples.css'/>	 
 	
 	
 	<script type="text/javascript">
@@ -80,7 +80,7 @@
 		});// READY FUNCTION 
 		
 		/* 추가 */
-		function sendContext(){
+		/* function sendContext(){
 			var data1 = CKEDITOR.instances.editor1.getData();
 			
 			var c_num = $('#c_num').val();
@@ -111,10 +111,10 @@
 				
 			}
 			
-		} //SEND CONTEXT
+		}  *///SEND CONTEXT
 		
-		/* old 추가 
-		function sendContext(){
+		//old 추가 
+		/*  function sendContext(){
 			var context = CKEDITOR.instances.editor1.getData();
 			console.log('지금 여기~~~~'+myId);
 			stompClient.send("/chat/${p_num}/context",{}, JSON.stringify({
@@ -123,7 +123,7 @@
 				})
 			);
 			console.log('컨컨컨컨컨텍텍텍텍-----------'+myId);
-		}*/
+		} */ 
 		
 	</script>
 	

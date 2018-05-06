@@ -81,11 +81,11 @@ public class ChatController {
 		projectDAO.upDateContext(context);
 		
 		//여기서 저장한것을 다시 불러옴 context를 새롭게 불러온겁니다.
-		context = projectDAO.searchContext(p_num);
+		Context resultContext = projectDAO.searchContext2(p_num);
 		
-		logger.info("저장 후 다시 불러와서 이제 화면에 뿌릴 context : "+context);
+		logger.info("저장 후 다시 불러와서 이제 화면에 뿌릴 context : "+resultContext);
 		
-		return context;
+		return resultContext;
 	}
 	
 	
