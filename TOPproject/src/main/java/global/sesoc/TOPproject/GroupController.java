@@ -47,13 +47,29 @@ public class GroupController {
 		hs.setAttribute("loginedId", loginedUser.getId());
 		
 		//그룹리스트
-		String [] groupArr=null;
-		String groupList = loginedUser.getP_num_list();
-		if( groupList != null ){				
-			groupArr = groupList.split("/");
-			logger.info("groupArr : " + groupArr);
-			model.addAttribute("groupList", groupArr);
-		}
+	      String [] groupArr=null;
+	      String groupList = loginedUser.getP_num_list();
+	      Project selectProject = null;
+	      ArrayList <Project> p_list = new ArrayList<Project>();
+	      if( groupList != null ){            
+	         groupArr = groupList.split("/");
+	         logger.info("groupArr : " + groupArr);
+	         // p_num입력해서 프로젝트 명입력하는 list를 만들어 봅시다
+	         
+	         for(int i = 0; i<groupArr.length;i++){
+	            
+	            logger.info("검색할 p_num : "+groupArr[i]);
+	            int parse_p_num=Integer.parseInt(groupArr[i]);
+	            selectProject = projectDAO.searchProject(parse_p_num);
+	            if(selectProject !=null){
+	               p_list.add(selectProject);
+	            }
+	         }
+	         logger.info("p_list 확인:"+p_list);
+	         model.addAttribute("p_list",p_list);
+	         model.addAttribute("groupList", groupArr);
+
+       }
 		//네비게이터에 임시로 값 담는 용도
 		int page = 4;
 		model.addAttribute("page", page);

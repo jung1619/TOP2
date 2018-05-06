@@ -85,10 +85,10 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${page == 6}">
-					<li class="active"><a><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
+					<li class="active"><a><em class="fa fa-navicon">&nbsp;</em> Editor</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="personalEdit"><em class="fa fa-power-off">&nbsp;</em> Editor</a></li>
+					<li><a href="personalEdit"><em class="fa fa-navicon">&nbsp;</em> Editor</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

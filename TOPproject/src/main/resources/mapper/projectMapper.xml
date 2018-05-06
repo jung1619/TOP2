@@ -211,7 +211,9 @@
   	FROM  
   		notice
   	WHERE
-  		p_num = #{p_num}	
+  		p_num = #{p_num}
+  	order by
+  		indate desc
   </select>
   
   
