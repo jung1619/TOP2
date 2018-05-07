@@ -51,8 +51,9 @@
 <script type="text/javascript" src="<c:url value='resources/js/friend2.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script> --%>
 <style type="text/css">
-			.searchId{ ime-mode:disabled; }
-			td{ padding: 3px; }
+			.searchId{
+				ime-mode:disabled;
+			}
 		</style>
 </head>
 <body id="bodyP">
@@ -95,7 +96,7 @@
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
 									<div id="friendReqList">
-										<h4>友達追加中</h4>
+										<h4>フレンド申し込み中</h4>
 										<table id="reqTable_req">
 										</table><p /><p />
 									</div>
@@ -110,7 +111,7 @@
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-									<h4>貰った友達追加</h4>
+									<h4>貰ったフレンド申し込み</h4>
 										<table id="reqTable_rec">
 										</table>
 									</div><p /><p />
@@ -126,7 +127,7 @@
 
 					<div class="panel panel-default articles">
 					<div class="panel-heading">
-						IDを検索して友達追加をしよう
+						IDを検索してフレンド申し込みをしよう
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body articles-container">			
 					<!-- <div class="article border-bottom"> -->

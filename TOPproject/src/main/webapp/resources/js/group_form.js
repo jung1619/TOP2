@@ -7,8 +7,8 @@ $(function() {
 	$( "#datepicker_start" ).datepicker({
 		changeMonth: true,
 		changeYear: true,
-		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		dayNamesMin: ['月', '火', '水', '木', '金', '土', '日'], 
+		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
 		minDate: 0, 
         maxDate: "+100Y",
     	dateFormat: 'yy-mm-dd'
@@ -16,8 +16,8 @@ $(function() {
 	$( "#datepicker_end" ).datepicker({
 		changeMonth: true,
 		changeYear: true,
-		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		dayNamesMin: ['月', '火', '水', '木', '金', '土', '日'],
+		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
 		minDate: +1, 
         maxDate: "+100Y",
         dateFormat: 'yy-mm-dd'
@@ -43,7 +43,7 @@ $(function() {
 			    	
 			    	var check = addList(selected);
 			    	if( check ){
-			    		alert('이미 목록에 존재합니다.');
+			    		alert('すでにリストにあります。');
 			    	}else{
 				    	$('#menu').append(str);
 				    	index++;			    		
@@ -87,19 +87,19 @@ function create(){
 					},
 					success : function( data ){ 
 						if( data == '1' ){							
-							alert('프로젝트 생성이 완료되었습니다.');
+							alert('プロジェクトを作りました。');
 							location.href = "personal";
 						}else
-							alert('프로젝트 생성에 실패하였습니다.');
+							alert('プロジェクトを作ることを失敗しました。');
 					},
 					error : function( err ){ $('#errpage').html( JSON.stringify(err) ); }
 				});//ajax	
 			}//if
 			
 		}else
-			alert('프로젝트 기간 설정을 다시 선택해주십시오.');
+			alert('期間を確認してください。');
 	}else
-		alert('내용을 모두 작성해주십시오.');
+		alert('内容を確認してください。');
 		
 }//create()
 
