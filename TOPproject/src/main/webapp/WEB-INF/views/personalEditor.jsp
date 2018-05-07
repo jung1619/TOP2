@@ -16,7 +16,7 @@
 </div>
 
 <div class="list">
-		<p>파일 list</p>
+		<p>ファイルlist</p>
 		<c:forEach var = "context" items="${c_list }">
 			<div class="context">
 			<input type="button" value="${context.indate}" data="${context.c_num}" class="loadContext">

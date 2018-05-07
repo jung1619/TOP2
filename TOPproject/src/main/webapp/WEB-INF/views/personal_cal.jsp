@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PERSONAL PAGE</title>
+	<title>パーソナルページ</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/moment.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/fullcalendar.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/ko.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/ja.js'/>"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" rel="stylesheet" />
@@ -88,7 +88,7 @@ var dataset = [
 	$('#calendar').fullCalendar({
 		customButtons: { 
 	        myCustomButton: { 
-	            text: '일정입력', 
+	            text: 'スケジュール入力', 
 	            click: function(event) { 
 	            	 $('#fullCalNew').modal(); 
 	            	} 
@@ -102,6 +102,7 @@ var dataset = [
     	      //defaultDate: '2017-12-12',
     	      navLinks: true, // can click day/week names to navigate views
     	      editable: true,
+    	      /* lang: 'jp', */
     	      eventLimit: true, // allow "more" link when too many events
     	      events: dataset,
     	      eventRender: function (event, element) {
@@ -185,7 +186,7 @@ var dataset = [
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">PERSONAL PAGE</h1>
+				<h1 class="page-header">パーソナルページ</h1>
 			</div>
 
 			<div class="col-lg-12" style="width:1200px">
@@ -203,7 +204,7 @@ var dataset = [
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 class="modal-title">일정을 삭제하시겠습니까?</h4>
+                <h4 class="modal-title">このスケジュールを削除してもよろしいですか？</h4>
             </div>
             <form action="deleteUserSchedule" method="post">
             <div id="modalBody" class="modal-body">
@@ -215,12 +216,12 @@ var dataset = [
 		            </tr>	            
 	            	<tr>
 		            	<td>
-		            		시작일 : <span class="startTimes"></span>
+		            		開始日 : <span class="startTimes"></span>
 		            	</td>
 		            </tr>
 		            <tr>
 		            	<td>
-		            		종료일 : <span class="endTimes"></span>
+		            		終了日 : <span class="endTimes"></span>
 		            	</td>
 		            </tr>
 	           		 <tr>
@@ -232,8 +233,8 @@ var dataset = [
 				</table>
             </div>
             <div class="modal-footer">
-            <input type="submit" id="eventUrl" class="btn btn-primary" value="삭제">
-            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            <input type="submit" id="eventUrl" class="btn btn-primary" value="削除">
+            <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
             </div>
             
             </form>
@@ -246,26 +247,26 @@ var dataset = [
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 class="modal-title">새로운 일정 등록</h4>
+                <h4 class="modal-title">新しいスケジュール登録</h4>
             </div>
             <div id="modalBody" class="modal-body">
             <form action="insertUserSchedule" method="post">
 	            <table class="scledulecss">
 	           		 <tr>
-	           		 	<th>프로젝트명</th>
+	           		 	<th>スケジュール名</th>
 						<td>
 							<input type="text" class="form-control input-md" name="content" required="required">
 							<input type="hidden" name="id" value="${sessionScope.loginedId}">
 						</td>
 					</tr>
 					<tr>
-						<th>시작일자</th>
+						<th>開始日</th>
 						<td>
 							<input type="datetime-local" class="form-control input-md" name="startdate" required="required" value="2018-05-01T08:30">
 						</td>
 					</tr>
 					<tr>
-						<th>종료일자</th>
+						<th>終了日</th>
 						<td>
 							<input type="datetime-local" class="form-control input-md" name="enddate" required="required" value="2018-05-03T08:30">
 						</td>
@@ -316,27 +317,27 @@ var dataset = [
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 class="modal-title">일정 수정</h4>
+                <h4 class="modal-title">スケジュール修正</h4>
             </div>
             <form action="updateUserSchedule" method="post">
 	            <div id="modalBody" class="modal-body">
 		            <table class="scledulecss">
 	           		 <tr>
-	           		 	<th>프로젝트명</th>
+	           		 	<th>スケジュール名</th>
 						<td>
 							<input type="text" name="content" class="modalTitle form-control input-md" required="required">
 							<input type="hidden" name="s_num" id="modalId">
 						</td>
 					</tr>
 					<tr>
-						<th>시작일자</th>
+						<th>開始日</th>
 						<td>
 							<input type="datetime-local" class="form-control input-md" id="startTime" name="startdate">
 							<input type="hidden" id="startTimes">
 						</td>
 					</tr>
 					<tr>
-						<th>종료일자</th>
+						<th>終了日</th>
 						<td>
 							<input type="datetime-local" class="form-control input-md" id="endTime" name="enddate">
 							<input type="hidden" id="endTimes">
@@ -376,9 +377,9 @@ var dataset = [
             </div>
             <div class="modal-footer">
 
-            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteUserSchedule()">일정 삭제</button>
+            	<input type="submit" id="eventUrl" class="btn btn-primary" value="修正">
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteUserSchedule()">スケジュール削除</button>
             </div>
             </form>
         </div>

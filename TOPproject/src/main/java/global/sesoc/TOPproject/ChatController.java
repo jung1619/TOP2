@@ -39,7 +39,7 @@ public class ChatController {
 		
 		model.addAttribute("p_num" ,p_num);
 		
-		Context context = new Context(p_num, "document", (String)hs.getAttribute("loginedId"), "자유롭게 문서를 작성하실 수 있습니다.");
+		Context context = new Context(p_num, "document", (String)hs.getAttribute("loginedId"), "自由に作成ができます。");
 		projectDAO.insertContext(context);
 		
 		model.addAttribute("content", context.getContext());

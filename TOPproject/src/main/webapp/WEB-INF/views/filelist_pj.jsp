@@ -18,7 +18,7 @@
 	
 	<div id="filelistArea">
 		<table id="fileListTable">
-			<tr><td>번호</td><td>제목</td><td>마지막 수정자</td><td>날짜</td></tr>
+			<tr><td>番号</td><td>タイトル</td><td>修正者</td><td>日付</td></tr>
 		</table>
 	</div>
 

@@ -150,8 +150,8 @@
 		${content}
 		
 	</textarea>
-	<input class="makedocs btn btn-primary btn-md" type="button" value="DOCX 파일로 저장">
-	<input class="makePDF btn btn-primary btn-md" type="button" value="PDF 파일로 저장">
+	<input class="makedocs btn btn-primary btn-md" type="button" value="DOCXでセーブ">
+	<input class="makePDF btn btn-primary btn-md" type="button" value="PDFでセーブ">
 
 	</div>
 	

@@ -18,7 +18,7 @@
 	
 	<div id="fileContextArea">
 		<table id="fileContextTable">
-			<tr><td>작성자</td><td>제목</td><td>날짜</td></tr>
+			<tr><td>コピーライター </td><td>タイトル</td><td>日付</td></tr>
 		</table>
 	</div>
 

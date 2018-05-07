@@ -17,9 +17,9 @@
 		</div>
 		<div class="divider"></div>
 		<form role="search">
-			<div class="form-group">
+<!-- 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="저장된 문서 검색">
-			</div>
+			</div> -->
 		</form>
 		<ul class="nav menu">
 			<c:choose>

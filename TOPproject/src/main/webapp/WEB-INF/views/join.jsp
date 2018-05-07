@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
+<title>会員加入</title>
 
 <style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
@@ -145,17 +145,17 @@ button.social-signin:focus {
   <div class="left">
     <h1>Sign up</h1>
     
-    <input type="text" name="id" class="joinText" placeholder="(필수) ID" id="id" />
+    <input type="text" name="id" class="joinText" placeholder="(必須) ID" id="id" />
 	<div id="idCheckDiv"></div>
     
-    <input type="password" name="pw" placeholder="(필수) Password" class="joinText"  id="pw1"/>
+    <input type="password" name="pw" placeholder="(必須) Password" class="joinText"  id="pw1"/>
     <input type="password" placeholder="Retype password" class="joinText" id="pw2"/>
     <div id="pwCheckDiv"></div>
     
-    <input type="text" name="email" placeholder="(필수) E-mail (ex) u1u2@uj.com" class="joinText" id="email"/>
+    <input type="text" name="email" placeholder="(必須) E-mail (ex) u1u2@uj.com" class="joinText" id="email"/>
     <div id="emailCheckDiv"></div>
     
-    <input type="text" name="name" placeholder="(필수) Username" class="joinText" id="name" />
+    <input type="text" name="name" placeholder="(必須) Username" class="joinText" id="name" />
 	
     <input type="text" name="nickname" placeholder="NickName" class="joinText" id="nickname" />
     

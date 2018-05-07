@@ -16,11 +16,11 @@
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
-		<a href="chat?p_num=${p_num}"><div class="kaigi"> 회의하기 </div></a>
+		<a href="chat?p_num=${p_num}"><div class="kaigi"> 会議する </div></a>
 		<form role="search">
-			<div class="form-group">
+<!-- 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="저장된 문서 검색">
-			</div>
+			</div> -->
 		</form>
 		<ul class="nav menu">
 			<c:choose>

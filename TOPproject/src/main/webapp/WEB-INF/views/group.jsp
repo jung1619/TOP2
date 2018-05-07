@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>GROUP PAGE</title>
+	<title>グループページ</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -92,7 +92,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">GROUP PAGE</h1>
+			<h1 class="page-header">グループページ</h1>
 		</div>
 	</div>
 <div class="row">

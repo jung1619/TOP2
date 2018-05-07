@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PERSONAL PAGE</title>
+	<title>パーソナルページ</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -68,14 +68,14 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">PERSONAL PAGE</h1>
+			<h1 class="page-header">パーソナルページ</h1>
 		</div>
 	</div>
 <div class="row">
 <div class="col-md-6">
 				<div class="panel panel-default articles">
 					<div class="panel-heading">
-						FRIENDS LIST
+						フレンド
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body articles-container">
 
@@ -83,7 +83,7 @@
 						<div class="article border-bottom">
 							<div class="col-xs-12">
 						<div id="friendList">
-							<h4>당신의 친구 목록</h4>
+							<h4>あなたのフレンド</h4>
 							<table id="flTable">
 							</table>
 						</div><p /><p />
@@ -96,7 +96,7 @@
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
 									<div id="friendReqList">
-										<h4>보낸 친구 신청</h4>
+										<h4>友達追加中</h4>
 										<table id="reqTable_req">
 										</table><p /><p />
 									</div>
@@ -111,7 +111,7 @@
 							<div class="col-xs-12">
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
-									<h4>받은 친구 신청</h4>
+									<h4>貰った友達追加</h4>
 										<table id="reqTable_rec">
 										</table>
 									</div><p /><p />
@@ -127,7 +127,7 @@
 
 					<div class="panel panel-default articles">
 					<div class="panel-heading">
-						회원을 검색하여 친구 요청을 보내십시오.
+						IDを検索して友達追加をしよう
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body articles-container">			
 					<!-- <div class="article border-bottom"> -->
@@ -135,7 +135,7 @@
 								<div class="row">
 									<div class="col-xs-10 col-md-10">
 									<div id="freindReq">
-										<input type="text" id="searchId" class="searchId" placeholder="ID로만 검색할 수 있습니다." onkeyup="searchId()">
+										<input type="text" id="searchId" class="searchId" placeholder="IDで検索してください" onkeyup="searchId()">
 										<div id="searchedIds"></div>
 									</div> 
 								</div>

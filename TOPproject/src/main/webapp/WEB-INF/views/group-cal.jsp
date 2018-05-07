@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>GROUP PAGE</title>
+	<title>グループページ</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/moment.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/resources/js/fullcalendar.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/resources/js/ko.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/ja.js'/>"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" rel="stylesheet" />
@@ -58,7 +58,7 @@
 	var mycustom = '';
 	
 	if (loginedId == pmid) {
-		mycustom = {myCustomButton: {text: "일정입력", click: function(event) { $("#fullCalNew").modal();}}};
+		mycustom = {myCustomButton: {text: "スケジュール入力", click: function(event) { $("#fullCalNew").modal();}}};
 	};
 	
 	var dataset = [
@@ -138,17 +138,17 @@
     	    	    $('.startTime').val(moment(event.start).format('YYYY-MM-DD')+'T'+moment(event.start).format('HH:mm'));
     	    	    $('.endTime').val(moment(event.end).format('YYYY-MM-DD')+'T'+moment(event.end).format('HH:mm'));
     	            
-    	    	    $('.startTime1').html(moment(event.start).format('YYYY')+'년 '
-    	    	    		+moment(event.start).format('MM')+'월 '
-    	    	    		+moment(event.start).format('DD')+'일 '
-    	    	    		+moment(event.start).format('HH')+'시 '
-    	    	    		+moment(event.start).format('mm')+'분 '
+    	    	    $('.startTime1').html(moment(event.start).format('YYYY')+'年 '
+    	    	    		+moment(event.start).format('MM')+'月 '
+    	    	    		+moment(event.start).format('DD')+'日 '
+    	    	    		+moment(event.start).format('HH')+'時 '
+    	    	    		+moment(event.start).format('mm')+'分 '
     	    	    		);
-    	    	    $('.endTime1').html(moment(event.end).format('YYYY')+'년 '
-    	    	    		+moment(event.end).format('MM')+'월 '
-    	    	    		+moment(event.end).format('DD')+'일 '
-    	    	    		+moment(event.end).format('HH')+'시 '
-    	    	    		+moment(event.end).format('mm')+'분 '
+    	    	    $('.endTime1').html(moment(event.end).format('YYYY')+'年 '
+    	    	    		+moment(event.end).format('MM')+'月 '
+    	    	    		+moment(event.end).format('DD')+'日 '
+    	    	    		+moment(event.end).format('HH')+'時 '
+    	    	    		+moment(event.end).format('mm')+'分 '
     	    	    		);
     	    	    $('#startTimes').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
     	    	    $('#endTimes').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
@@ -181,7 +181,7 @@
  
  //완료처리 부분 작업 오네가이시마스
  function updateProjectComplete(){
-	if (confirm('완료 처리를 하시겠습니까?')) {
+	if (confirm('スケジュールを完了しますか?')) {
 	var s_num = document.getElementById('modalIdUP').value;
 	location.href = 'updateProjectComplete?s_num=' + s_num;
 			
@@ -198,7 +198,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">GROUP PAGE</h1>
+				<h1 class="page-header">グループページ</h1>
 			</div>
 
 			<div class="col-lg-12" style="width:1200px">
@@ -218,7 +218,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 class="modal-title">일정을 삭제하시겠습니까?</h4>
+                <h4 class="modal-title">このスケジュールを削除してもよろしいですか？</h4>
             </div>
             <form action="deleteProjectSchedule" method="post">
             <div id="modalBody" class="modal-body">
@@ -230,12 +230,12 @@
 		            </tr>	            
 	            	<tr>
 		            	<td>
-		            		시작일 : <span class="startTimes"></span>
+		            		開始日 : <span class="startTimes"></span>
 		            	</td>
 		            </tr>
 		            <tr>
 		            	<td>
-		            		종료일 : <span class="endTimes"></span>
+		            		終了日 : <span class="endTimes"></span>
 		            	</td>
 		            </tr>
 	           		 <tr>
@@ -247,8 +247,8 @@
 				</table>
             </div>
             <div class="modal-footer">
-            <input type="submit" id="eventUrl" class="btn btn-primary" value="삭제">
-            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            <input type="submit" id="eventUrl" class="btn btn-primary" value="削除">
+            <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
             </div>
             
             </form>
@@ -261,26 +261,26 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 class="modal-title">새로운 일정 등록</h4>
+                <h4 class="modal-title">新しいスケジュール登録</h4>
             </div>
             <div id="modalBody" class="modal-body">
             <form action="insertProjectSchedule" method="post">
 	            <table class="scledulecss">
 	           		 <tr>
-	           		 	<th>일정명</th>
+	           		 	<th>スケジュール名</th>
 						<td>
 							<input type="text" class="form-control input-md" name="content" required="required">
 							<input type="hidden" name="p_num" value="${p_num}">
 						</td>
 					</tr>
 					<tr>
-						<th>시작일자</th>
+						<th>開始日</th>
 						<td>
 							<input type="datetime-local" class="form-control input-md" name="startdate" required="required" value="2018-05-01T08:30">
 						</td>
 					</tr>
 					<tr>
-						<th>종료일자</th>
+						<th>終了日</th>
 						<td>
 							<input type="datetime-local" class="form-control input-md" name="enddate" required="required" value="2018-05-03T08:30">
 						</td>
@@ -316,11 +316,11 @@
 						</td>
 					</tr>
 				</table>
-            	<input type="submit" id="eventUrl" class="btn btn-primary" value="등록">
+            	<input type="submit" id="eventUrl" class="btn btn-primary" value="登録">
             </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
             </div>
         </div>
     </div>
@@ -332,13 +332,13 @@
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
 	                <!-- 내 일정으로 추가 -->
-	                <h4 class="modal-title">내 일정으로 추가</h4>
+	                <h4 class="modal-title">個人スケジュールにコピー</h4>
 	            </div>
 	             <div id="modalBody" class="modal-body" style="border-bottom: 1px solid #e5e5e5;">
             	<form action="copyUserSchedule" method="post">
             	<table>
             		<tr>
-            			<td>해당 스케쥴을 내 프로젝트에 추가합니다</td>
+            			<td>このスケジュールを個人スケジュールにコピーします</td>
             		</tr>
             		<tr><td>&nbsp;</td></tr>
 	           		 <tr>
@@ -352,19 +352,19 @@
 					</tr>
 					<tr>
 						<td>
-							시작시간 : <span class="startTime1"></span>
+							開始日 : <span class="startTime1"></span>
 							<input type="hidden" class="startTime" name="startdate">
 						</td>
 					</tr>
 					<tr>
 						<td>
-							종료시간 : <span class="endTime1"></span>
+							終了日 : <span class="endTime1"></span>
 							<input type="hidden" class="endTime" name="enddate">
 						</td>
 					</tr>
 				</table>
 				<br>
-            	<input type="submit" id="eventUrl" class="btn btn-primary" value="추가">
+            	<input type="submit" id="eventUrl" class="btn btn-primary" value="追加">
 	            </form>
 	            </div>
 
@@ -373,12 +373,12 @@
 	        <!-- 일정 수정 / 프로젝트 리더만 보이도록 해야함 -->
 			<c:if test="${pj.p_m_id==sessionScope.loginedId}">
 				<br>
-	           	<h4 class="modal-title">&nbsp;&nbsp;&nbsp;일정 수정</h4>
+	           	<h4 class="modal-title">&nbsp;&nbsp;&nbsp;スケジュール修正</h4>
 	            <form action="updateProjectSchedule" method="post">
 	            <div id="modalBody" class="modal-body">
 		            <table class="scledulecss">
 		           		 <tr>
-		           		 	<th>프로젝트명</th>
+		           		 	<th>スケジュール名</th>
 							<td>
 								<input type="hidden" name="p_num" value="${p_num}">
 								<input type="hidden" id="modalIdUP" name="s_num" required="required">
@@ -386,14 +386,14 @@
 							</td>
 						</tr>
 						<tr>
-							<th>시작일자</th>
+							<th>開始日</th>
 							<td>
 								<input type="datetime-local" class="startTime form-control input-md" name="startdate">
 								<input type="hidden" id="startTimes">
 							</td>
 						</tr>
 						<tr>
-							<th>종료일자</th>
+							<th>終了日</th>
 							<td>
 								<input type="datetime-local" class="endTime form-control input-md" name="enddate">
 								<input type="hidden" id="endTimes">
@@ -432,10 +432,10 @@
 					</table>
 	            </div>
 	            <div class="modal-footer">
-	            	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:updateProjectComplete()" style="background:#ffe179;">스케쥴 완료</button>
-	            	<input type="submit" id="eventUrl" class="btn btn-primary" value="수정">
-	                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteProjectSchedule()">일정 삭제</button>
+	            	<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:updateProjectComplete()" style="background:#ffe179;">スケジュール完了</button>
+	            	<input type="submit" id="eventUrl" class="btn btn-primary" value="修正">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+	                <button type="button" id="eventUrl" class="btn btn-primary" onclick="javascript:deleteProjectSchedule()">スケジュール削除</button>
 	            </div>
 	            </form>
 	            </c:if>

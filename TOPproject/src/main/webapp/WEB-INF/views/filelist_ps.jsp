@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PERSONAL PAGE</title>
+	<title>パーソナルページ</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -57,7 +57,7 @@ $(function() {
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">PERSONAL PAGE</h1>
+			<h1 class="page-header">パーソナルページ</h1>
 			<div id="errArea"></div>
 		</div>
 <!-- 	</div>
@@ -90,17 +90,11 @@ $(function() {
 									
 									<div class="row">
 										<div class="col-xs-10 col-md-10">
-											<h4><a href="#"><span class="site__title2">[여기엔 파일 번호]랑 제목</span></a></h4>
-												<p>여기엔 날짜</p>
+											<h4><a href="#"><span class="site__title2">タイトル</span></a></h4>
+												<p>日程</p>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-xs-10 col-md-10">
-											<h4><a href="#"><span class="site__title2">[여기엔 파일 번호]랑 제목2</span></a></h4>
-												<p>여기엔 날짜2</p>
-										</div>
-									</div>
-									
+
 									</div>
 								</div>
 							</div>

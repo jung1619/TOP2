@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>그룹 생성</title>
+	<title>グループを作る</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -171,7 +171,7 @@ button.social-signin:focus {
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header" style="font-size:40px;">PERSONAL PAGE</h1>
+			<h1 class="page-header" style="font-size:40px;">パーソナルページ</h1>
 		</div>
 	</div>
 	<div id="errpage"></div>
@@ -186,22 +186,22 @@ button.social-signin:focus {
 						 <div class="col-xs-12">
 
 						    <input hidden="loginedId" value="${sessionScope.loginedId}">
-						    <input type="text" placeholder="프로젝트명" id="projacename" class="joinText" /><br>
+						    <input type="text" placeholder="プロジェクト名" id="projacename" class="joinText" /><br>
 						    
-						    <label for="fl">프로젝트 구성원을 선택하십시오.<br>(현재 친구 상태인 유저만 추가 가능합니다.)</label><br><br>
-						    <input type="text" placeholder="아이디로 검색할 수 있습니다." class="joinText" id="fl">
+						    <label for="fl">プロジェクトに参加する人を選んでください<br>(現在友人リストにある人だけ参加できます)</label><br><br>
+						    <input type="text" placeholder="IDで検索できます" class="joinText" id="fl">
 						    
 						    
 						    <ul id="menu" style="width:450px">
-							  <li class="ui-widget-header"> <div>프로젝트 매니저 : ${sessionScope.loginedId}</div> </li>
+							  <li class="ui-widget-header"> <div>プロジェクトマネージャー : ${sessionScope.loginedId}</div> </li>
 							  <!-- 선택된 멤버가 추가되는 부분 -->
 							  
 							</ul>
-							<input type="button" value="선택 삭제" onclick="del()"><br><br><br>
+							<input type="button" value="選択削除" onclick="del()"><br><br><br>
 					
-					    	프로젝트 기간을 설정하십시오.<br>
-					    	<p>시작일: <input type="text" class="form-controlp" id="datepicker_start" style="width:400px"></p>
-					    	<p>종료일: <input type="text" class="form-controlp" id="datepicker_end" style="width:400px"></p>
+					    	プロジェクト期間<br>
+					    	<p>開始日: <input type="text" class="form-controlp" id="datepicker_start" style="width:400px"></p>
+					    	<p>終了日: <input type="text" class="form-controlp" id="datepicker_end" style="width:400px"></p>
 							
 							
 						    <input type="button" value="Create" class="btn btn-primary btn-md" onclick="create()" />

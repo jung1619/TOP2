@@ -49,7 +49,7 @@
 			    <input type="submit" value="login">
 	    	</c:when>
 	    	<c:otherwise>
-	    		<span class="site__title" style="font-size:16px;">${sessionScope.loginedId}</span>님 
+	    		<span class="site__title" style="font-size:16px;">${sessionScope.loginedId}</span>様 
 				<span class="logout"><a href="logout">&nbsp; <span class="site__title3">LOGOUT</span></a></span>
 	    	</c:otherwise>
 	    </c:choose>

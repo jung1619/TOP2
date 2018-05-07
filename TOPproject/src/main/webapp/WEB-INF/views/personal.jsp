@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PERSONAL PAGE</title>
+	<title>パーソナルページ</title>
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
 <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
@@ -52,14 +52,14 @@ $(window).load(function() {
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">PERSONAL PAGE</h1>
+			<h1 class="page-header">パーソナルページ</h1>
 		</div>
 	</div>
 <div class="row">
 <div class="col-md-6">
 				<div class="panel panel-default articles">
 					<div class="panel-heading">
-						PROJECT NOTICE
+						パーソナルノーティス
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body articles-container">
 					
@@ -143,7 +143,7 @@ $(window).load(function() {
 			<div class="col-md-6">
 				<div class="panel panel-default articles">
 					<div class="panel-heading">
-						PROJECT GROUP
+						プロジェクトグループ
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body articles-container">
 					
