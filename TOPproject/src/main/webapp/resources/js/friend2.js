@@ -6,13 +6,17 @@ function load_friendList(){
 		url : "loadFL",
 		type : 'POST',
 		dataType : "json",
-		data : { id : loginedId },
+		data : { myId : loginedId },
 		success : function( data ){
 			flList = data;
 			var content = '';
 			
-			for( var i in flList )
-				content += '<tr><td>'+ flList[i] +'</td><td><input type="button" onclick="task_5(\''+flList[i]+'\')" value="삭제"></td></tr>';
+			if( flList == null ){
+				content += '등록된 친구가 없습니다.';
+			}else{				
+				for( var i in flList )
+					content += '<tr><td>'+ flList[i] +'</td><td><input type="button" onclick="task_5(\''+flList[i]+'\')" value="삭제"></td></tr>';
+			}
 			$("#flTable").append(content);
 		},
 		error : function( err ){ $("#errArea").html( JSON.stringify(err) ); }
@@ -83,7 +87,7 @@ function searchId(){
 			
 			for( var i in data ){ 
 				var flag = 'request';
-				content += '<tr><td>'+ i + " / ";
+				content += '<tr><td><b>'+ (parseInt(i)+1) + "</b></td><td>";
 				content += data[i].id;
 				content += '</td><td><input type="button" onclick="task_1(\''+data[i].id+'\')" value="친구 요청"></td></tr>';
 			}
@@ -101,14 +105,6 @@ function task_1( herId ){
 	var ment = '에게 친구 요청을 보내시겠습니까?';
 	var uurl = 'insertReq';
 	var suc = function(){ location.reload(); };
-	/*
-	var suc = function(){ 
-		var content = '';
-		content += '<tr><td>'+ herId;
-		content += '</td><td><input type="button" onclick="" value="취소"></td></tr>';
-		$("#reqTable_req").append(content);
-	};
-	*/
 	task_0( herId, ment, uurl, suc );
 }
 

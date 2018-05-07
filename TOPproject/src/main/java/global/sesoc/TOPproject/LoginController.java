@@ -95,13 +95,13 @@ public class LoginController {
 				
 			}
 			
-			//친구리스트
+			/* 친구리스트 - 0507uj 여기서 친구 목록 조회할 필요가 없다고 판단, 주석 처리
 			String fList = userDao.searchUserFL(loginedUser.getId());
 			String [] friendList = fList.split("/");
 			for(String f : friendList) {
 				System.out.println(f);
 			}
-			model.addAttribute("fList", friendList);
+			model.addAttribute("fList", friendList); */
 			
 			//켈린더 관련
 			String id = (String) hs.getAttribute("loginedId");
@@ -113,7 +113,7 @@ public class LoginController {
 			model.addAttribute("personal", personal);
 			
 			logger.info("로그인 시도 성공");
-			return "personal";
+			return "home";
 			
 		}else{
 			model.addAttribute("msg", "입력하신 아이디와 비밀번호를 다시 확인해 주십시오.");

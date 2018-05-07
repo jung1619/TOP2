@@ -13,7 +13,7 @@ public interface ScheduleMapperInterface {
 	public int updateUserSchedule(Schedule schedule);
 	public int deleteUserSchedule(Schedule schedule);
 	public ArrayList<Schedule> selectSchedule(String id);
-	public int updateUserComplete(int complete);
+	public int updateUserComplete(int s_num);
 	
 	
 	/* PROJECT  */
@@ -21,7 +21,7 @@ public interface ScheduleMapperInterface {
 	public int updateProjectSchedule(Schedule schedule);
 	public int deleteProjectSchedule(Schedule schedule);
 	public ArrayList<Schedule> selectProjectSchedule(String p_num);
-	public int updateProjectComplete(HashMap<String, Integer> map);
+	public int updateProjectComplete(int s_num);
 	public ArrayList<Schedule> selectProjectComplete(int p_num);
 
 	

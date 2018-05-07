@@ -37,9 +37,45 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-$(window).load(function() {
-	$('#load').hide();
-});
+	var loginedId = '<%=(String)session.getAttribute("loginedId")%>';
+	
+	$(function() {
+	
+		$.ajax({
+			url : "completeRateEachProject",
+			type : "POST",
+			dataType : "json",
+			data : { myId : loginedId },
+			success : function( data ){ 
+				projectList = data;
+				var content = '';
+				
+				console.log(projectList);
+				if( projectList == null ){
+					content += '참가중인 프로젝트가 없습니다.';
+				}else{				
+					for( var i in projectList ){				
+						console.log(content);
+						content += '<div class="row progress-labels"><div class="col-sm-6">';
+						content += projectList[i].p_name;
+						content += '</div><div class="col-sm-6" style="text-align: right;">';
+						content += projectList[i].rate;
+						content += '% </div></div><div class="progress"><div data-percentage="0%" style="width: ';
+						content += projectList[i].rate;
+						content += '%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div></div>';
+					}
+					$("#completerateForproject").append(content);
+				}
+				
+			}//suc
+		});
+		
+	}); //ready
+		
+	$(window).load(function() {
+		$('#load').hide();
+		
+	});
 </script>
 
 <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script>
@@ -99,38 +135,11 @@ $(window).load(function() {
 				
 				<div class="panel panel-default ">
 					<div class="panel-heading">
-						Progress bars
+						Complete Rate each project
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
-						<div class="col-md-12 no-padding">
-							<div class="row progress-labels">
-								<div class="col-sm-6">New Orders</div>
-								<div class="col-sm-6" style="text-align: right;">80%</div>
-							</div>
-							<div class="progress">
-								<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							<div class="row progress-labels">
-								<div class="col-sm-6">Comments</div>
-								<div class="col-sm-6" style="text-align: right;">60%</div>
-							</div>
-							<div class="progress">
-								<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							<div class="row progress-labels">
-								<div class="col-sm-6">New Users</div>
-								<div class="col-sm-6" style="text-align: right;">40%</div>
-							</div>
-							<div class="progress">
-								<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							<div class="row progress-labels">
-								<div class="col-sm-6">Page Views</div>
-								<div class="col-sm-6" style="text-align: right;">20%</div>
-							</div>
-							<div class="progress">
-								<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
+						<div class="col-md-12 no-padding" id="completerateForproject">
+							
 						</div>
 					</div>
 				</div>

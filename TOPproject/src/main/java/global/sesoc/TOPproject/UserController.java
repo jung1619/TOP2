@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.docx4j.docProps.variantTypes.Array;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -59,7 +60,7 @@ public class UserController {
 	
 	
 	
-	// 친구검색
+	/* 친구검색
 	@ResponseBody
 	@RequestMapping(value = "idSearch", method = RequestMethod.POST)
 	public String idSearch(String searchId, HttpSession session) {
@@ -104,7 +105,7 @@ public class UserController {
 		
 		
 		return fList;
-	}
+	}*/
 		
 		
 		
@@ -113,15 +114,15 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="loadFL", method=RequestMethod.POST)
-	public String[] loadFL(String id){
+	public ArrayList<String> loadFL(String myId){
 		System.out.println("---------------------------------------------");
-		logger.info("친구목록 조회 : " + id);
+		logger.info("친구목록 조회 : " + myId);
 		
-		String fl = uDao.searchUserFL(id);
-		String[] list = fl.split("/");
-		
-		logger.info("친구목록 조회 결과 : " + list);
-		return list;
+		ArrayList<String> myList = uDao.searchUserFL(myId);
+
+		if( !(myList.isEmpty()) )						
+			return myList;
+		else return null;
 	}
 	
 	
@@ -188,13 +189,19 @@ public class UserController {
 	public void addFriend(String myId, String herId){ 
 		logger.info("받은 친구 요청 수락 시도 : " + myId + " / " + herId);
 		
-		String fl = uDao.searchUserFL(myId);
-		String fl2 = uDao.searchUserFL(herId);
-		fl += "/"+herId;
-		fl2 += "/"+myId;
+		ArrayList<String> myList = uDao.searchUserFL(myId);
+		ArrayList<String> herList = uDao.searchUserFL(herId);
+		String myfl = null, herfl = null;
+
+		for (String string : myList) {
+			myfl += string +"/";
+		}
+		for (String string : herList) {
+			herfl += string +"/";
+		}
 		
-		uDao.updateFriendList(myId, fl);
-		uDao.updateFriendList(herId, fl2);
+		int myResult = uDao.updateFriendList(myId, myfl);
+		int herResult = uDao.updateFriendList(myId, herfl);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("requester", herId); map.put("receiver", myId);
@@ -223,20 +230,25 @@ public class UserController {
 	public void deleteFriend(String myId, String herId){ 
 		logger.info("친구 삭제 시도 : " + myId + " / " + herId);
 		
-		String fl = uDao.searchUserFL(myId);
-		String[] list = fl.split("/");
+		ArrayList<String> myList = uDao.searchUserFL(myId);
+		ArrayList<String> herList = uDao.searchUserFL(herId);
+		String myfl = null, herfl = null;
 
-		for(int i=0; i<list.length; i++){			
-			if ( list[i].equals(herId) ) {
-				for (int j=0; j<list.length-1; j++) {
-					list[j] = list[j+1];
-				}
-				break;
-			}
+		for(int i=0; i<=myList.size(); i++){			
+			if( myList.get(i).equals(herId) )
+				myList.remove(herId);
+			else
+				myfl += myList.get(i) +"/";
 		}
-		System.out.println(list);
-		//상대방 목록에서도 삭제가 되어야지
-		int result = uDao.updateFriendList(myId, fl);
+		for(int i=0; i<=herList.size(); i++){			
+			if( herList.get(i).equals(myId) )
+				herList.remove(myId);
+			else
+				herfl += herList.get(i) +"/";
+		}
+		
+		int myResult = uDao.updateFriendList(myId, myfl);
+		int herResult = uDao.updateFriendList(myId, herfl);
 		
 		logger.info("친구 삭제 시도 종료");
 	}

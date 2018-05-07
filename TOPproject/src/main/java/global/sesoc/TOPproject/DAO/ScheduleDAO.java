@@ -83,14 +83,14 @@ public class ScheduleDAO {
 	}
 	
 	
-	public int updateUserComplete(int complete){
-		logger.info("회원 스케쥴 완료 처리 : " + complete);
+	public int updateUserComplete(int s_num){
+		logger.info("회원 스케쥴 완료 처리 : " + s_num);
 		
 		ScheduleMapperInterface mapper = sqls.getMapper(ScheduleMapperInterface.class);
 		int result = 0;
 		
 		try{
-			result = mapper.updateUserComplete(complete);
+			result = mapper.updateUserComplete(s_num);
 			logger.info("회원 스케쥴 완료 처리 성공");
 		}catch(Exception e){ logger.info("회원 스케쥴 완료 처리 실패"); e.printStackTrace(); }
 		
@@ -162,14 +162,14 @@ public class ScheduleDAO {
 	}
 	
 	
-	public int updateProjectComplete(HashMap<String, Integer> map){
-		logger.info("프로젝트 스케쥴 완료 처리 : " + map);
+	public int updateProjectComplete(int s_num){
+		logger.info("프로젝트 스케쥴 완료 처리");
 		
 		ScheduleMapperInterface mapper = sqls.getMapper(ScheduleMapperInterface.class);
 		int result = 0;
 		
 		try{
-			result = mapper.updateProjectComplete(map);
+			result = mapper.updateProjectComplete(s_num);
 			logger.info("프로젝트 스케쥴 완료 처리 성공");
 		}catch(Exception e){ logger.info("프로젝트 스케쥴 완료 처리 실패"); e.printStackTrace(); }
 		
@@ -178,7 +178,7 @@ public class ScheduleDAO {
 	
 	
 	public HashMap<String, Integer> selectProjectComplete(int p_num){
-		logger.info("프로젝트 스케쥴 완료된 거 몇개냐 : " + p_num);
+		logger.info( p_num + "번 프로젝트 스케쥴 완료 개수 검색");
 		
 		ScheduleMapperInterface mapper = sqls.getMapper(ScheduleMapperInterface.class);
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
@@ -196,8 +196,8 @@ public class ScheduleDAO {
 			
 			map.put("length", length); map.put("count", count);
 			
-			logger.info("프로젝트 스케쥴 완료 처리 성공 : " + map);
-		}catch(Exception e){ logger.info("프로젝트 스케쥴 완료 처리 실패"); e.printStackTrace(); }
+			logger.info("프로젝트 스케쥴 완료 개수 검색 성공 : " + map);
+		}catch(Exception e){ logger.info("프로젝트 스케쥴 완료 개수 검색 실패"); e.printStackTrace(); }
 		
 		return map;
 	}

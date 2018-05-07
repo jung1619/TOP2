@@ -31,7 +31,7 @@ $(function() {
 		url : "loadFL",
 		type : "POST",
 		dataType : "json",
-		data : { id : loginedId },
+		data : { myId : loginedId },
 		success : function( data ){ 
 			flList = data; 
 			$('#fl').autocomplete({

@@ -396,8 +396,8 @@ public class ProjectDAO {
 		
 		try{
 			project = mapper.searchProject(p_num);
-			logger.info("프로젝트 스케쥴 검색 성공 : " + project);
-		}catch(Exception e){ logger.info("프로젝트 스케쥴 검색 실패"); e.printStackTrace(); }
+			logger.info("프로젝트 검색 성공 : " + project);
+		}catch(Exception e){ logger.info("프로젝트 검색 실패"); e.printStackTrace(); }
 		return project;
 	}
 	

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.docx4j.docProps.variantTypes.Array;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -36,7 +37,7 @@ public class UserDAO {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", user.getId());
-		map.put("fl", "temp");
+		map.put("fl", "");
 		int result = 0;
 		
 		try{
@@ -97,18 +98,26 @@ public class UserDAO {
 	}
 	
 	
-	public String searchUserFL(String id){
+	public ArrayList<String> searchUserFL(String id){
 		logger.info("친구목록 검색 : " + id);
 		
 		UserMapperInterface mapper = sqls.getMapper(UserMapperInterface.class);
-		String fl = "";
+		String fl = ""; 
+		ArrayList<String> list = new ArrayList<>();
 		
 		try{
 			fl = mapper.searchUserFL(id);
-			logger.info("친구목록 검색 성공 : " + fl);
+			if( fl != null ){				
+				String[] slist = fl.split("/");
+				
+				for(int i=0; i<slist.length; i++){			
+					list.add(slist[i]);
+				}
+			}
+			logger.info("친구목록 검색 성공 : " + list);
 		}catch(Exception e){ logger.info("친구목록 검색 실패"); e.printStackTrace(); }
 		
-		return fl;
+		return list;
 	}
 	
 	

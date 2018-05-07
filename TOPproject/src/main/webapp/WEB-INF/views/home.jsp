@@ -4,34 +4,36 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TOP - チームプロジェクト管理</title>
-<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
-<script type="text/javascript" src="<c:url value='resources/js/home.js'/>"></script>
-<link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- css 추가부분 -->
-<script src="https://medialoot.com/preview/lumino/js/chart.min.js"></script>
-<script src="https://medialoot.com/preview/lumino/js/chart-data.js"></script>
-<script src="https://medialoot.com/preview/lumino/js/easypiechart.js"></script>
-<script src="https://medialoot.com/preview/lumino/js/easypiechart-data.js"></script>
-<script src="https://medialoot.com/preview/lumino/js/bootstrap-datepicker.js"></script>
-<script src="https://medialoot.com/preview/lumino/js/custom.js"></script>
-<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
-<link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
-<script src="//code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	$(window).load(function() {
-		$('#load').hide();
-	 });
-
-</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TOP - チームプロジェクト管理</title>
+	<script type="text/javascript" src="<c:url value='/resources/js/jquery-3.2.1.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='resources/js/home.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='resources/js/login.js'/>"></script>
+	
+	<link rel="stylesheet" type="text/css" href="./resources/css/style.css"/>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- css 추가부분 -->
+	<script src="https://medialoot.com/preview/lumino/js/chart.min.js"></script>
+	<script src="https://medialoot.com/preview/lumino/js/chart-data.js"></script>
+	<script src="https://medialoot.com/preview/lumino/js/easypiechart.js"></script>
+	<script src="https://medialoot.com/preview/lumino/js/easypiechart-data.js"></script>
+	<script src="https://medialoot.com/preview/lumino/js/bootstrap-datepicker.js"></script>
+	<script src="https://medialoot.com/preview/lumino/js/custom.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://medialoot.com/preview/lumino/css/datepicker3.css" />
+	<link rel="stylesheet" type="text/css" href="./resources/css/customStyle.css" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" />
+	<script src="//code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		$(window).load(function() {
+			$('#load').hide();
+		 });
+	
+	</script>
 </head>
 <body>
 	<!-- 상단 네비게이터. 메인과 로그인 후 개인화면에서 사용할 예정 -->

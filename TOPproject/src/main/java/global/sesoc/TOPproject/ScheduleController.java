@@ -1,5 +1,6 @@
 package global.sesoc.TOPproject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.TOPproject.DAO.ProjectDAO;
 import global.sesoc.TOPproject.DAO.ScheduleDAO;
 import global.sesoc.TOPproject.DAO.UserDAO;
+import global.sesoc.TOPproject.VO.CompleteRateObj;
 import global.sesoc.TOPproject.VO.Project;
 import global.sesoc.TOPproject.VO.Schedule;
+import global.sesoc.TOPproject.VO.User;
 
 @Controller
 public class ScheduleController {
@@ -144,30 +148,57 @@ public class ScheduleController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "completeRateEachProject", method = RequestMethod.POST)
+	public ArrayList<CompleteRateObj> completeRateEachProject(String myId){
+		logger.info("-------------------------------------");
+		logger.info("회원의 프로젝트별 완성도 조회 : " + myId);
+		
+		User user = userDAO.searchUser(myId);
+		String[] plist = user.getP_num_list().split("/");
+		
+		ArrayList<CompleteRateObj> list = new ArrayList<>();
+		
+		for (String string : plist) {
+			Project p = projectDAO.searchProject(Integer.parseInt(string));
+			CompleteRateObj cro = new CompleteRateObj(p.getName(), completeRate(p.getP_num()));
+			list.add(cro);
+		}
+		
+		logger.info("회원의 프로젝트별 완성도 조회 완료 : " + list);
+		return list;
+	} 
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "completeRateForProject", method = RequestMethod.POST)
+	public int completeRateForProject(int p_num){
+		logger.info("-------------------------------------");
+		logger.info("현 프로젝트의 완성도 조회 : " + p_num);
+		
+		int rate = completeRate(p_num);
+		
+		logger.info("현 프로젝트의 완성도 조회 완료 : " + rate);
+		return rate;
+	}
+	
 	
 	@RequestMapping(value = "updateUserComplete", method = RequestMethod.POST)
-	public String updateUserComplete(int schedule_num){
+	public String updateUserComplete(int s_num){
 		logger.info("회원 스케쥴 완료 처리 시도");
 		
-		int result = shceduleDAO.updateUserComplete(schedule_num);
+		int result = shceduleDAO.updateUserComplete(s_num);
+		
 		return "redirect:/personalCalendar";
 	}
 	
 	
-	// 주의
 	@RequestMapping(value = "updateProjectComplete", method = RequestMethod.GET)
-	public String updateProjectComplete(Model model, HttpServletRequest req){
-		logger.info("프로젝트 스케쥴 완료 처리 시도");
+	public String updateProjectComplete(Model model, HttpServletRequest req, int s_num, int p_num){
+		logger.info("프로젝트 스케쥴 완료 처리 시도 : " + p_num +"번 프로젝트의 "+ s_num);
 		
-		int p_num = Integer.parseInt(req.getParameter("groupNum"));
-		model.addAttribute("p_num", p_num);
+		int result = shceduleDAO.updateProjectComplete(s_num);
 		
-		int per = completeRate(p_num);
-		
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("p_num", p_num); map.put("rate", per);
-		
-		int result = shceduleDAO.updateProjectComplete( map );
 		return "redirect:groupCal?groupNum=" + p_num;
 	}
 	
@@ -191,6 +222,7 @@ public class ScheduleController {
 		map_per = shceduleDAO.selectProjectComplete(p_num);
 		
 		int per = (int)((double)((double)map_per.get("count")/(double)map_per.get("length")) * 100);
+		logger.info("프로젝트 완성도 계산 : " + per);
 		
 		return per;
 	}

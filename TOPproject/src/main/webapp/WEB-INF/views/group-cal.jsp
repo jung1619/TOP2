@@ -182,10 +182,11 @@
  //완료처리 부분 작업 오네가이시마스
  function updateProjectComplete(){
 	if (confirm('スケジュールを完了しますか?')) {
-	var s_num = document.getElementById('modalIdUP').value;
-	location.href = 'updateProjectComplete?s_num=' + s_num;
+		var s_num = document.getElementById('modalIdUP').value;
+		var p_num = ${p_num};
+		location.href = 'updateProjectComplete?s_num=' + s_num + '&p_num=' + p_num;
 			
-	return true;
+		return true;
 	 }else {
 	 }
  }
