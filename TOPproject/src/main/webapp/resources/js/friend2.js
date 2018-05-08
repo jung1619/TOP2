@@ -1,5 +1,5 @@
 function load_friendList(){
-	console.log('친구 목록');
+	console.log('フレンドリスト');
 	var flList = [];
 	
 	$.ajax({
@@ -12,10 +12,10 @@ function load_friendList(){
 			var content = '';
 			
 			if( flList == null ){
-				content += '등록된 친구가 없습니다.';
+				content += 'フレンドがないです。';
 			}else{				
 				for( var i in flList )
-					content += '<tr><td>'+ flList[i] +'</td><td><input type="button" onclick="task_5(\''+flList[i]+'\')" value="삭제"></td></tr>';
+					content += '<tr><td>'+ flList[i] +'</td><td><input type="button" onclick="task_5(\''+flList[i]+'\')" value="削除"></td></tr>';
 			}
 			$("#flTable").append(content);
 		},
@@ -26,7 +26,7 @@ function load_friendList(){
 
 // 보낸 친구 요청 목록
 function load_friendReq(){
-	console.log('보낸 친구 요청 목록');
+	console.log('申し込み中のフレンドリスト');
 	$.ajax({
 		url : "searchReqList",
 		type : 'POST',
@@ -38,7 +38,7 @@ function load_friendReq(){
 			
 			for( var i in data ){
 				content += '<tr><td>'+ data[i].RECEIVER;
-				content += '</td><td><input type="button" onclick="task_2(\''+data[i].RECEIVER+'\')" value="취소"></td></tr>';
+				content += '</td><td><input type="button" onclick="task_2(\''+data[i].RECEIVER+'\')" value="キャンセル"></td></tr>';
 			}
 			$("#reqTable_req").append(content);
 		},
@@ -49,7 +49,7 @@ function load_friendReq(){
 
 //받은 친구 요청 목록
 function load_friendRec(){
-	console.log('받은 친구 요청 목록');
+	console.log('申し込みもを貰ったリスト');
 	$.ajax({
 		url : "searchReqList",
 		type : 'POST',
@@ -62,8 +62,8 @@ function load_friendRec(){
 			
 			for( var i in data ){
 				content += '<tr><td>'+ data[i].REQUESTER;
-				content += '</td><td><input type="button" onclick="task_3(\''+data[i].REQUESTER+'\')" value="수락"></td>';
-				content += '</td><td><input type="button" onclick="task_4(\''+data[i].REQUESTER+'\')" value="거절"></td></tr>';
+				content += '</td><td><input type="button" onclick="task_3(\''+data[i].REQUESTER+'\')" value="応諾"></td>';
+				content += '</td><td><input type="button" onclick="task_4(\''+data[i].REQUESTER+'\')" value="拒絶"></td></tr>';
 			}
 			$("#reqTable_rec").append(content);
 		},
@@ -73,7 +73,7 @@ function load_friendRec(){
 
 
 function searchId(){
-	console.log('id 검색');
+	console.log('ID検索');
 	var id = $("#searchId").val();
 	
 	$.ajax({
@@ -91,7 +91,7 @@ function searchId(){
 				}else{					
 					content += '<tr><td><b>'+ (parseInt(i)+1) + "</b></td><td>";
 					content += data[i].id;
-					content += '</td><td><input type="button" onclick="task_1(\''+data[i].id+'\')" value="친구 요청"></td></tr>';
+					content += '</td><td><input type="button" onclick="task_1(\''+data[i].id+'\')" value="フレンド申し込み"></td></tr>';
 				}
 			}
 			$("#searchedIds").append(content);
@@ -104,8 +104,8 @@ function searchId(){
 
 // 친구 요청 보내기
 function task_1( herId ){
-	console.log('친구 요청');
-	var ment = '에게 친구 요청을 보내시겠습니까?';
+	console.log('申し込み');
+	var ment = 'に申し込みにをしますか?';
 	var uurl = 'insertReq';
 	var suc = function(){ location.reload(); };
 	task_0( herId, ment, uurl, suc );
@@ -113,8 +113,8 @@ function task_1( herId ){
 
 
 function task_2( herId ){
-	console.log('요청 취소');
-	var ment = '에게 보낸 친구 요청을 취소하시겠습니까?';
+	console.log('申し込みキャンセル');
+	var ment = 'への申し込みをキャンセルしますか?';
 	var uurl = 'deleteReq';
 	var suc = function(){ location.reload(); };
 	task_0( herId, ment, uurl, suc );
@@ -122,8 +122,8 @@ function task_2( herId ){
 
 
 function task_3( herId ){
-	console.log('요청 수락');
-	var ment = '의 친구 요청을 수락하시겠습니까?';
+	console.log('申し込み応諾');
+	var ment = 'の申し込みを応諾しますか?';
 	var uurl = 'addFriend';
 	var suc = function(){ location.reload(); };
 //	var flag = '1';
@@ -131,8 +131,8 @@ function task_3( herId ){
 }
 
 function task_4( herId ){
-	console.log('요청 거절');
-	var ment = '의 친구 요청을 거절하시겠습니까?';
+	console.log('申し込み');
+	var ment = 'の申し込みを拒絶しますか?';
 	var uurl = 'deleteReq';
 	var suc = function(){ location.reload(); };
 //	var flag = '2';
@@ -141,7 +141,7 @@ function task_4( herId ){
 
 
 function task_5( herId ){
-	var ment = '을 친구 목록에서 삭제하시겠습니까?';
+	var ment = 'をフレンドリストで削除しますか？';
 	var uurl = 'deleteFriend';
 	var suc = function(){ location.reload(); };
 	task_0( herId, ment, uurl, suc );

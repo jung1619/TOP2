@@ -155,7 +155,7 @@
 						<c:if test="${sessionScope.loginedId == pj.p_m_id}">
 							<div class="panel-footer">
 								<div class="input-group">
-									<input type="text" id="context" name="context" class="form-control input-md" placeholder="추가할 공지사항을 입력하세요 근데 이거 Ajax로 넘어갔음 좋겠당">
+									<input type="text" id="context" name="context" class="form-control input-md" placeholder="NOTICE">
 									<input type="hidden" value="${p_num}" id="p_num" name="p_num">
 									<span class="input-group-btn"><input type="submit" class="btn btn-primary btn-md" id="NoticeSearchBtn" value="작성"></span>
 								</div>
