@@ -51,9 +51,8 @@
 <script type="text/javascript" src="<c:url value='resources/js/friend2.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/friend.js'/>"></script> --%>
 <style type="text/css">
-			.searchId{
-				ime-mode:disabled;
-			}
+			.searchId{ ime-mode:disabled; }
+			td{ padding: 3px; }
 		</style>
 </head>
 <body id="bodyP">

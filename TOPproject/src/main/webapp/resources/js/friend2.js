@@ -80,16 +80,19 @@ function searchId(){
 		url : "searchUserList",
 		type : 'POST',
 		dataType : "json",
-		data : { id : id },
+		data : { id : id, myId : loginedId },
 		success : function( data ){
 			var content = '';
 			$("#searchedIds").html(content);
 			
 			for( var i in data ){ 
-				var flag = 'request';
-				content += '<tr><td><b>'+ (parseInt(i)+1) + "</b></td><td>";
-				content += data[i].id;
-				content += '</td><td><input type="button" onclick="task_1(\''+data[i].id+'\')" value="친구 요청"></td></tr>';
+				if( data[i].id == loginedId ){
+					content += '';
+				}else{					
+					content += '<tr><td><b>'+ (parseInt(i)+1) + "</b></td><td>";
+					content += data[i].id;
+					content += '</td><td><input type="button" onclick="task_1(\''+data[i].id+'\')" value="친구 요청"></td></tr>';
+				}
 			}
 			$("#searchedIds").append(content);
 		},

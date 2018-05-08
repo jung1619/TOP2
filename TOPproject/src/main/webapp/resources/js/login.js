@@ -1,7 +1,7 @@
 $(function() {
 	
 	$("#loginID").keyup(function(e) {
-		reg = /[ㄱ-ㅎA-Z]/g;
+		reg = /[ㄱ-ㅎㅏ-ㅣA-Z]/g;
         v = $(this).val();
         if( reg.test(v) ) {
         	console.log( reg.test(v) );
@@ -10,7 +10,7 @@ $(function() {
         }
 	});
 	$("#loginPW").keyup(function(e) {
-		reg = /[ㄱ-ㅎA-Z]/g;
+		reg = /[ㄱ-ㅎㅏ-ㅣA-Z]/g;
         v = $(this).val();
         if( reg.test(v) ) {
         	console.log( reg.test(v) );

@@ -128,10 +128,19 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="searchUserList", method=RequestMethod.POST)
-	public ArrayList<User> searchUserList(String id){
+	public ArrayList<User> searchUserList(String id, String myId){
 		logger.info("해당 ID의 회원 목록 검색 시도 : " + id);
 		
 		ArrayList<User> userList = uDao.searchUserList(id);
+		ArrayList<String> myList = uDao.searchUserFL(myId);
+		
+		for(int i=0; i<userList.size(); i++){
+			for(int j=0; j<myList.size(); j++){
+				if( userList.get(i).getId().equals(myList.get(j)) ){
+					userList.remove(i);
+				}
+			}
+		}
 		
 		logger.info("해당 ID의 회원 목록 검색 종료 : " + userList);
 		return userList;
@@ -149,6 +158,7 @@ public class UserController {
 		
 		logger.info("친구 요청 등록 시도  종료");
 	}
+	
 	
 	/*
 	@ResponseBody
@@ -171,6 +181,7 @@ public class UserController {
 	}
 	*/
 	
+	
 	@ResponseBody
 	@RequestMapping(value="deleteReq", method=RequestMethod.POST)
 	public void deleteReq(String myId, String herId){ 
@@ -191,17 +202,13 @@ public class UserController {
 		
 		ArrayList<String> myList = uDao.searchUserFL(myId);
 		ArrayList<String> herList = uDao.searchUserFL(herId);
-		String myfl = null, herfl = null;
+		String myfl = "", herfl = "";
 
-		for (String string : myList) {
-			myfl += string +"/";
-		}
-		for (String string : herList) {
-			herfl += string +"/";
-		}
+		for (String string : myList) { myfl += string +"/"; } myfl += herId;
+		for (String string : herList) { herfl += string +"/"; } herfl += myId;
 		
 		int myResult = uDao.updateFriendList(myId, myfl);
-		int herResult = uDao.updateFriendList(myId, herfl);
+		int herResult = uDao.updateFriendList(herId, herfl);
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("requester", herId); map.put("receiver", myId);

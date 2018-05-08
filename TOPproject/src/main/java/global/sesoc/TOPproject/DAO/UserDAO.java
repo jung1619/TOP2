@@ -252,6 +252,7 @@ public class UserDAO {
 		return result;
 	}
 	
+	
 	/*
 	public int updateReq(HashMap<String, String> map){
 		logger.info("친구 요청 상태 변화 : " + map);
@@ -270,6 +271,7 @@ public class UserDAO {
 		return result;
 	}
 	*/
+	
 	
 	
 	// D E L E T E ------------------------------------------------------------------
